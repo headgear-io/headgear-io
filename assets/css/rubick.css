@@ -1736,6 +1736,7 @@ a:hover {
 .separator-container {
   text-align: center;
   position: relative;
+  transform: rotate(180deg) !important;
 }
 .separator-container .separator {
   color: #c5a47e;
@@ -2202,7 +2203,7 @@ a,
   height: 100%;
   z-index: 2;
   content: "";
-  opacity: .4;
+  opacity: .2;
   background: #000;
   background: url("../img/pattern.png");
 }
