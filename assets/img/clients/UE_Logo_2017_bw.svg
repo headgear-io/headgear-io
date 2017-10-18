@@ -4,7 +4,7 @@
 	 viewBox="0 0 1283.1 553.8" enable-background="new 0 0 1283.1 553.8" xml:space="preserve">
 <g id="Layer_1" display="none">
 	
-		<image display="inline" overflow="visible" opacity="0.24" width="1920" height="1200" xlink:href="815CDD283CD1DF60.jpg"  transform="matrix(1 0 0 1 -1468.4718 -946.392)">
+		<image display="inline" overflow="visible" opacity="0.24" width="1920" height="1200" xlink:href="815CDD283CD1DF61.jpg"  transform="matrix(1 0 0 1 -1468.4718 -946.392)">
 	</image>
 </g>
 <g id="Layer_2">
@@ -62,13 +62,13 @@
 	<g>
 		<g>
 			<defs>
-				<path id="SVGID_9_" d="M336.5,319.6c-5.1,0-7.2-3.1-7.2-3.1c-0.3-1.4-0.8-21.7-0.9-42c-0.2-21.1,0-42.1,1-42.2
-					c5.9-11.1,24.9-33.6,24.9-33.6c-35.4,7-54.7,30.1-54.7,30.1c-5.7-4.5-17.3-3.7-17.3-3.7c5.4,3,10.9,11.7,10.9,18.9v71
-					c0,0-11.9,10.5-21,10.5c-5.4,0-8.7-3-10.6-5.4c-1.3-1.7-1.8-3.1-1.8-3.1v-87.7c-1.1,0.8-2.7,1.5-4.4,1.5c-1.9,0-4-1-5.3-3.8
-					c-1-2.2-1.7-5.4-1.7-10.1c0-16.2,18.3-26.9,18.3-26.9c-23.2,6.2-44.8,18.2-73.5,51.1c-28.7,32.9-23.2,60-23.2,60
-					s7.9-18.7,27-38.4c9-9.3,15.8-12.4,20.4-12.5c5.1,0,7.6,3.8,7.6,7.2v66.8c0,6.6-4.2,8-8.2,8c-3.3-0.1-6.4-1.2-6.4-1.2
-					c19.5,28.4,66.3,32.4,66.3,32.4l20.5-21.9l0.5,0.4l18.8,16c34.4-20.4,50.9-58.3,50.9-58.3C352.1,315.8,342.3,319.6,336.5,319.6"
-					/>
+				<path id="SVGID_9_" d="M362.4,337c-6.5,0-9.1-3.9-9.1-3.9c-0.4-1.8-1-27.6-1.2-53.3c-0.2-26.7,0-53.4,1.3-53.5
+					c7.5-14.1,31.6-42.6,31.6-42.6c-44.9,8.8-69.3,38.2-69.3,38.2c-7.2-5.7-22-4.7-22-4.7c6.9,3.8,13.8,14.9,13.8,24v90.1
+					c0,0-15.1,13.3-26.7,13.3c-6.9,0-11.1-3.8-13.4-6.8c-1.6-2.1-2.3-3.9-2.3-3.9V222.5c-1.4,1-3.4,1.9-5.5,1.9
+					c-2.5,0-5-1.2-6.8-4.9c-1.3-2.7-2.2-6.8-2.2-12.8c0-20.5,23.2-34.1,23.2-34.1c-29.5,7.9-56.8,23.1-93.2,64.8
+					c-36.4,41.7-29.5,76.2-29.5,76.2s10-23.7,34.2-48.7c11.4-11.8,20-15.8,25.8-15.8c6.5,0,9.6,4.8,9.6,9.2V343
+					c0,8.4-5.4,10.2-10.3,10.1c-4.2-0.1-8.2-1.6-8.2-1.6c24.8,36,84.1,41.1,84.1,41.1l26-27.8l0.6,0.5l23.9,20.3
+					c43.6-25.9,64.6-74,64.6-74C382.2,332.3,369.8,337.1,362.4,337"/>
 			</defs>
 			<use xlink:href="#SVGID_9_"  overflow="visible" fill-rule="evenodd" clip-rule="evenodd" fill="#262626"/>
 			<clipPath id="SVGID_10_">
@@ -76,21 +76,21 @@
 			</clipPath>
 			<g clip-path="url(#SVGID_10_)">
 				<defs>
-					<rect id="SVGID_11_" x="92" y="95" width="363.4" height="363.4"/>
+					<rect id="SVGID_11_" x="52.3" y="52.2" width="460.9" height="460.9"/>
 				</defs>
 				<use xlink:href="#SVGID_11_"  overflow="visible" fill="#262626"/>
 				<clipPath id="SVGID_12_">
 					<use xlink:href="#SVGID_11_"  overflow="visible"/>
 				</clipPath>
-				<rect x="167.7" y="187.9" clip-path="url(#SVGID_12_)" fill="#262626" width="201.8" height="177.4"/>
+				<rect x="148.2" y="170" clip-path="url(#SVGID_12_)" fill="#262626" width="256" height="225.1"/>
 			</g>
 		</g>
 		<g>
 			<defs>
-				<path id="SVGID_13_" d="M273.9,139.3c36.4,0,70.7,14.3,96.5,40.3c25.8,26,40,60.5,40,97.3s-14.2,71.3-40,97.3
-					c-25.8,26-60,40.3-96.5,40.3s-70.7-14.3-96.5-40.3c-25.8-26-40-60.5-40-97.3s14.2-71.3,40-97.3
-					C203.2,153.6,237.5,139.3,273.9,139.3 M273.9,133c-78.8,0-142.7,64.4-142.7,143.9s63.9,143.9,142.7,143.9
-					s142.7-64.4,142.7-143.9S352.7,133,273.9,133"/>
+				<path id="SVGID_13_" d="M283,108.4c46.2,0,89.7,18.2,122.4,51.1c32.7,33,50.7,76.8,50.7,123.4s-18,90.5-50.7,123.4
+					c-32.7,33-76.2,51.1-122.4,51.1s-89.7-18.2-122.4-51.1c-32.7-33-50.7-76.8-50.7-123.4s18-90.5,50.7-123.4
+					C193.3,126.5,236.8,108.4,283,108.4 M283,100.3c-100,0-181,81.7-181,182.6S183,465.5,283,465.5s181-81.7,181-182.6
+					S383,100.3,283,100.3"/>
 			</defs>
 			<use xlink:href="#SVGID_13_"  overflow="visible" fill-rule="evenodd" clip-rule="evenodd" fill="#262626"/>
 			<clipPath id="SVGID_14_">
@@ -98,19 +98,19 @@
 			</clipPath>
 			<g clip-path="url(#SVGID_14_)">
 				<defs>
-					<rect id="SVGID_15_" x="92" y="95" width="363.4" height="363.4"/>
+					<rect id="SVGID_15_" x="52.3" y="52.2" width="460.9" height="460.9"/>
 				</defs>
 				<use xlink:href="#SVGID_15_"  overflow="visible" fill="#262626"/>
 				<clipPath id="SVGID_16_">
 					<use xlink:href="#SVGID_15_"  overflow="visible"/>
 				</clipPath>
-				<rect x="129.2" y="131" clip-path="url(#SVGID_16_)" fill="#262626" width="289.5" height="291.9"/>
+				<rect x="99.4" y="97.8" clip-path="url(#SVGID_16_)" fill="#262626" width="367.2" height="370.3"/>
 			</g>
 		</g>
 	</g>
-	<rect x="500.6" y="194.7" fill="none" width="475.6" height="71.4"/>
-	<text transform="matrix(1 0 0 1 500.6101 257.4075)"><tspan x="0" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="92px" letter-spacing="26">UNREA</tspan><tspan x="430.1" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="92px" letter-spacing="9">L</tspan></text>
-	<rect x="499.7" y="293" fill="none" width="483" height="108"/>
-	<text transform="matrix(1 0 0 1 499.7412 355.7643)"><tspan x="0" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="92px" letter-spacing="30">ENGIN</tspan><tspan x="431.2" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="92px" letter-spacing="9">E</tspan></text>
+	<rect x="570.6" y="178.6" fill="none" width="603.3" height="90.6"/>
+	<text transform="matrix(1 0 0 1 570.6029 258.169)"><tspan x="0" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="116.7062px" letter-spacing="33">UNREA</tspan><tspan x="545.6" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="116.7062px" letter-spacing="11">L</tspan></text>
+	<rect x="569.5" y="303.3" fill="none" width="612.8" height="137"/>
+	<text transform="matrix(1 0 0 1 569.5013 382.9385)"><tspan x="0" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="116.7062px" letter-spacing="38">ENGIN</tspan><tspan x="547.1" y="0" fill="#262626" font-family="'BrutalType-Light'" font-size="116.7062px" letter-spacing="11">E</tspan></text>
 </g>
 </svg>
