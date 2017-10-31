@@ -1695,7 +1695,7 @@ a {
   opacity: .9;
 }
 a:hover {
-  color: #777777;
+  color: #DFAB1C;
   opacity: 1;
 }
 
@@ -2934,8 +2934,10 @@ body.noscroll {
   text-align: right;
   float: right;
 }
+/*
 .project-content > div .project-details .product .project-text p {
-  margin-top: 50px;
+  margin-top: 15px;
+*/
 }
 .project-content > div .project-details .article .project-image {
   width: 50%;
