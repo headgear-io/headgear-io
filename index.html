@@ -20,7 +20,7 @@
 
     <script type="text/javascript">
         function onLinkedInLoad() {
-            IN.API.Raw("/company/headgear:(num-followers)").result(onSuccess).error(onError);
+            IN.API.Raw("/companies/1337:(num-followers)").result(onSuccess).error(onError);
         }
 
         function onSuccess(data) {
