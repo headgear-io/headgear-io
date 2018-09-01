@@ -12,26 +12,6 @@
         gtag('config', 'UA-62029864-1');
       </script>
 
-      <script src="http://platform.linkedin.com/in.js" type="text/javascript">
-      api_key: 77yeygo0tad2pa
-      onLoad: onLinkedInLoad
-      authorize: true
-    </script>
-
-    <script type="text/javascript">
-        function onLinkedInLoad() {
-            IN.API.Raw("/companies/10088368:(num-followers)").result(onSuccess).error(onError);
-        }
-
-        function onSuccess(data) {
-            document.getElementById("statusDiv").innerHTML =  data.numFollowers;
-        }
-
-        function onError(error) {
-            console.log(error);
-        }
-    </script>
-
   <meta charset="utf-8" />
   <link rel="icon" type="image/png" href="assets/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -524,8 +504,7 @@
                        <h3>Contacts</h3>
                        <h5 class="text-gray">in Immersive Tech</h5>
                        <div class="number" id="citiesNo">
-                           460
-                      <div id="statusDiv">Result</div>
+                           506
                        </div>
                    </div>
                </div>
