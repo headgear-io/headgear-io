@@ -291,11 +291,13 @@ rubik = {
                 if(transparent) {
                     transparent = false;
                     $('nav[role="navigation"]').removeClass('navbar-transparent');
+                    $('.logo-container img').attr('src', 'assets/img/HLOGO.PNG');
                 }
             } else {
                 if( !transparent ) {
                     transparent = true;
                     $('nav[role="navigation"]').addClass('navbar-transparent');
+                    $('.logo-container img').attr('src', 'assets/img/IMG_0088.PNG');
                 }
             }
     }, 17),
@@ -385,12 +387,12 @@ rubik = {
     },
 
     initGoogleMaps: function(){
-        var myLatlng = new google.maps.LatLng(53.543407, 9.9910115);
+        var myLatlng = new google.maps.LatLng(53.549859, 9.993077);
         //var centreLatlng = (53.543407,9.9910115);
 
         var mapOptions = {
-          zoom: 16,
-          center: new google.maps.LatLng(53.5435026,9.9868379),
+          zoom: 13,
+          center: new google.maps.LatLng(53.557257,9.973609),
           scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
           disableDefaultUI: true,
           styles: [{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"},{"gamma":"1.82"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"gamma":"1.96"},{"lightness":"-9"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"on"},{"lightness":"25"},{"gamma":"1.00"},{"saturation":"-100"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#ffaa00"},{"saturation":"-43"},{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"},{"hue":"#ffaa00"},{"saturation":"-70"}]},{"featureType":"road.highway.controlled_access","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"visibility":"on"},{"saturation":"-100"},{"lightness":"30"}]},{"featureType":"road.local","elementType":"all","stylers":[{"saturation":"-100"},{"lightness":"40"},{"visibility":"off"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"gamma":"0.80"}]},{"featureType":"water","elementType":"all","stylers":[{color: '#A3CCFF'}]}]

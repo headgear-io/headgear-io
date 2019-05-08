@@ -26,7 +26,7 @@
     <link href="assets/css/rubick.css" rel="stylesheet"/>
 
     <!--     Fonts and icons     -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
     <link href="assets/css/fonts/pe-icon-7-stroke.css" rel="stylesheet">
     <link href="assets/css/fonts/Rubik-Fonts.css" rel="stylesheet" />
@@ -34,6 +34,8 @@
 </head>
 
 <body id="skrollr-body">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
 <div class="loading ">
   <div class="loading-container">
     <p>please hold...</p>
@@ -51,7 +53,12 @@
             <span class="icon-bar bar2"></span>
             <span class="icon-bar bar3"></span>
         </button>
-        <a href="http://headgear.io" class="navbar-brand">
+        <a href="#" class="navbar-brand">
+          <div class="logo-container">
+              <div class="logo">
+                  <img src="assets/img/IMG_0088.PNG" alt="HEADGEAR logo">
+              </div>
+            </div>
            HEADGEAR
         </a>
     </div>
@@ -60,14 +67,17 @@
       <ul class="nav navbar-nav navbar-right navbar-uppercase">
             <li class="social-links">
                 <a href="https://www.facebook.com/headgear.io">
-                    <i class="fa fa-facebook"></i>
+                    <i class="fab fa-facebook"></i>
                 </a>
                 <a href="https://twitter.com/headgearIO">
-                    <i class="fa fa-twitter"></i>
+                    <i class="fab fa-twitter"></i>
                 </a>
-                <a href="https://www.youtube.com/channel/UCJb36p4K3-65ImeF3I1QfSQ">
-                    <i class="fa fa-youtube-play"></i>
+                <a href="mailto:mail@headgear.io">
+                  <i class="fas fa-envelope"></i>
                 </a>
+                <!-- <a href="https://www.youtube.com/channel/UCJb36p4K3-65ImeF3I1QfSQ">
+                    <i class="fab fa-youtube"></i>
+                </a> -->
             </li>
             <li>
                 <a href="" data-scroll="true" data-id="#whoWeAre">
@@ -86,12 +96,12 @@
             </li>
             <li>
                 <a href="" data-scroll="true" data-id="#clients">
-                    Clients
+                    Partners
                 </a>
             </li>
             <li>
                 <a href="" data-scroll="true" data-id="#numbers">
-                    Numbers
+                    Data
                 </a>
             </li>
             <li>
@@ -115,7 +125,7 @@
                     <p><span></span><p>
                     <h1>get immersed!</h1>
                     <div class="separator-container">
-                      <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                      <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
                     </div>
                     <h5>Come with us down the Rabbit Hole </h5>
                 </div>
@@ -132,7 +142,7 @@
                           <h5 class="text-gray">Est. 2014</h5>
                           <h2>Find your <br> headset</h2>
                           <div class="separator-container">
-                          <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                          <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
                         </div>
                       </div>
                     </div>
@@ -178,7 +188,7 @@
                    <h5 class="text-gray">Find out</h5>
                    <h2>How we work</h2>
                    <div class="separator-container">
-                        <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                        <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
                     </div>
                </div>
             </div>
@@ -219,10 +229,10 @@
     <div class="section section-we-made-1 section-with-hover" id="projects">
          <div class="text-area">
             <div class="title add-animation">
-                <h5 class="text-gray">Our</h5>
-                <h2>Expertise</h2>
+                <h5 class="text-gray">Check Out</h5>
+                <h2>Our Talents</h2>
                 <div class="separator-container">
-                    <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                    <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
                 </div>
             </div>
          </div>
@@ -310,7 +320,7 @@
                     <h5 class="text-gray">Clients, Partners &</h5>
                     <h2>Our Friends</h2>
                     <div class="separator-container">
-                        <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                        <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
                     </div>
                 </div>
             </div>
@@ -390,7 +400,7 @@
         </div>
       </div>
       <div class="static-image gradient-image add-animation animation-1">
-        <img src="assets/img/team/virtual-reality-bikers.jpg" alt="" title=""/>
+        <img src="assets/img/team/virtual-reality-astronaut.jpg" alt="" title=""/>
       </div>
     </div>
     <div class="section section-team-2" id="team2">
@@ -400,7 +410,7 @@
                     <h5 class="text-gray">Founding Team</h5>
                     <h2>Reality Fanatics</h2>
                     <div class="separator-container">
-                        <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                        <div class="separator line-separator"><i class="fas fa-users"></i></div>
                     </div>
                 </div>
             </div>
@@ -476,7 +486,7 @@
                     <h5 class="text-gray">People lie</h5>
                     <h2>Numbers don't</h2>
                     <div class="separator-container">
-                      <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+                      <div class="separator line-separator"><i class="fas fa-hashtag"></i></div>
                     </div>
                 </div>
             </div>
@@ -488,7 +498,7 @@
                        <h3>Customers</h3>
                        <h5 class="text-gray">Total Downloads</h5>
                        <div class="number" id="customersNo">
-                        15,582
+                        17,142
                        </div>
                    </div>
                </div>
@@ -497,7 +507,7 @@
                        <h3>Hours</h3>
                        <h5 class="text-gray">Spent in VR</h5>
                        <div class="number" id="projectsNo">
-                        6,042
+                        9,042
                        </div>
                    </div>
                </div>
@@ -506,7 +516,7 @@
                        <h3>Contacts</h3>
                        <h5 class="text-gray">in Immersive Tech</h5>
                        <div class="number" id="citiesNo">
-                           506
+                           869
                        </div>
                    </div>
                </div>
@@ -515,23 +525,40 @@
     </div>
 
     <div class="section section-contact-3" id="contact">
+      <div class="text-area">
+         <div class="title add-animation">
+             <h5 class="text-gray">Social & </h5>
+             <h2>In Hamburg</h2>
+             <div class="separator-container">
+               <div class="separator line-separator"><i class="fas fa-anchor"></i></div>
+             </div>
+         </div>
+     </div>
         <div class="contact-container">
             <div class="address-container add-animation animation-1">
-                <div class="address">
+              <div class="col-md-6 col-sm-6">
+              <nav>
+                  <a class="twitter-timeline" href="https://twitter.com/headgearIO?ref_src=twsrc%5Etfw" data-tweet-limit="1"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              </nav>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fheadgear.io%2F&tabs=timeline&width=300&height=520&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false&appId" width="300" height="520" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+              </div>
+                <!-- <div class="address">
                     <h4>find us now in <br>the Speicherstadt</h4>
                     <a href="https://www.google.de/maps/place/HEADGEAR/@53.543407,9.9914827,18z/data=!3m1!4b1!4m5!3m4!1s0x47b18f1c89297641:0xb8165e05f577c55f!8m2!3d53.543407!4d9.9921058?hl=en" target="_blank"><p class="text-gray">
                       Am Sandtorkai 27<br>
                         20457 Hamburg<br>
                         Germany
-                    </p></a>
+                    </p></a> -->
                     <!-- <h4>On the Phone</h4>
                     <p class="text-gray">+49 40 84 20 12 30</p>
                   -->
-                    <h4>or drop us a line…</h4>
+                    <!-- <h4>or drop us a line…</h4>
                     <a href="mailto:mail@headgear.io">
                         <p class="text-gray">mail@headgear.io</p>
                     </a>
-                </div>
+                </div> -->
             </div>
             <div  class="map">
                 <div id="contactUsMap" class="big-map"></div>
@@ -579,7 +606,7 @@
             -->
               <div class="col-md-3 col-md-offset-1 col-sm-3">
                  <div class="info add-animation-stopped animation-2">
-                  <h5 class="title"> Help and Support</h5>
+                  <!-- <h5 class="title"> Help and Support</h5> -->
                   <nav>
                       <ul>
                           <li>
@@ -587,7 +614,7 @@
                                  Contact Us
                               </a>
                           </li>
-
+<!--
                           <li>
                               <a href="legal.html#terms">
                                   Terms &amp; Conditions
@@ -597,49 +624,48 @@
                               <a href="legal.html#privacy">
                                   Privacy Policy
                               </a>
-                          </li>
+                          </li> -->
                       </ul>
                   </nav>
               </div>
               </div>
-              <div class="col-md-3 col-sm-3">
+              <div class="col-md-3 col-md-offset-1 col-sm-3">
                   <div class="info add-animation-stopped animation-3">
-                  <h5 class="title">Latest News</h5>
+                  <!-- <h5 class="title">Latest News</h5> -->
                   <nav>
                       <ul>
                           <li>
-                              <a class="twitter-timeline" href="https://twitter.com/headgearIO?ref_src=twsrc%5Etfw" data-tweet-limit="1"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <a href="legal.html#terms">
+                                Terms &amp; Conditions
+                            </a>
+                              <!-- <a class="twitter-timeline" href="https://twitter.com/headgearIO?ref_src=twsrc%5Etfw" data-tweet-limit="1"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
                           </li>
-<!--                               <li>
-                                <a href="#">
-                                 <i class="fa fa-twitter"></i>
-                                 We've just been featured on <b> Awwwards Website</b>! Thank you everybody for...
-                              </a>
-                          </li>
--->
                       </ul>
                   </nav>
               </div>
             </div>
               <div class="col-md-2 col-md-offset-1 col-sm-3">
                   <div class="info add-animation-stopped animation-4">
-                  <h5 class="title">Follow us on</h5>
+                  <!-- <h5 class="title">keep up with the latest…</h5> -->
                   <nav>
                       <ul>
                           <li>
-                              <a href="https://www.facebook.com/headgear.io" class="btn btn-social btn-facebook btn-simple">
-                                  <i class="fa fa-facebook-square"></i> Facebook
-                              </a>
+                            <a href="legal.html#privacy">
+                                Privacy Policy
+                            </a>
+                              <!-- <a href="https://www.facebook.com/headgear.io" class="btn btn-social btn-facebook btn-simple" target="_blank">
+                                  <i class="fab fa-facebook-square"></i> Facebook
+                              </a> -->
                           </li>
                           <li>
-                             <a href="https://twitter.com/headgearIO" class="btn btn-social btn-twitter btn-simple">
-                                  <i class="fa fa-twitter"></i> Twitter
-                              </a>
+                             <!-- <a href="https://twitter.com/headgearIO" class="btn btn-social btn-twitter btn-simple" target="_blank">
+                                  <i class="fab fa-twitter"></i> Twitter
+                              </a> -->
                           </li>
                           <li>
-                               <a href="https://www.youtube.com/channel/UCJb36p4K3-65ImeF3I1QfSQ" class="btn btn-social btn-reddit btn-simple">
-                                  <i class="fa fa-youtube-play"></i> YouTube
-                              </a>
+                               <!-- <a href="https://www.youtube.com/channel/UCJb36p4K3-65ImeF3I1QfSQ" class="btn btn-social btn-reddit btn-simple">
+                                  <i class="fab fa-youtube"></i> YouTube
+                              </a> -->
                           </li>
 
                       </ul>
@@ -649,11 +675,11 @@
           </div>
             <hr>
             <div class="copyright">
-                © 2019 HEADGEAR GbR, made with <i class="fa fa-anchor"></i> in Hamburg, Germany
+                © 2014-2019 HEADGEAR GbR
             </div>
         </div>
     </footer>
-</div> <!-- end wrapper -->
+</div> <!-- end wrapper , made with <i class="fas fa-anchor"></i> in Hamburg, Germany -->
 
 <div class="project-content" id="project_1">
   <div>
@@ -664,7 +690,7 @@
           <h5 >Check out our apps</h5>
             <h2>Great VR makes everything better</h2>
             <div class="separator-container">
-              <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+              <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
             </div>
         </div>
         <div class="product">
@@ -701,7 +727,7 @@
           <h5 >Beyond the Camera Frame</h5>
             <h2>See the world around you</h2>
             <div class="separator-container">
-              <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+              <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
             </div>
         </div>
         <div class="product">
@@ -735,10 +761,10 @@
       <span class="icon-close"><i class="pe-7s-close-circle"></i></span>
       <div class="container">
         <div class="project-title">
-          <h5 >Watch out</h5>
-            <h2>You won't believe your eyes</h2>
+          <h5 >Watch out you won't believe</h5>
+            <h2> your eyes & ears</h2>
             <div class="separator-container">
-              <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+              <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
             </div>
         </div>
         <div class="product">
@@ -751,7 +777,8 @@
             </div>
             <div class="col-md-4">
               <div class="project-image">
-                  <iframe width="100%" height="315px" src="https://www.youtube.com/embed/u7TJbq-Ptiw" frameborder="0" allowfullscreen></iframe>
+                  <img src="assets/img/synced-virtual-reality-events.gif" alt="Using Evrbit VR Sync for streaming and broadcasting virtual reality" title="Event Marketing"/>
+                  <!-- <iframe width="100%" height="315px" src="https://www.youtube.com/embed/u7TJbq-Ptiw" frameborder="0" allowfullscreen></iframe> -->
                 </div>
             </div>
             <div class="col-md-4">
@@ -775,7 +802,7 @@
           <h5 >Learn how to</h5>
             <h2>Go with the moment</h2>
             <div class="separator-container">
-              <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+              <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
             </div>
         </div>
         <div class="product">
@@ -789,7 +816,8 @@
             </div>
             <div class="col-md-4">
               <div class="project-image">
-                  <img src="assets/img/google-tilt-brush-mixed-reality-capture.gif" alt="Using Mixcast VR and the LIV Cube client and SDKs for streaming and broadcasting virtual reality" title="Mixed-Reality Capturing"/>
+                <iframe width="100%" height="315px" src="https://www.youtube.com/embed/u7TJbq-Ptiw" frameborder="0" allowfullscreen></iframe>
+                  <!-- <img src="assets/img/google-tilt-brush-mixed-reality-capture.gif" alt="Using Mixcast VR and the LIV Cube client and SDKs for streaming and broadcasting virtual reality" title="Mixed-Reality Capturing"/> -->
                 </div>
             </div>
             <div class="col-md-4">
@@ -813,7 +841,7 @@
           <h5 >The Future is...</h5>
             <h2>AUGMENTED</h2>
             <div class="separator-container">
-              <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+              <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
             </div>
         </div>
         <div class="product">
@@ -852,7 +880,7 @@
           <h5 >CAD & Point Clouds</h5>
             <h2>Mapping the World</h2>
             <div class="separator-container">
-              <div class="separator line-separator"><i class="fa fa-simplybuilt"></i></div>
+              <div class="separator line-separator"><i class="fas fa-vr-cardboard"></i></div>
             </div>
         </div>
         <div class="product">
@@ -865,7 +893,7 @@
             </div>
             <div class="col-md-4">
                 <div class="project-image">
-                    <img src="assets/img/modelling.gif" alt="Mapping and scanning of the real world. Constructing digital 3D worlds." title="3D Modelling, Rigging, Texturing"/>
+                    <img src="assets/img/3dscanning.gif" alt="Mapping and scanning of the real world. Constructing digital 3D worlds." title="3D Modelling, Rigging, Texturing"/>
                 </div>
             </div>
             <div class="col-md-4">

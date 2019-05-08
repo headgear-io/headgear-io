@@ -363,11 +363,12 @@ body > .navbar-collapse a {
 }
 .navbar .navbar-brand {
   font-weight: 600;
-  margin: 5px 0px;
+  margin: 1px 0px;
   padding: 20px 15px;
   font-size: 20px;
   font-family: "Slim-Joe";
   letter-spacing: 0;
+  width: 300px;
 }
 .navbar .navbar-nav > li > a {
   padding: 10px 15px;
@@ -412,7 +413,7 @@ body > .navbar-collapse a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .navbar-default .navbar-nav > li > a:not(.btn) {
-  color: #343434;
+  color: #DFAB1C;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:not(.btn):hover,
@@ -440,7 +441,7 @@ body > .navbar-collapse a {
   background-color: transparent;
 }
 .navbar-default .navbar-brand {
-  color: #343434;
+  color: #DFAB1C;
 }
 .navbar-default:not(.navbar-transparent) .btn-default:hover {
   color: #DFAB1C;
@@ -1736,7 +1737,6 @@ a:hover {
 .separator-container {
   text-align: center;
   position: relative;
-  transform: rotate(180deg) !important;
 }
 .separator-container .separator {
   color: #DFAB1C;
@@ -1903,7 +1903,7 @@ a:hover {
   top: 0;
   left: 0;
   width: 100%;
-  height: 300px;
+  height: 442px;
   content: '';
   background: -moz-linear-gradient(top, white 0%, rgba(255, 255, 255, 0.95) 22%, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.7) 65%, rgba(255, 255, 255, 0) 100%);
   /* FF3.6+ */
@@ -3498,7 +3498,7 @@ body.noscroll {
 .section-contact-3 .contact-container .address-container {
   position: absolute;
   left: 0;
-  width: 40%;
+
   height: 570px;
   background-color: rgba(255, 255, 255, 0.75);
   z-index: 3;
@@ -3828,4 +3828,27 @@ body.noscroll {
   footer .row div:first-child .title {
     margin-top: 0;
   }
+}
+
+.logo-container .logo{
+    width: 50px;
+    float: left;
+}
+
+.logo-container .brand{
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 20px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 15px;
+    width: 150px;
+    height: 50px;
+}
+.logo-container{
+    margin-top: 10px;
+}
+.logo-container .logo img{
+    width: 100%;
+    margin-top: -15px;
 }
