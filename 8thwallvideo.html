@@ -69,14 +69,7 @@
 <!-- Copyright (c) 2019 8th Wall, Inc. -->
 <!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
 
- <!-- Don't wait for the video to load, we're going to stream it.-->
  
-    <a-assets timeout="3000">
-        
-        <video id="video1" src="./assets/Sam_100_0999-lowbitrate_trimmed.mp4"
-          loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
-      
-    </a-assets>
 
 
 <a-scene 
@@ -85,7 +78,14 @@
   xrextras-loading 
   xrextras-runtime-error 
   xrweb>
+        <!-- Don't wait for the video to load, we're going to stream it.-->
+ 
+    <a-assets timeout="3000">
         
+        <video id="video1" src="./assets/Sam_100_0999-lowbitrate_trimmed.mp4"
+          loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
+      
+    </a-assets>
            <a-videosphere id="videosphere" rotation="0 90 0" src="#video1" play-on-window-click videoeventhandler>
        </a-videosphere>    
        
