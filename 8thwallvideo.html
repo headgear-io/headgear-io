@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!-- d16b784dcf125bafd1967e30c1918f909ea6c5c7 8d2927fdfbae9ea66e34caa4039a4c3f -->
+      <meta charset="UTF-8">
+
+      <title>TEST: 360 Video</title>
+      <meta itemprop="name" content="TEST: 360 Video">
+      <meta name="twitter:title" content="TEST: 360 Video">
+      <meta name="og:title" content="TEST: 360 Video">
+      <meta name="og:site_name" content="TEST: 360 Video">
+      <meta name="image" content="https://cdn.8thwall.com/apps/cover/2rjcnl6swxgefilw8385hwuvzaixkipgk33fhxzh7v5dqnpqxlvwq7g0-preview">
+      <meta itemprop="image" content="https://cdn.8thwall.com/apps/cover/2rjcnl6swxgefilw8385hwuvzaixkipgk33fhxzh7v5dqnpqxlvwq7g0-preview">
+      <meta name="og:image" content="https://cdn.8thwall.com/apps/cover/2rjcnl6swxgefilw8385hwuvzaixkipgk33fhxzh7v5dqnpqxlvwq7g0-preview">
+      <meta name="twitter:image:src" content="//cdn.8thwall.com/apps/cover/2rjcnl6swxgefilw8385hwuvzaixkipgk33fhxzh7v5dqnpqxlvwq7g0-preview">
+    
+      <meta name="og:type" content="website">
+      <meta name="twitter:card" content="summary">
+
+      <script async src="https://apps.8thwall.com/xrweb?appKey=gftVHrLHK3Mx92pE0O2QQGRTFlQNXSqvplFdG0xFsCO4BPjmwuMroTEjOJNNjDK6Ch3Vo5&s=1"></script>
+      
+      <script src="https://cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
+      <script src="https://cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+      <!-- Copyright (c) 2019 8th Wall, Inc. -->
+<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
+
+<!-- Use "8thwall:" meta tags to hook into 8th Wall's build process and developer tools. -->
+<meta name="8thwall:renderer" content="aframe">
+<meta name="8thwall:package" content="@8thwall.xrextras">
+
+<!-- Other external scripts and meta tags can also be added. -->
+<!-- tag for iOS icon homepage pinning -->
+<link rel="apple-touch-icon" href="https://headgear.io/assets/img/HLOGO.PNG">
+ <link rel="icon" type="image/png" href="https://headgear.io/assets/img/HLOGO.ico">
+ 
+   <!-- meta tag for iOS video playback -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+      
+      
+    </head>
+    <body>
+      <script type="text/javascript" src="https://cdn.8thwall.com/web/hosting/app8-k4ednot0.js"></script>
+      <script type="text/javascript">app8("<!-- Copyright (c) 2019 8th Wall, Inc. -->\n<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->\n\n <!-- Don't wait for the video to load, we're going to stream it.-->\n \n    <a-assets timeout=\"3000\">\n        \n        <video id=\"video1\" src=\"/videotest/assets/Sam_100_0999-lowbitrate_trimmed-v69o4466rf.mp4\"\n          loop crossorigin=\"anonymous\" preload=\"auto\" playsinline webkit-playsinline></video>\n      \n    </a-assets>\n\n\n<a-scene \n  xrextras-tap-recenter \n  xrextras-almost-there \n  xrextras-loading \n  xrextras-runtime-error \n  xrweb>\n        \n           <a-videosphere id=\"videosphere\" rotation=\"0 90 0\" src=\"#video1\" play-on-window-click videoeventhandler>\n       </a-videosphere>    \n       \n        <a-camera\n        id=\"camera\">\n          <a-entity\n            id=\"infoText\"\n            text=\"align: center; value: Tap screen to start video; color: white; wrapCount: 22;\" \n            position=\"0 -0.1 -1\"\n            scale=\"0.5 0.5 0.5\"\n            play-on-window-click>\n          </a-entity>\n        </a-camera>\n        \n       \n</a-scene>", "noncommercial", "", false, "/videotest/")</script>
+     </body>
+  </html>
