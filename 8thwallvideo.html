@@ -39,7 +39,69 @@
       
     </head>
     <body>
-      <script type="text/javascript" src="https://cdn.8thwall.com/web/hosting/app8-k4ednot0.js"></script>
-      <script type="text/javascript">app8("<!-- Copyright (c) 2019 8th Wall, Inc. -->\n<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->\n\n <!-- Don't wait for the video to load, we're going to stream it.-->\n \n    <a-assets timeout=\"3000\">\n        \n        <video id=\"video1\" src=\"/videotest/assets/Sam_100_0999-lowbitrate_trimmed-v69o4466rf.mp4\"\n          loop crossorigin=\"anonymous\" preload=\"auto\" playsinline webkit-playsinline></video>\n      \n    </a-assets>\n\n\n<a-scene \n  xrextras-tap-recenter \n  xrextras-almost-there \n  xrextras-loading \n  xrextras-runtime-error \n  xrweb>\n        \n           <a-videosphere id=\"videosphere\" rotation=\"0 90 0\" src=\"#video1\" play-on-window-click videoeventhandler>\n       </a-videosphere>    \n       \n        <a-camera\n        id=\"camera\">\n          <a-entity\n            id=\"infoText\"\n            text=\"align: center; value: Tap screen to start video; color: white; wrapCount: 22;\" \n            position=\"0 -0.1 -1\"\n            scale=\"0.5 0.5 0.5\"\n            play-on-window-click>\n          </a-entity>\n        </a-camera>\n        \n       \n</a-scene>", "noncommercial", "", false, "/videotest/")</script>
-     </body>
+	<script>
+	// Copyright (c) 2019 8th Wall, Inc.
+//
+// app.js is the main entry point for your 8th Wall app. Code here will execute after head.html
+// is loaded, and before body.html is loaded.
+ //This component plays the video on screen tap if it doesn't autoplay
+    AFRAME.registerComponent('play-on-window-click', {
+      init: function() {
+       
+           this.onClick = this.onClick.bind(this);
+
+      },
+      play: function() {
+        window.addEventListener('click', this.onClick);
+      },
+      pause: function() {
+        window.removeEventListener('click', this.onClick);
+      },
+      onClick: function(evt) {
+       
+        //play video
+        var video = this.el.components.material.material.map.image;
+        if (!video) { return; }
+        video.play();
+        
+      }
+    });
+	</script>
+	
+<!-- Copyright (c) 2019 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+ <!-- Don't wait for the video to load, we're going to stream it.-->
+ 
+    <a-assets timeout="3000">
+        
+        <video id="video1" src="./assets/Sam_100_0999-lowbitrate_trimmed.mp4"
+          loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
+      
+    </a-assets>
+
+
+<a-scene 
+  xrextras-tap-recenter 
+  xrextras-almost-there 
+  xrextras-loading 
+  xrextras-runtime-error 
+  xrweb>
+        
+           <a-videosphere id="videosphere" rotation="0 90 0" src="#video1" play-on-window-click videoeventhandler>
+       </a-videosphere>    
+       
+        <a-camera
+        id="camera">
+          <a-entity
+            id="infoText"
+            text="align: center; value: Tap screen to start video; color: white; wrapCount: 22;" 
+            position="0 -0.1 -1"
+            scale="0.5 0.5 0.5"
+            play-on-window-click>
+          </a-entity>
+        </a-camera>
+        
+       
+</a-scene>
   </html>
