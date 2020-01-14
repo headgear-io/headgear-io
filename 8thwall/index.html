@@ -1,1 +1,636 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!-- d16b784dcf125bafd1967e30c1918f909ea6c5c7 8d2927fdfbae9ea66e34caa4039a4c3f -->
+      <meta charset="UTF-8">
 
+      <title>AR Portal</title>
+      <meta itemprop="name" content="AR Portal">
+      <meta name="twitter:title" content="AR Portal">
+      <meta name="og:title" content="AR Portal">
+      <meta name="og:site_name" content="AR Portal">
+      <meta name="image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta itemprop="image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta name="og:image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta name="twitter:image:src" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+    
+      <meta name="og:type" content="website">
+      <meta name="twitter:card" content="summary">
+
+      <script async src="https://apps.8thwall.com/xrweb?appKey=gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn&s=1"></script>
+     <script src="https://cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
+      <script src="https://cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+
+      <!-- Copyright (c) 2019 8th Wall, Inc. -->
+<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
+
+
+
+<!-- Other external scripts and meta tags can also be added. -->
+<!-- tag for iOS icon homepage pinning -->
+<link rel="apple-touch-icon" href="./assets/HLOGO.PNG">
+ <link rel="icon" type="image/png" href="./assets/HLOGO.ico">
+ 
+   <!-- meta tag for iOS video playback -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+      
+      
+    </head>
+    <body>
+	<script>
+	// Copyright (c) 2020 Headgear
+//
+// app.js is the main entry point for your 8th Wall app. Code here will execute after head.html
+// is loaded, and before body.html is loaded.
+  
+
+//*****Global Variables START**********************************      
+    
+    //whether to show debug on screen or not - should be false for clients & staging & production!
+    var debugOnVar = false //to use log with the command: AFRAME.log('test')
+
+    //text strings
+    var INFO_TEXT1 = "Tippen Sie auf den Bildschirm, um die Tür zu platzieren"  //initial text shown
+    var INFO_TEXT2 = "Gehe durch das Tor, um das Erlebnis zu starten." //text shown after placement
+    var INFO_TEXT3 = "Einen Schritt zurück und es geht weiter, order tippen Sie zum Zurücksetzen auf den Bildschirm" //text shown when walking out of balcony
+    var sceneLocationTextString = "Scene Location" //text to be shown above the door
+    
+    
+    //experience setup ** THESE CAN BE CHANGED
+    var hideDoorOnWalkthrough = false //true means door is hidden when user walks through - Needed for 2nd app demo!!
+    var showBalcony = true   //true means balcony is shown
+    var videoElsePhoto = true //true means video not photo
+    var sceneLocationText = false //true means text will be shown above the door signifying the location
+    var doorTriggerDistance = 7.5  //camera starts around a value of 9. Where a value of 0 = at the door
+    var containsDoorAnimation = false //whether door animation exists
+
+    //global logic vars ** DO NOT CHANGE THESE
+    var isInPortalSpace = false
+    var wasOutside = true
+    var withinPortalBounds = false
+    var doorOpened = false
+    var resetSceneTriggered = false //called for proper reset of the hide door when walking through scenerio
+    var outofBounds = false
+    
+    
+    
+//*****Global Variables END************************************
+
+      // For showing debug logs on screen
+      AFRAME.registerComponent('debugon', {
+        init: function() {
+          this.el.setAttribute('visible', debugOnVar)
+        },
+      })
+      
+      // This component gives the invisible hider walls the property they need
+      AFRAME.registerComponent('hider-material', {
+        init: function() {
+          const mesh = this.el.getObject3D('mesh')
+          mesh.material.colorWrite = false
+        },
+      })
+
+      // To set the initial info text
+      AFRAME.registerComponent('set-initial-info-text', {
+        init: function() {
+          this.el.setAttribute('text', 'value: ' + INFO_TEXT1)
+        },
+      })
+      
+      
+      // This component hides and shows certain elements as the camera moves as well as info text and balcony
+      AFRAME.registerComponent('portal', {
+        schema: {
+          width: {default: 6},
+          height: {default: 30}, //To do: make this dynamic
+          depth: {default: 1}, //TO DO: check this value
+        },
+        init: function(){
+          this.camera = document.getElementById('camera')
+          this.contents = document.getElementById('portal-contents')
+          this.walls = document.getElementById('hider-walls')
+          this.portalWall = document.getElementById('portal-return-opening')
+          this.portalWorld = document.getElementById('portal-world')
+          
+          //get sceneHolder distance
+          this.sceneholder = document.getElementById('scene-holder')
+          depthOffset = this.sceneholder.getAttribute('position').z
+          
+
+          //hide or show balcony depending on global var 
+          document.getElementById('balcony').object3D.visible = showBalcony
+          
+          
+          //XR8.XrController.configure({disableWorldTracking: false})
+            
+
+        },
+        tick: function() {
+          const position = this.camera.object3D.position
+
+          var isOutside = position.z  > ((this.data.depth / 2) + depthOffset)
+          const withinPortalBounds = position.y < this.data.height && Math.abs(position.x) < this.data.width / 2
+          //console.log('camera.z = ' + position.z + 'compared to: '+ (this.data.depth / 2) + depthOffset)
+          
+          //check if reset scene has been triggered
+          if (resetSceneTriggered) {
+               isInPortalSpace = false
+               isOutside = true
+               resetSceneTriggered = false
+               if (hideDoorOnWalkthrough) {
+                  //through door show  door
+                  document.getElementById('doorEntity').setAttribute('visible', 'true')
+                  document.getElementById('balcony').setAttribute('visible', 'true')
+              }
+          }
+          // check if user has walked out of balcony
+          if (isInPortalSpace && !isOutside && !hideDoorOnWalkthrough) {
+     
+                withinBalconyWidth = position.y < this.data.height && Math.abs(position.x) < this.data.width // 2
+                withinBalconyDepth = position.z  > (-(this.data.depth * 4) + depthOffset)
+
+                //AFRAME.log('withinBalconyWidth = ' + withinBalconyWidth + ", withinBalconyDepth = " + withinBalconyWidth);
+                if (!withinBalconyWidth && !withinBalconyDepth && !outofBounds) {
+                    AFRAME.log('out of balcony');
+                    outofBounds = true
+                    //change text / reshow
+                    document.getElementById('infoText').setAttribute('text', 'value: ' + INFO_TEXT3)
+                    document.getElementById('infoText').object3D.visible = true
+                } else if (withinBalconyWidth && withinBalconyDepth && outofBounds) {
+                    AFRAME.log('in balcony again');
+                    outofBounds = false
+                    //hide out of bounds text
+                    document.getElementById('infoText').object3D.visible = false
+                } else if (outofBounds) {
+                    AFRAME.log('position.z = ' + position.z + ", Depth = " + (-(this.data.depth * 4) + depthOffset)); //(((-1 * this.data.depth) / 2) - depthOffset));
+                }
+
+          }
+          // check if user has walked into portal
+          if (!isInPortalSpace && !isOutside && withinPortalBounds) {
+                isInPortalSpace = true
+              //hide stuff:
+                //through door hide info text
+                document.getElementById('infoText').object3D.visible = false
+                //through door hide arrow
+                document.getElementById('arrow-image-holder').setAttribute('visible', 'false')
+                
+              if (hideDoorOnWalkthrough) {
+                //through door hide door
+                document.getElementById('doorEntity').setAttribute('visible', 'false')
+                document.getElementById('balcony').setAttribute('visible', 'false')
+              }
+              
+              //play narrative sound
+              var entity = document.querySelector('#soundcue')
+              entity.components.sound.playSound();
+              
+              //test to disable world tracking
+              //XR8.stop()
+              //XR8.XrController.configure({disableWorldTracking: false})
+          
+            //else check if user has walked out of portal
+          } else if (isInPortalSpace && isOutside && !hideDoorOnWalkthrough) {
+              isInPortalSpace = false
+              //reset narrative audio
+              document.querySelector('#soundcue').components.sound.stopSound()
+          }
+          
+          //door animation check
+          if ((position.z < doorTriggerDistance) && !doorOpened && containsDoorAnimation) {
+              doorOpened = true
+              //console.log('door opened')
+          } else if ((position.z > doorTriggerDistance) && doorOpened && containsDoorAnimation) {
+              doorOpened = false
+              //console.log('door closed')
+          }
+          //end door animation check
+          //console.log('isInPortalSpace = ' + isInPortalSpace + ', isOutside = ' + isOutside)
+          //set visibilities of portal components
+          this.contents.object3D.visible = isInPortalSpace || isOutside
+          this.walls.object3D.visible = !isInPortalSpace && isOutside
+          this.portalWall.object3D.visible = isInPortalSpace && !isOutside && !hideDoorOnWalkthrough
+          this.portalWorld.object3D.visible = isInPortalSpace
+
+          wasOutside = isOutside
+          
+          
+        }
+      })
+    
+    
+      //To hide or show  the sceneLocationText above door
+      AFRAME.registerComponent('scenelocation_textholder_controller', {
+        init: function() {
+          
+          if (sceneLocationText) {
+            document.getElementById('sceneLocationTextHolder').setAttribute('visible', 'true')
+          } else {
+            document.getElementById('sceneLocationTextHolder').setAttribute('visible', 'false')
+          }
+        },
+         
+      });
+      
+      //to set the text of the scenelocationText entitys
+        AFRAME.registerComponent('scenelocation_text_setter', {
+        init: function() {
+            if (sceneLocationText) {
+            this.el.setAttribute('text', 'align: center; value: ' + sceneLocationTextString + '; color: white; font: https://cdn.aframe.io/fonts/mozillavr.fnt;')
+          }
+        },
+         
+      })
+    
+    //to show either photo or video sphere
+     AFRAME.registerComponent('photo-or-video', {
+        init: function() {
+          if (videoElsePhoto) {
+            document.querySelector("#photosphere").setAttribute('visible', 'false')
+
+          } else {
+            document.querySelector("#videosphere").setAttribute('visible', 'false')
+          }
+          
+        },
+      })
+    
+ 
+    
+              
+    
+    //This component plays the video on screen tap if it doesn't autoplay
+    AFRAME.registerComponent('play-on-window-click', {
+      init: function() {
+           this.onClick = this.onClick.bind(this);
+      },
+      play: function() {
+        window.addEventListener('click', this.onClick);
+      },
+      pause: function() {
+        window.removeEventListener('click', this.onClick);
+      },
+      onClick: function(evt) {
+        
+        //change text / reshow
+        document.getElementById('infoText').setAttribute('text', 'value: ' + INFO_TEXT2)
+        document.getElementById('infoText').object3D.visible = true
+        //show arrow
+        document.getElementById('arrow-image-holder').setAttribute('visible', 'true')
+        
+
+        //to reset the door visibility if previously hidden on walkthrough
+        if (hideDoorOnWalkthrough) {
+            resetSceneTriggered = true
+         }
+        //reset vars
+        outofBounds = false
+        
+        //reset narrative audio
+        var entity = document.querySelector('#soundcue')
+        entity.components.sound.stopSound();
+        if (videoElsePhoto){
+          //play video
+          var video = this.el.components.material.material.map.image;
+          if (!video) { return; }
+          video.play();
+        }
+      }
+    });
+
+    
+ // To handle the looping arrow-animation
+      AFRAME.registerComponent('arrow-ani-setup', {
+        init: function() {
+          var arrow1 = document.querySelector('#arrow1')
+          //var arrow2 = document.querySelector('#arrow2')
+          //var arrow3 = document.querySelector('#arrow3')
+          this.el.addEventListener('loaded', (e) => {
+              //console.log('loaded')
+              arrow1.emit('moveup');
+              //setTimeout(function(){ arrow2.emit('moveup'); }, 400);
+              //setTimeout(function(){ arrow3.emit('moveup'); }, 800);
+          })
+        },
+      })
+       
+       AFRAME.registerComponent('arrow-ani', {
+        init: function() {
+          this.el.addEventListener('animationcomplete', (e) => {
+            //console.log(e.detail.name);
+            if (e.detail.name == 'animation__moveup') {
+                this.el.emit('moveup');
+                this.el.emit('fadein');
+            } 
+            if (e.detail.name == 'animation__fadein') {
+                  //console.log('fadein done')
+                    this.el.emit('fadeout');
+                } 
+            if (e.detail.name == 'animation__fadeout') {
+                  //console.log('fadeout done')
+                    this.el.emit('fadein');
+                }
+          })
+
+      
+        },
+      })
+      
+
+    //Dynamic Lighting 
+      AFRAME.registerComponent('xr-light', {
+        schema: {
+          min: {default: 0},
+          max: {default: 20}
+        },
+        init: function() {
+          const startListen = () => {
+            window.XR.XrController.configure({enableLighting: true})
+            window.XR.addCameraPipelineModule({
+              name: 'xr-light',
+              onUpdate: ({processCpuResult}) => {
+                if (processCpuResult.reality && processCpuResult.reality.lighting && processCpuResult.reality.lighting.exposure) {
+                  this.intensity = 1 + processCpuResult.reality.lighting.exposure
+                }
+              }
+            })
+          }
+
+          this.intensity = 1
+
+          window.XR ? startListen() : window.addEventListener('xrloaded', startListen)
+
+          },
+        tick: function() {
+          let headlights = this.el.sceneEl.querySelectorAll('a-cone')
+          var tempIntensity = Math.max(this.data.min, Math.min((this.system.intensity * 10), this.data.max))
+          this.el.setAttribute('light', 'intensity: ' + tempIntensity)
+          //console.log(tempIntensity)
+         
+                    
+          }
+        })
+
+
+
+
+  //Video event handler
+    AFRAME.registerComponent('videoeventhandler', {
+      init: function() {
+          if (videoElsePhoto){
+            var video = this.el.components.material.material.map.image;
+           
+           
+             //video event testing
+                  video.addEventListener('waiting', (event) => {
+             // console.log('Video is waiting for more data.');
+            });
+            
+                  video.addEventListener('stalled', (event) => {
+            //  console.log('Video is stalled for more data.');
+            });
+            
+            video.addEventListener('playing', (event) => {
+             // console.log('Video is no longer paused');
+            });
+            
+            video.addEventListener('canplay', (event) => {
+            //  console.log('Video can start, but not sure it will play through.' + video.readyState);
+            });
+            video.addEventListener('progress', (event) => {
+            //  console.log('resource loading buffered = ' + video.buffered);
+            });
+            video.addEventListener('canplaythrough', (event) => {
+            //  console.log('I think I can play through the entire ' + 'video without ever having to stop to buffer.');
+            });
+            video.addEventListener('loadeddata', (event) => {
+            //  console.log('Yay! The readyState just increased to  ' + 'HAVE_CURRENT_DATA or greater for the first time.');
+            });
+          }
+      },
+       
+    });
+
+
+      
+ 
+	</script>
+	
+	<!-- Copyright (c) 2020 Headgear -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+ <a-scene id="scene"
+ light="defaultLightsEnabled: false"
+      xrweb
+      portal
+      aframe-log-component
+      photo-or-video
+      xrextras-almost-there
+      xrextras-loading
+      xrextras-runtime-error
+      xrextras-tap-recenter>
+
+      <!-- We can define assets here to be loaded when A-Frame initializes -->
+      <a-assets>
+
+        <a-asset-item id="doorModel" src="./assets/dolmen_enter.glb"></a-asset-item>
+        <a-asset-item id="balconyModel" src="./assets/dolmen_balcony.glb"></a-asset-item>
+        
+        <img id="arrowhead-image" src="./assets/arrowhead.png">
+          <!-- asset for 360 photo and or video poster -->
+        <img id="photo" src="./assets/video_thumbnail.jpg">
+        
+         <!-- asset for narrator -->
+        <audio id="audio" src="./assets/narrative.mp3" preload="auto"></audio>
+        
+      </a-assets>
+      <a-assets timeout="3000">
+      <!-- Different timeout mentioned here in case we wish to start the video streaming sooner -->
+        
+        <video id="video1" src="./assets/Sam_100_0999-lowbitrate_trimmed.mp4"
+          loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
+      
+      </a-assets>
+
+      <!-- light -->
+      <a-entity
+        light="type: directional;
+               intensity: 0;
+               target: #doorEntity;"
+        position="1 4.3 2.5">
+      </a-entity>
+    
+      <a-light type="ambient" intensity="0"></a-light>
+
+      <!-- main scene holder - used to push door further back on spawn. NOTE: changing Z results in having to move the camera Y up or down -->
+      <a-entity id="scene-holder" position="0 0 -7">
+        
+            <!-- Doorway door model (note: order is important as first listed is always drawn on top) -->
+            <a-entity
+                id="doorEntity"
+                position="0 0 0"
+                scale="2.3 2.3 2.3"
+                gltf-model="#doorModel">
+                  
+                  <!-- text sign --> 
+                  <!-- standard font: 
+                  font: https://cdn.aframe.io/fonts/mozillavr.fnt;" 
+                  -->
+                  <!-- custom font: 
+                  shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/play/Play-Regular.json;"
+                  from: https://github.com/etiennepinchon/aframe-fonts -->
+                <a-entity id="sceneLocationTextHolder" scenelocation_textholder_controller>
+                    <a-entity
+                        id="sceneLocationTextEntity"
+                        text="align: center; value: Location; color: white; font: https://cdn.aframe.io/fonts/mozillavr.fnt;" 
+                        position="0 8 1.45"
+                        scale="12 12 12"
+                        scenelocation_text_setter
+                        >
+                    </a-entity>
+                    <!-- text shadow attempt -->
+                    <a-entity
+                        id="sceneLocationTextShadowEntity"
+                        text="align: center; value: Location; color: black; font: https://cdn.aframe.io/fonts/mozillavr.fnt;" 
+                        position="0 8 1.4"
+                        scale="12.1 12.1 12.1"
+                        scenelocation_text_setter
+                        >
+                    </a-entity>
+                </a-entity>
+            </a-entity>
+            
+      
+            <!-- Hider walls -->
+            <a-entity id="hider-walls">
+              <!-- above portal on front: wScale effected by width of door. yPosition effected by height of door-->
+              <a-box id="abovePortalHiderWall"
+                scale="10 100 1"
+                position="0 67 0"
+                hider-material></a-box>
+              <!-- front left: wScale effected by width of door-->
+              <a-box
+                scale="92 100 1"
+                position="-50 50 0"
+                hider-material></a-box>
+              <!-- front right: wScale effected by width of door-->
+              <a-box
+                scale="92 100 1"
+                position="50 50 0"
+                hider-material></a-box>
+              <!-- back -->
+              <a-box
+                scale="200 100 1"
+                position="0 50 200"
+                hider-material></a-box>
+              <!-- floor left -->
+              <a-box
+                scale="200 1 201"
+                position="0 100 100"
+                hider-material></a-box>
+              <!-- floor right -->
+              <a-box
+                scale="200 1 199"
+                position="0 -0.5 100"
+                hider-material></a-box>
+              <!-- side left -->
+              <a-box
+                scale="1 100 205"
+                position="-100 50 100"
+                hider-material></a-box>
+              <!-- side right -->
+              <a-box
+                scale="1 100 205"
+                position="100 50 100"
+                hider-material></a-box>
+            </a-entity>
+            
+            <!-- return side: xScale effected by width of door. yScale and yHeight effected by door height -->
+            <a-entity id="portal-return-opening">
+              <a-plane
+                scale="7 17 1"
+                rotation="180 0 0"
+                position="0 8.5 0.5"
+                hider-material></a-plane>
+            </a-entity>
+      
+            <a-entity id="portal-contents">
+              
+              <!-- Balcony  -->
+                <a-entity id="balcony"
+                position="0 0 0"
+                gltf-model="#balconyModel"
+                scale="2.3 2.3 2.3"></a-entity>
+                
+             
+            <!-- sky replace this with 360 photo sky
+            <a-sky color="#6EBAA7"></a-sky>
+            -->
+           <a-videosphere id="videosphere" rotation="0 90 0" src="#video1" play-on-window-click videoeventhandler>
+           </a-videosphere>    
+      
+            <!-- ground outside if separate should go here --> 
+              
+            </a-entity>
+        
+            <!-- ground inside portal --> 
+       
+            <a-entity id="portal-world">
+             
+            </a-entity>
+            
+            <!-- sky background for 360 photo -->
+            <a-sky id="photosphere" src="#photo" photo-or-video ></a-sky>
+            
+            <!-- narrator audio track -->
+            <a-entity id="soundcue" sound="src: #audio; autoplay: false;"></a-entity>
+            
+     </a-entity>
+     <a-camera
+        id="camera"
+        position="0 11.5 9.2"> <!-- changing the depth/height (y) and distance (z) of the camera results in a rescale of the door -->
+           
+          <a-entity id="arrow-image-holder" visible="false" arrow-ani-setup>
+             <a-image id="arrow1" position="0 0.025 -1" scale="0.1 0.2 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
+                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad "
+                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
+                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad "
+                          
+                           arrow-ani>
+              </a-image>  
+              <!-- for multiple arrows:
+              <a-image id="arrow2" position="0 0.025 -1" scale="0.1 0.1 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
+                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad"
+                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
+                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad"
+                          
+                           arrow-ani>
+              </a-image>  
+              <a-image id="arrow3" position="0 0.025 -1" scale="0.1 0.1 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
+                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad "
+                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
+                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad "
+                          
+                           arrow-ani>
+              </a-image >  
+              -->
+          </a-entity> 
+          <a-entity
+            id="infoText"
+            text="align: center; value: Tor platzieren; color: white; wrapCount: 22; shader: msdf; negate: false; font: ./assets/msyaheide.json; " 
+            position="0 -0.1 -1"
+            scale="0.5 0.5 0.5"
+            set-initial-info-text
+            play-on-window-click>
+          </a-entity>
+          
+           <!-- Logging to screen -->
+           <a-log position="1 2.5 -4" visibile="false" debugon></a-log>
+            
+      </a-camera>
+    </a-scene>
+    
+   
+
+  
+  </html>
