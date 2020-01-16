@@ -28,8 +28,8 @@
 
 <!-- Other external scripts and meta tags can also be added. -->
 <!-- tag for iOS icon homepage pinning -->
-<link rel="apple-touch-icon" href="./assets/HLOGO.PNG">
- <link rel="icon" type="image/png" href="./assets/HLOGO.ico">
+<link rel="apple-touch-icon" href="./assets/pagelogo.png">
+ <link rel="icon" type="image/png" href="./assets/pagelogo.ico">
  
    <!-- meta tag for iOS video playback -->
    <meta name="apple-mobile-web-app-capable" content="yes">
@@ -384,28 +384,28 @@
            
              //video event testing
                   video.addEventListener('waiting', (event) => {
-             // console.log('Video is waiting for more data.');
+              console.log('Video is waiting for more data.');
             });
             
                   video.addEventListener('stalled', (event) => {
-            //  console.log('Video is stalled for more data.');
+              console.log('Video is stalled for more data.');
             });
             
             video.addEventListener('playing', (event) => {
-             // console.log('Video is no longer paused');
+              console.log('Video is no longer paused');
             });
             
             video.addEventListener('canplay', (event) => {
-            //  console.log('Video can start, but not sure it will play through.' + video.readyState);
+              console.log('Video can start, but not sure it will play through.' + video.readyState);
             });
             video.addEventListener('progress', (event) => {
-            //  console.log('resource loading buffered = ' + video.buffered);
+              console.log('resource loading buffered = ' + video.buffered);
             });
             video.addEventListener('canplaythrough', (event) => {
-            //  console.log('I think I can play through the entire ' + 'video without ever having to stop to buffer.');
+              console.log('I think I can play through the entire ' + 'video without ever having to stop to buffer.');
             });
             video.addEventListener('loadeddata', (event) => {
-            //  console.log('Yay! The readyState just increased to  ' + 'HAVE_CURRENT_DATA or greater for the first time.');
+              console.log('Yay! The readyState just increased to  ' + 'HAVE_CURRENT_DATA or greater for the first time.');
             });
           }
       },
@@ -413,11 +413,70 @@
     });
 
 
+
+
+//shadow test
+    AFRAME.registerComponent('shadow-material', {
+  init:function() {
+    this.material = new THREE.ShadowMaterial()
+    this.el.getOrCreateObject3D('mesh').material = this.material
+    this.material.opacity = 0.4
+  }
+})
+
+
+
+//test componenent function - currently not working
+      AFRAME.registerComponent('portal-size', {
+      init: function() {
+          console.log('portal size called. This:')
+          console.log(this)
+          console.log('portal size called. object3d:')
+          console.log(this.el.Object3D)
+          
+          //get size vector
+          var model = this.el.object3D;
+          var box = new THREE.Box3().setFromObject( model );
+          const sizeVector = new THREE.Vector3();
+          var size = box.getSize( sizeVector );
+          var loader = new THREE.OBJLoader(model);
+             var helper = new THREE.BoxHelper(loader, 0xff0000);
+          helper.update();
+          // If you want a visible bounding box
+          scene.add(helper);
+          // If you just want the numbers
+                    console.log('1portal size called. size:')
+          console.log(helper.box.min);
+          console.log(helper.box.max);
+          
+          helper = new THREE.BoxHelper(model, 0xff0000);
+          helper.update();
+          // If you want a visible bounding box
+          scene.add(helper);
+          // If you just want the numbers
+                    console.log('2portal size called. size:')
+          console.log(helper.box.min);
+          console.log(helper.box.max);
+          
+          
+          
+          
+
+        //  console.log(size.x)
+        // console.log(size.y)
+        // console.log(size.z)
+          //update scale:
+          // With three.js
+          //el.object3D.scale.set(1, 2, 3);
+        },
+      })
+      
+ 
       
  
 	</script>
 	
-	<!-- Copyright (c) 2020 Headgear -->
+<!-- Copyright (c) 2020 Headgear -->
 <!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
  <a-scene id="scene"
  light="defaultLightsEnabled: false"
@@ -432,22 +491,24 @@
 
       <!-- We can define assets here to be loaded when A-Frame initializes -->
       <a-assets>
-
-        <a-asset-item id="doorModel" src="./assets/dolmen_enter.glb"></a-asset-item>
-        <a-asset-item id="balconyModel" src="./assets/dolmen_balcony.glb"></a-asset-item>
+       
+        <a-asset-item id="doorModelPlain" src="./assets/door230cm.glb"></a-asset-item>
+        <a-asset-item id="doorModel" src="./assets/door_model.glb"></a-asset-item>
+        <a-asset-item id="balconyModel" src="./assets/balcony_model.glb"></a-asset-item>
         
         <img id="arrowhead-image" src="./assets/arrowhead.png">
+        
           <!-- asset for 360 photo and or video poster -->
         <img id="photo" src="./assets/video_thumbnail.jpg">
-        
+
          <!-- asset for narrator -->
         <audio id="audio" src="./assets/narrative.mp3" preload="auto"></audio>
         
       </a-assets>
-      <a-assets timeout="3000">
       <!-- Different timeout mentioned here in case we wish to start the video streaming sooner -->
+      <a-assets timeout="3000">
         
-        <video id="video1" src="./assets/Sam_100_0999-lowbitrate_trimmed.mp4"
+        <video id="video1" src="./assets/360_video.mp4"
           loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
       
       </a-assets>
@@ -617,7 +678,7 @@
           </a-entity> 
           <a-entity
             id="infoText"
-            text="align: center; value: Tor platzieren; color: white; wrapCount: 22; shader: msdf; negate: false; font: ./assets/msyaheide.json; " 
+            text="align: center; value: Tor platzieren; color: white; wrapCount: 22; shader: msdf; negate: false; font: /assets/msyaheide-19hs69cri5.glb;" 
             position="0 -0.1 -1"
             scale="0.5 0.5 0.5"
             set-initial-info-text
@@ -629,6 +690,10 @@
             
       </a-camera>
     </a-scene>
+    
+   
+
+  
     
    
 
