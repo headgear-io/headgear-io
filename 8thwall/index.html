@@ -1,48 +1,78 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <!-- d16b784dcf125bafd1967e30c1918f909ea6c5c7 8d2927fdfbae9ea66e34caa4039a4c3f -->
-      <meta charset="UTF-8">
-
-      <title>AR Portal</title>
-      <meta itemprop="name" content="AR Portal">
-      <meta name="twitter:title" content="AR Portal">
-      <meta name="og:title" content="AR Portal">
-      <meta name="og:site_name" content="AR Portal">
-      <meta name="image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
-      <meta itemprop="image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
-      <meta name="og:image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
-      <meta name="twitter:image:src" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
-    
-      <meta name="og:type" content="website">
-      <meta name="twitter:card" content="summary">
-
-      <script async src="https://apps.8thwall.com/xrweb?appKey=gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn&s=1"></script>
-     <script src="https://cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
-      <script src="https://cdn.8thwall.com/web/xrextras/xrextras.js"></script>
-
-      <!-- Copyright (c) 2019 8th Wall, Inc. -->
+<!-- Copyright (c) 2020 Headgear -->
 <!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
 
+<!-- Use "8thwall:" meta tags to hook into 8th Wall's build process and developer tools. -->
+<meta name="8thwall:renderer" content="aframe">
 
 
-<!-- Other external scripts and meta tags can also be added. -->
 <!-- tag for iOS icon homepage pinning -->
 <link rel="apple-touch-icon" href="./assets/pagelogo.png">
  <link rel="icon" type="image/png" href="./assets/pagelogo.ico">
  
    <!-- meta tag for iOS video playback -->
    <meta name="apple-mobile-web-app-capable" content="yes">
-      
-      
+   
+   <!-- script for pushing debug logs onto screen! -->
+   <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script> 
+   
+   
+   <style>
+
+  #tapScreenButton {
+    position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index:10;
+
+}
+  
+  #uiContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
+#closeButton {
+  position: absolute;
+  width: 15vmin;
+  height: 15vmin;
+  background-color: white;
+  bottom: 2vmax;
+  border-radius: 7.5vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: auto;
+}
+
+
+#closeButton {
+  background-image: url('#');
+  display: none;
+}
+
+   </style>
     </head>
     <body>
 	<script>
-	// Copyright (c) 2020 Headgear
+// Copyright (c) 2020 Headgear
 //
 // app.js is the main entry point for your 8th Wall app. Code here will execute after head.html
 // is loaded, and before body.html is loaded.
   
+  require('./xrextras.js');
 
 //*****Global Variables START**********************************      
     
@@ -57,7 +87,7 @@
     
     
     //experience setup ** THESE CAN BE CHANGED
-    var hideDoorOnWalkthrough = false //true means door is hidden when user walks through - Needed for 2nd app demo!!
+    var hideDoorOnWalkthrough = true //true means door is hidden when user walks through - Needed for 2nd app demo!!
     var showBalcony = true   //true means balcony is shown
     var videoElsePhoto = true //true means video not photo
     var sceneLocationText = false //true means text will be shown above the door signifying the location
@@ -71,18 +101,235 @@
     var doorOpened = false
     var resetSceneTriggered = false //called for proper reset of the hide door when walking through scenerio
     var outofBounds = false
-    
-    
-    
+    var doorVisible = false
+    var materialOriginalDoor = new THREE.MeshStandardMaterial({})
+    var materialOriginalBalcony = new THREE.MeshStandardMaterial({})
+
 //*****Global Variables END************************************
 
-      // For showing debug logs on screen
-      AFRAME.registerComponent('debugon', {
-        init: function() {
-          this.el.setAttribute('visible', debugOnVar)
-        },
-      })
+
+
+
+ //This component plays the video on screen tap if it doesn't autoplay and resets the tracking on screentap
+    AFRAME.registerComponent('tap-handler', {
+      init: function() {
+           
+            const uiContainer = document.getElementById('uiContainer')
+            const closeButton = document.getElementById('placeholderButton')
+            const tapScreen = document.getElementById('tapScreenButton')
+
+            // Container starts hidden so it isn't visible when the page is still loading
+            
+            //uiContainer.addEventListener('click', () => {
+            //  console.log('container pressed')
+            //})
+        
+            //tap screen listener for non-specific components:
+            tapScreen.addEventListener('click', () => {
+                  console.log('tapScreen pressed')
+                  
+                  // recenter scene
+                  let scene = this.el.sceneEl
+                  scene.emit('recenter')
+                  
+                
+                  //to reset the door visibility if previously hidden on walkthrough
+                  if (hideDoorOnWalkthrough) {
+                      resetSceneTriggered = true
+                   }
+                  //reset vars
+                  outofBounds = false
+                  
+                  //reset narrative audio
+                  var soundEntity = document.querySelector('#soundcue')
+                  soundEntity.components.sound.stopSound();
+                  
+                  //check if video is playing yet
+                  if (videoElsePhoto){
+                    //play video
+                    var video = document.querySelector('#videosphere').components.material.material.map.image;
+                    if (!video) { return; }
+                    video.play();
+                   }
+            })  //end tap screen eventhandler
+   
+      }
+    });
+
+    //This handles starting the show door animation on a screen tap
+    AFRAME.registerComponent('show-door-ani-on-tap', {
+      init: function() {
+         const tapScreen = document.getElementById('tapScreenButton')
+         //tap screen listener:
+            tapScreen.addEventListener('click', () => {
+                   
+                  //Door & Balcony: material change
+                  if (!doorVisible || (doorVisible)){ //need to fix this second condition
+                    
+                        //set wirefirame materials door:
+                          let el = document.getElementById('doorEntity');
+                          let mesh = el.getObject3D('mesh'); 
+                          if (!mesh){return;}
+                          //console.log(mesh);
+                          mesh.traverse(function(node){
+                             if (node.isMesh){  
+                               let materialOriginal = node.material
+                               node.material = new THREE.MeshStandardMaterial({
+                                  color : 0x00ff00,
+                                 wireframe : true,
+                                 emissive:  0x00ff00,
+                                 emissiveIntensity: 10,
+                                 opacity : 1
+                               });
+                             }
+                          });
+                          //set wireframe materials balcony:
+                          if (showBalcony) {
+                              let el = document.getElementById('balcony');
+                                let mesh = el.getObject3D('mesh'); 
+                                if (!mesh){return;}
+                                //console.log(mesh);
+                                mesh.traverse(function(node){
+                                   if (node.isMesh){  
+                                     let materialOriginal = node.material
+                                     node.material = new THREE.MeshStandardMaterial({
+                                        color : 0x00ff00,
+                                       wireframe : true,
+                                       emissive:  0x00ff00,
+                                       emissiveIntensity: 10,
+                                       opacity : 1
+                                     });
+                                   }
+                                });        
+                          }
+                  
+                        //hide info text and arrow while door is animating
+                        document.getElementById('infoText').object3D.visible = false
+                        document.getElementById('arrow-image-holder').setAttribute('visible', 'false')
+                        //start animation of box hider
+                        document.getElementById('boxInFrontOfDoor').emit('showportal')
+                        document.getElementById('boxInFrontOfDoor').setAttribute('visible', 'true')
+                        document.getElementById('doorEntity').setAttribute('visible', 'true')
+                        if (showBalcony) { document.getElementById('balcony').setAttribute('visible', 'true') }
+                    
+                  }
+            })
+      }
+    });
+
+
+    //This handles the logic for when the show door animation is complete
+    AFRAME.registerComponent('show-door-ani-over-logic', {
+      init: function() {
       
+          document.getElementById('boxInFrontOfDoor').addEventListener('animationcomplete', (e) => {
+          console.log(e.detail.name);
+                                    
+          if (e.detail.name == 'animation__showportal') {
+                 console.log('show portal done')
+                 document.getElementById('boxInFrontOfDoor').setAttribute('visible', 'false')
+                 
+                  let eldoor = document.getElementById('doorEntity');
+                  let mesh = eldoor.getObject3D('mesh'); 
+                  if (!mesh){return;}
+                  mesh.traverse(function(node){
+                    if (node.isMesh){  
+                      node.material = materialOriginalDoor
+                    }
+                  });
+            if (showBalcony) {
+                  let elbalcony = document.getElementById('balcony');
+                  let mesh = elbalcony.getObject3D('mesh'); 
+                  if (!mesh){return;}
+                  mesh.traverse(function(node){
+                     if (node.isMesh){  
+                       node.material = materialOriginalBalcony
+                     }
+                  });
+                }
+            doorVisible = true
+            
+            //change text / reshow
+            document.getElementById('infoText').setAttribute('text', 'value: ' + INFO_TEXT2)
+            document.getElementById('infoText').object3D.visible = true
+            //show arrow
+            document.getElementById('arrow-image-holder').setAttribute('visible', 'true')
+                 
+          }
+        }) 
+      }
+    })
+
+ 
+      //This hides video/photo sphere inside the initial hider box in case user walks in their before spawning door
+    AFRAME.registerComponent('hide-after-load', {         
+          init: function () {
+             // After entity has loaded scale down to make 'invisible'
+            this.el.addEventListener('loaded', (e) => {
+
+                this.el.object3D.visible = false;
+            })
+          }
+     })
+ 
+    //This shows video/photo sphere on tap
+    AFRAME.registerComponent('show-on-tap', {         
+          init: function () {
+            const tapScreen = document.getElementById('tapScreenButton')
+            //tap screen listener:
+            tapScreen.addEventListener('click', () => {
+                if (this.el == document.getElementById('videosphere')) { if (videoElsePhoto) {if (!this.el.object3D.visible) {this.el.object3D.visible = true;}}}
+                else if (this.el == document.getElementById('photosphere')) { if (!videoElsePhoto) {if (!this.el.object3D.visible) {this.el.object3D.visible = true;}}}
+            })
+          }
+     })
+
+    //This shows models on tap
+    AFRAME.registerComponent('scaleup-on-tap', {         
+          init: function () {
+            const tapScreen = document.getElementById('tapScreenButton')
+            //tap screen listener:
+            tapScreen.addEventListener('click', () => {
+                this.el.object3D.scale.set(2.3, 2.3, 2.3);
+            })
+          }
+     })  
+     
+
+    //This saves the original material of the door and balcony models
+    AFRAME.registerComponent('save-orginal-model-material', {         
+          init: function () {
+             // After gltf model has loaded,save it's default material
+            let eldoor = document.getElementById('doorEntity');
+            eldoor.addEventListener('model-loaded', function(ev){
+              let mesh = eldoor.getObject3D('mesh'); 
+              if (!mesh){return;}
+              mesh.traverse(function(node){
+                 if (node.isMesh){  
+                   materialOriginalDoor = node.material
+                   
+                 }
+              });
+            });
+            if (showBalcony) {
+                elbalcony = document.getElementById('balcony');
+                elbalcony.addEventListener('model-loaded', function(ev){
+                  let mesh = elbalcony.getObject3D('mesh'); 
+                  if (!mesh){return;}
+                  mesh.traverse(function(node){
+                     if (node.isMesh){  
+                       materialOriginalBalcony = node.material
+                       
+                     }
+                  });
+                });
+            }
+          }
+        });
+
+
+        
+
       // This component gives the invisible hider walls the property they need
       AFRAME.registerComponent('hider-material', {
         init: function() {
@@ -107,6 +354,7 @@
           depth: {default: 1}, //TO DO: check this value
         },
         init: function(){
+
           this.camera = document.getElementById('camera')
           this.contents = document.getElementById('portal-contents')
           this.walls = document.getElementById('hider-walls')
@@ -118,8 +366,8 @@
           depthOffset = this.sceneholder.getAttribute('position').z
           
 
-          //hide or show balcony depending on global var 
-          document.getElementById('balcony').object3D.visible = showBalcony
+          //hide or show balcony depending on global var - now set in tap-handler
+          //document.getElementById('balcony').object3D.visible = showBalcony
           
           
           //XR8.XrController.configure({disableWorldTracking: false})
@@ -168,7 +416,7 @@
 
           }
           // check if user has walked into portal
-          if (!isInPortalSpace && !isOutside && withinPortalBounds) {
+          if (!isInPortalSpace && !isOutside && withinPortalBounds && doorVisible) {
                 isInPortalSpace = true
               //hide stuff:
                 //through door hide info text
@@ -260,44 +508,7 @@
     
               
     
-    //This component plays the video on screen tap if it doesn't autoplay
-    AFRAME.registerComponent('play-on-window-click', {
-      init: function() {
-           this.onClick = this.onClick.bind(this);
-      },
-      play: function() {
-        window.addEventListener('click', this.onClick);
-      },
-      pause: function() {
-        window.removeEventListener('click', this.onClick);
-      },
-      onClick: function(evt) {
-        
-        //change text / reshow
-        document.getElementById('infoText').setAttribute('text', 'value: ' + INFO_TEXT2)
-        document.getElementById('infoText').object3D.visible = true
-        //show arrow
-        document.getElementById('arrow-image-holder').setAttribute('visible', 'true')
-        
-
-        //to reset the door visibility if previously hidden on walkthrough
-        if (hideDoorOnWalkthrough) {
-            resetSceneTriggered = true
-         }
-        //reset vars
-        outofBounds = false
-        
-        //reset narrative audio
-        var entity = document.querySelector('#soundcue')
-        entity.components.sound.stopSound();
-        if (videoElsePhoto){
-          //play video
-          var video = this.el.components.material.material.map.image;
-          if (!video) { return; }
-          video.play();
-        }
-      }
-    });
+   
 
     
  // To handle the looping arrow-animation
@@ -336,9 +547,18 @@
       
         },
       })
+
+
+
+      // For showing debug logs on screen
+      AFRAME.registerComponent('debugon', {
+        init: function() {
+          this.el.setAttribute('visible', debugOnVar)
+        },
+      })
       
 
-    //Dynamic Lighting 
+    //Dynamic Lighting - partially used
       AFRAME.registerComponent('xr-light', {
         schema: {
           min: {default: 0},
@@ -375,7 +595,7 @@
 
 
 
-  //Video event handler
+  //Video event handler not used yet
     AFRAME.registerComponent('videoeventhandler', {
       init: function() {
           if (videoElsePhoto){
@@ -399,7 +619,7 @@
               console.log('Video can start, but not sure it will play through.' + video.readyState);
             });
             video.addEventListener('progress', (event) => {
-              console.log('resource loading buffered = ' + video.buffered);
+             // console.log('resource loading buffered = ' + video.buffered);
             });
             video.addEventListener('canplaythrough', (event) => {
               console.log('I think I can play through the entire ' + 'video without ever having to stop to buffer.');
@@ -415,7 +635,7 @@
 
 
 
-//shadow test
+//shadow test no used
     AFRAME.registerComponent('shadow-material', {
   init:function() {
     this.material = new THREE.ShadowMaterial()
@@ -426,7 +646,7 @@
 
 
 
-//test componenent function - currently not working
+//test componenent function - currently not working or used
       AFRAME.registerComponent('portal-size', {
       init: function() {
           console.log('portal size called. This:')
@@ -472,27 +692,35 @@
       })
       
  
-      
  
 	</script>
-	
-<!-- Copyright (c) 2020 Headgear -->
-<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+	<!-- Copyright (c) 2020 Headgear -->
+
+<!-- body.html ; elements will be added to your html body after app.js is loaded. -->
+
+ <!-- These HTML elements are used to show an UI laid over the scene -->
+      <div id="tapScreenButton"></div>
+      <div id="uiContainer" style="display: none">
+        <div id="placeholderButton"></div>
+      </div>
+
+<!-- aframe scene components -->
+
  <a-scene id="scene"
  light="defaultLightsEnabled: false"
       xrweb
       portal
+      tap-handler
       aframe-log-component
       photo-or-video
       xrextras-almost-there
       xrextras-loading
-      xrextras-runtime-error
-      xrextras-tap-recenter>
+      xrextras-runtime-error>
 
       <!-- We can define assets here to be loaded when A-Frame initializes -->
       <a-assets>
        
-       <!-- <a-asset-item id="doorModelPlain" src="./assets/door230cm.glb"></a-asset-item> -->
+       <!-- <a-asset-item id="doorModel" src="./assets/door230cm.glb"></a-asset-item>  -->
         <a-asset-item id="doorModel" src="./assets/door_model.glb"></a-asset-item>
         <a-asset-item id="balconyModel" src="./assets/balcony_model.glb"></a-asset-item>
         
@@ -513,6 +741,49 @@
       
       </a-assets>
 
+       <a-camera
+        id="camera"
+        position="0 11.5 9.2"> <!-- changing the depth/height (y) and distance (z) of the camera results in a rescale of the door -->
+           
+          <a-entity id="arrow-image-holder" visible="false" arrow-ani-setup>
+             <a-image id="arrow1" position="0 0.025 -1" scale="0.1 0.2 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
+                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1.5; dur: 2000; startEvents: moveup; easing: easeInOutQuad "
+                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
+                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad "
+                          
+                           arrow-ani>
+              </a-image>  
+              <!-- for multiple arrows:
+              <a-image id="arrow2" position="0 0.025 -1" scale="0.1 0.1 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
+                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad"
+                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
+                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad"
+                          
+                           arrow-ani>
+              </a-image>  
+              <a-image id="arrow3" position="0 0.025 -1" scale="0.1 0.1 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
+                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad "
+                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
+                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad "
+                          
+                           arrow-ani>
+              </a-image >  
+              -->
+          </a-entity> 
+        
+              <a-entity
+            id="infoText"
+            text="align: center; value: Tor platzieren; color: white; wrapCount: 22; shader: msdf; negate: false; font: ./assets/msyaheide-19hs69cri5.glb;" 
+            position="0 -0.1 -1"
+            scale="0.5 0.5 0.5"
+            set-initial-info-text>
+          </a-entity>
+              
+           <!-- Logging to screen -->
+           <a-log position="1 2.5 -4" visibile="false" debugon></a-log>
+            
+      </a-camera>
+
       <!-- light -->
       <a-entity
         light="type: directional;
@@ -520,18 +791,35 @@
                target: #doorEntity;"
         position="1 4.3 2.5">
       </a-entity>
-    
       <a-light type="ambient" intensity="0"></a-light>
 
       <!-- main scene holder - used to push door further back on spawn. NOTE: changing Z results in having to move the camera Y up or down -->
-      <a-entity id="scene-holder" position="0 0 -7">
+      <a-entity id="scene-holder" position="0 0 -10">
+        
+            <!-- box in front of door for ani in: wScale effected by width of door. yPosition & ySacle (set also in ani) effected by height of door 
+            was: 
+            scale="20 76 15"
+            position="0 38 0"
+            animation__showportal="property: scale; from: 20 76 15; to: 20 0 15; dur: 1900; startEvents: showportal; easing: linear "
+            -->
+              <a-box id="boxInFrontOfDoor"
+                scale="20 76 15"
+                position="0 38 0"
+                animation__showportal="property: scale; from: 20 76 15; to: 20 38 15; dur: 1900; startEvents: showportal; easing: linear "
+                hider-material
+                show-door-ani-over-logic></a-box>
         
             <!-- Doorway door model (note: order is important as first listed is always drawn on top) -->
             <a-entity
                 id="doorEntity"
                 position="0 0 0"
-                scale="2.3 2.3 2.3"
-                gltf-model="#doorModel">
+                scale="0 0 0"
+                gltf-model="#doorModel"
+                visible="true"
+                animation__scaleup="property: scale; from: 2.3 0 2.3; to: 2.3 2.3 2.3; dur: 2000; startEvents: scaleup; easing: easeOutQuad "
+                save-orginal-model-material
+                show-door-ani-on-tap
+                scaleup-on-tap>
                   
                   <!-- text sign --> 
                   <!-- standard font: 
@@ -564,10 +852,11 @@
       
             <!-- Hider walls -->
             <a-entity id="hider-walls">
-              <!-- above portal on front: wScale effected by width of door. yPosition effected by height of door-->
+              <!-- above portal on front: wScale effected by width of door. yPosition & ySacle (set also in ani) effected by height of door  -->
               <a-box id="abovePortalHiderWall"
                 scale="10 100 1"
                 position="0 67 0"
+                animation__scaleup="property: scale; from: 10 135 1; to: 10 100 1; dur: 2000; startEvents: scaleup; easing: easeOutQuad "
                 hider-material></a-box>
               <!-- front left: wScale effected by width of door-->
               <a-box
@@ -615,21 +904,26 @@
                 hider-material></a-plane>
             </a-entity>
       
-            <a-entity id="portal-contents">
+            <a-entity id="portal-contents"  >
               
               <!-- Balcony  -->
                 <a-entity id="balcony"
                 position="0 0 0"
                 gltf-model="#balconyModel"
-                scale="2.3 2.3 2.3"></a-entity>
+                scale="0 0 0"
+                visible="true"
+                animation__scaleup="property: scale; from: 2.3 0 2.3; to: 2.3 2.3 2.3; dur: 2000; startEvents: scaleup; easing: easeOutQuad "
+                save-orginal-model-material
+                show-door-ani-on-tap
+                scaleup-on-tap></a-entity>
                 
              
-            <!-- sky replace this with 360 photo sky
-            <a-sky color="#6EBAA7"></a-sky>
-            -->
-           <a-videosphere id="videosphere" rotation="0 90 0" src="#video1" play-on-window-click videoeventhandler>
+           <a-videosphere id="videosphere" rotation="0 90 0" src="#video1"  videoeventhandler hide-after-load show-on-tap>
            </a-videosphere>    
       
+            <!-- sky background for 360 photo -->
+            <a-sky id="photosphere" src="#photo" photo-or-video hide-after-load show-on-tap></a-sky>
+            
             <!-- ground outside if separate should go here --> 
               
             </a-entity>
@@ -640,62 +934,18 @@
              
             </a-entity>
             
-            <!-- sky background for 360 photo -->
-            <a-sky id="photosphere" src="#photo" photo-or-video ></a-sky>
+   
             
             <!-- narrator audio track -->
             <a-entity id="soundcue" sound="src: #audio; autoplay: false;"></a-entity>
             
      </a-entity>
-     <a-camera
-        id="camera"
-        position="0 11.5 9.2"> <!-- changing the depth/height (y) and distance (z) of the camera results in a rescale of the door -->
-           
-          <a-entity id="arrow-image-holder" visible="false" arrow-ani-setup>
-             <a-image id="arrow1" position="0 0.025 -1" scale="0.1 0.2 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
-                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad "
-                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
-                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad "
-                          
-                           arrow-ani>
-              </a-image>  
-              <!-- for multiple arrows:
-              <a-image id="arrow2" position="0 0.025 -1" scale="0.1 0.1 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
-                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad"
-                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
-                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad"
-                          
-                           arrow-ani>
-              </a-image>  
-              <a-image id="arrow3" position="0 0.025 -1" scale="0.1 0.1 0.1" src="#arrowhead-image" transparent="true" shader="flat" opacity="0.0"
-                          animation__moveup="property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad "
-                          animation__fadein="property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad"
-                           animation__fadeout="property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad "
-                          
-                           arrow-ani>
-              </a-image >  
-              -->
-          </a-entity> 
-          <a-entity
-            id="infoText"
-            text="align: center; value: Tor platzieren; color: white; wrapCount: 22; shader: msdf; negate: false; font: ./assets/msyaheide-19hs69cri5.glb;" 
-            position="0 -0.1 -1"
-            scale="0.5 0.5 0.5"
-            set-initial-info-text
-            play-on-window-click>
-          </a-entity>
-          
-           <!-- Logging to screen -->
-           <a-log position="1 2.5 -4" visibile="false" debugon></a-log>
-            
-      </a-camera>
+    
     </a-scene>
     
    
 
   
-    
-   
 
   
   </html>
