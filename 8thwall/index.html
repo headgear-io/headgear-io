@@ -140,7 +140,32 @@
 
 //*****Global Variables END************************************
 
+      // Checking if camera permissions have been excepted - if so fire tracking event
+      AFRAME.registerComponent('camera-status-check', {
+        init: function(){
+          var handleCameraStatusChange = function handleCameraStatusChange(event) {
+          //console.log('status change', event.detail.status);
+      
+        switch (event.detail.status) {
+          case 'requesting':
+            // Do something
+            break;
+      
+          case 'hasStream':
+            utag.link({ "event_name" : "ar", "event_action": "ar_loaded", "event_label": "consent to use camera given"});
+			//console.log('camera has stream')
+            break;
+      
+          case 'failed':
+            //event.target.emit('realityerror');
+            //break;
+        }
+      };
+      let scene = this.el.sceneEl
+      scene.addEventListener('camerastatuschange', handleCameraStatusChange)
 
+        }
+        })
 
  //This component plays the video on screen tap if it doesn't autoplay and resets the tracking on screentap
     AFRAME.registerComponent('tap-handler', {
@@ -387,7 +412,7 @@
         },
         init: function(){
 			
-		utag.link({ "event_name" : "ar", "event_action": "ar_loaded", "event_label": "consent to use camera given"});
+		
 		
           this.camera = document.getElementById('camera')
           this.contents = document.getElementById('portal-contents')
@@ -750,6 +775,7 @@
  <a-scene id="scene"
  light="defaultLightsEnabled: false"
       xrweb
+	  camera-status-check
       portal
       tap-handler
       aframe-log-component
