@@ -2,12 +2,25 @@
   <html>
     <head>
 <!-- Copyright (c) 2020 Headgear -->
-<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
+<meta charset="UTF-8">
 
-<!-- Use "8thwall:" meta tags to hook into 8th Wall's build process and developer tools. -->
-<meta name="8thwall:renderer" content="aframe">
+      <title>AR Portal</title>
+      <meta itemprop="name" content="AR Portal">
+      <meta name="twitter:title" content="AR Portal">
+      <meta name="og:title" content="AR Portal">
+      <meta name="og:site_name" content="AR Portal">
+      <meta name="image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta itemprop="image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta name="og:image" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta name="twitter:image:src" content="https://cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+    
+      <meta name="og:type" content="website">
+      <meta name="twitter:card" content="summary">
 
-<script src="xrextras.js"></script> -->
+      <script async src="https://apps.8thwall.com/xrweb?appKey=gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn&s=1"></script>
+     <script src="https://cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
+
+<!-- <script src="xrextras.js"></script> -->
 
 <!-- tag for iOS icon homepage pinning -->
 <link rel="apple-touch-icon" href="./assets/pagelogo.png">
@@ -16,7 +29,7 @@
    <!-- meta tag for iOS video playback -->
    <meta name="apple-mobile-web-app-capable" content="yes">
    
-   <!-- script for pushing debug logs onto screen! -->
+   <!-- script for pushing debug logs onto screen -->
    <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script> 
    
    
@@ -73,7 +86,7 @@
 // app.js is the main entry point for your 8th Wall app. Code here will execute after head.html
 // is loaded, and before body.html is loaded.
   
- // require('./xrextras.js');
+ require('./xrextras.js');
 
 //*****Global Variables START**********************************      
     
