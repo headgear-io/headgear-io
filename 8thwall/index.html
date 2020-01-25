@@ -17,14 +17,33 @@
       <meta name="og:type" content="website">
       <meta name="twitter:card" content="summary">
 
+	  <script type="text/javascript">
+		var utag_data = {
+			page_name : "",
+			page_section_path : "",
+			page_section_1 : "",
+			page_section_2 : "",
+			page_platform : "" ,
+			app_name : ""
+		}
+		</script>
+		<!-- Loading script asynchronously -->
+		<script type="text/javascript">
+			(function(a,b,c,d){
+				a='https://tags.tiqcdn.com/utag/axelspringer/welt/dev/utag.js';
+				b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+				a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+			})();
+		</script>
+	  
       <script async src="https://apps.8thwall.com/xrweb?appKey=gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn&s=1"></script>
      <script src="https://cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
 
-<!-- <script src="xrextras.js"></script>  -->
+	<script src="xrextras.js"></script>
 
-<!-- tag for iOS icon homepage pinning -->
-<link rel="apple-touch-icon" href="./assets/pagelogo.png">
- <link rel="icon" type="image/png" href="./assets/pagelogo.ico">
+	<!-- tag for iOS icon homepage pinning -->
+	<link rel="apple-touch-icon" href="./assets/pagelogo.png">
+	<link rel="icon" type="image/png" href="./assets/pagelogo.ico">
  
    <!-- meta tag for iOS video playback -->
    <meta name="apple-mobile-web-app-capable" content="yes">
@@ -86,7 +105,7 @@
 // app.js is the main entry point for your 8th Wall app. Code here will execute after head.html
 // is loaded, and before body.html is loaded.
   
- require('xrextras.js');
+
 
 //*****Global Variables START**********************************      
     
@@ -121,8 +140,8 @@
 
 //*****Global Variables END************************************
 
-
-
+//fire initial tracking event
+	utag.link({ "event_name" : "ar", "event_action": "ar_initialized"});
 
  //This component plays the video on screen tap if it doesn't autoplay and resets the tracking on screentap
     AFRAME.registerComponent('tap-handler', {
@@ -268,7 +287,7 @@
             document.getElementById('infoText').object3D.visible = true
             //show arrow
             document.getElementById('arrow-image-holder').setAttribute('visible', 'true')
-                 
+            utag.link({ "event_name" : "ar", "event_action": "user_placed_portal"});     
           }
         }) 
       }
@@ -368,7 +387,9 @@
           depth: {default: 1}, //TO DO: check this value
         },
         init: function(){
-
+			
+		utag.link({ "event_name" : "ar", "event_action": "ar_loaded", "event_label": "consent to use camera given"});
+		
           this.camera = document.getElementById('camera')
           this.contents = document.getElementById('portal-contents')
           this.walls = document.getElementById('hider-walls')
@@ -448,6 +469,8 @@
               var entity = document.querySelector('#soundcue')
               entity.components.sound.playSound();
               
+			  utag.link({ "event_name" : "ar", "event_action": "user_walked_through_portal"});
+			  
               //test to disable world tracking
               //XR8.stop()
               //XR8.XrController.configure({disableWorldTracking: false})
@@ -612,34 +635,39 @@
   //Video event handler not used yet
     AFRAME.registerComponent('videoeventhandler', {
       init: function() {
-          if (videoElsePhoto){
+          videoPlaying = false
+		  if (videoElsePhoto){
             var video = this.el.components.material.material.map.image;
            
            
              //video event testing
                   video.addEventListener('waiting', (event) => {
-              console.log('Video is waiting for more data.');
+              //console.log('Video is waiting for more data.');
             });
             
                   video.addEventListener('stalled', (event) => {
-              console.log('Video is stalled for more data.');
+              //console.log('Video is stalled for more data.');
             });
             
             video.addEventListener('playing', (event) => {
-              console.log('Video is no longer paused');
+            if (!videoPlaying) { //once only boolean as this even fires on every video loop
+				utag.link({ "event_name" : "ar", "event_action": "ar_video_playing", "event_label": "consent to use camera given"});
+				videoPlaying = true
+			}
+			  console.log('Video is no longer paused / playing');
             });
             
             video.addEventListener('canplay', (event) => {
-              console.log('Video can start, but not sure it will play through.' + video.readyState);
+              //console.log('Video can start, but not sure it will play through.' + video.readyState);
             });
             video.addEventListener('progress', (event) => {
              // console.log('resource loading buffered = ' + video.buffered);
             });
             video.addEventListener('canplaythrough', (event) => {
-              console.log('I think I can play through the entire ' + 'video without ever having to stop to buffer.');
+              //console.log('I think I can play through the entire ' + 'video without ever having to stop to buffer.');
             });
             video.addEventListener('loadeddata', (event) => {
-              console.log('Yay! The readyState just increased to  ' + 'HAVE_CURRENT_DATA or greater for the first time.');
+              //console.log('Yay! The readyState just increased to  ' + 'HAVE_CURRENT_DATA or greater for the first time.');
             });
           }
       },
