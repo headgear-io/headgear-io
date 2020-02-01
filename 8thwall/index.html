@@ -18,22 +18,25 @@
       <meta name="twitter:card" content="summary">
 
 	  <script type="text/javascript">
-		var utag_data = {
-			page_name : "",
-			page_section_path : "",
-			page_section_1 : "",
-			page_section_2 : "",
-			page_platform : "" ,
-			app_name : ""
+		var trackingProvider = "Tealium";
+		switch (trackingProvider) {
+			case "Tealium":
+				var utag_data = {
+					page_name : "",
+					page_section_path : "",
+					page_section_1 : "",
+					page_section_2 : "",
+					page_platform : "" ,
+					app_name : ""
+				};
+				(function(a,b,c,d){
+					a='https://tags.tiqcdn.com/utag/axelspringer/welt/dev/utag.js';
+					b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+					a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+				})();
+				console.log("here");
+				break;
 		}
-		</script>
-		<!-- Loading script asynchronously -->
-		<script type="text/javascript">
-			(function(a,b,c,d){
-				a='https://tags.tiqcdn.com/utag/axelspringer/welt/dev/utag.js';
-				b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
-				a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
-			})();
 		</script>
 	  
       <script async src="https://apps.8thwall.com/xrweb?appKey=gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn&s=1"></script>
@@ -143,7 +146,11 @@
       // Checking if camera permissions have been excepted - if so fire tracking event
       AFRAME.registerComponent('camera-status-check', {
         init: function(){
-          utag.link({ "event_name" : "ar", "event_action": "ar_initialized"});
+          switch (trackingProvider) {
+			case "Tealium":
+				utag.link({ "event_name" : "ar", "event_action": "ar_initialized"});
+				break;
+		  }
 		  var handleCameraStatusChange = function handleCameraStatusChange(event) {
           //console.log('status change', event.detail.status);
       
@@ -153,7 +160,10 @@
             break;
       
           case 'hasStream':
-            utag.link({ "event_name" : "ar", "event_action": "ar_loaded", "event_label": "consent to use camera given"});
+            switch (trackingProvider) {
+			case "Tealium":
+				utag.link({ "event_name" : "ar", "event_action": "ar_loaded", "event_label": "consent to use camera given"});
+			}
 			//console.log('camera has stream')
             break;
       
@@ -312,7 +322,11 @@
             document.getElementById('infoText').object3D.visible = true
             //show arrow
             document.getElementById('arrow-image-holder').setAttribute('visible', 'true')
-            utag.link({ "event_name" : "ar", "event_action": "user_placed_portal"});     
+            switch (trackingProvider) {
+				case "Tealium":
+					utag.link({ "event_name" : "ar", "event_action": "user_placed_portal"});     
+				break;
+			}
           }
         }) 
       }
@@ -494,7 +508,11 @@
               var entity = document.querySelector('#soundcue')
               entity.components.sound.playSound();
               
-			  utag.link({ "event_name" : "ar", "event_action": "user_walked_through_portal"});
+			  switch (trackingProvider) {
+				  case "Tealium":
+					utag.link({ "event_name" : "ar", "event_action": "user_walked_through_portal"});
+				  break;
+			  }
 			  
               //test to disable world tracking
               //XR8.stop()
