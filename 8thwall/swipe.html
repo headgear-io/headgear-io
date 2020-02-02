@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-<div id="touchscreen">NEW  touch2 </div>
+<div id="touchscreen">NEW  touch 3 </div>
 
 <div id="bottomMenu">swipes this div up and down  </div>
   
@@ -103,13 +103,14 @@ var supportTouch = $.support.touch,
 	
 $("#touchscreen").each(function(){
 	var flag = 0;
-	$('#touchscreen').on('mousedown',function(){flag = 0; console.log('touchstarted');} );	
+	//$('#touchscreen').on('mousedown',function(){flag = 0; console.log('touchstarted');} );	
 	$('#touchscreen').on('touchstart',function(){flag = 0; console.log('touchstarted');} );
 	$('#touchscreen').on('swipedown',function(){flag = 1;} );
 	$('#touchscreen').on('swipeup',function(){flag = 2;} );	
-	$( "#touchscreen" ).on( "click", function() {
+	//$( "#touchscreen" ).on( "click", function() {
+	$( "#touchscreen" ).on( "touchend", function() {
 		if(flag === 0){
-			alert("click");                   
+			alert("tap");                   
         }
         else if(flag === 1){
 			alert("swipeDown");
