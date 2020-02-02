@@ -1,0 +1,127 @@
+<html>
+<head>
+
+<script src="https://demos.jquerymobile.com/1.3.2/js/jquery.js"></script>
+
+	<script src="https://demos.jquerymobile.com/1.3.2/js/jquery.mobile-1.3.2.min.js"></script>
+       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	 
+
+<style>
+#touchscreen{
+    
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index:10;
+}
+#bottomMenu{
+    position: absolute;
+    width:100%;
+    height:100px;
+    border: 2px solid red;
+	bottom: -60px;
+	z-index: 11;
+}
+
+</style>
+</head>
+<body>
+<div id="touchscreen">main  </div>
+
+<div id="bottomMenu">swipes this div up and down  </div>
+  
+<script>
+var supportTouch = $.support.touch,
+            scrollEvent = "touchmove scroll",
+            touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+            touchStopEvent = supportTouch ? "touchend" : "mouseup",
+            touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+    $.event.special.swipeupdown = {
+        setup: function() {
+            var thisObject = this;
+            var $this = $(thisObject);
+            $this.bind(touchStartEvent, function(event) {
+                var data = event.originalEvent.touches ?
+                        event.originalEvent.touches[ 0 ] :
+                        event,
+                        start = {
+                            time: (new Date).getTime(),
+                            coords: [ data.pageX, data.pageY ],
+                            origin: $(event.target)
+                        },
+                        stop;
+
+                function moveHandler(event) {
+                    if (!start) {
+                        return;
+                    }
+                    var data = event.originalEvent.touches ?
+                            event.originalEvent.touches[ 0 ] :
+                            event;
+                    stop = {
+                        time: (new Date).getTime(),
+                        coords: [ data.pageX, data.pageY ]
+                    };
+
+                    // prevent scrolling
+                    if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
+                        event.preventDefault();
+                    }
+                }
+                $this
+                        .bind(touchMoveEvent, moveHandler)
+                        .one(touchStopEvent, function(event) {
+                    $this.unbind(touchMoveEvent, moveHandler);
+                    if (start && stop) {
+                        if (stop.time - start.time < 1000 &&
+                                Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
+                                Math.abs(start.coords[0] - stop.coords[0]) < 75) {
+                            start.origin
+                                    .trigger("swipeupdown")
+                                    .trigger(start.coords[1] > stop.coords[1] ? "swipeup" : "swipedown");
+                        }
+                    }
+                    start = stop = undefined;
+                });
+            });
+        }
+    };
+    $.each({
+        swipedown: "swipeupdown",
+        swipeup: "swipeupdown"
+    }, function(event, sourceEvent){
+        $.event.special[event] = {
+            setup: function(){
+                $(this).bind(sourceEvent, $.noop);
+            }
+        };
+    });
+$("#touchscreen").each(function(){
+	flag = 0;
+	$('#touchscreen').bind('mousedown',function(){flag = 0;} );	
+	$('#touchscreen').bind('mousemove',function(){flag = 1;} );
+	$('#touchscreen').bind('swipeup',function(){flag = 1;} );	
+	$( "#touchscreen" ).bind( "mouseup", function() {
+		if(flag === 0){
+                    alert("click");                   
+                }
+                else if(flag === 1){
+                    alert("drag");
+                }
+	});
+});
+	
+//$('#touchscreen').on('swipedown',function(){alert("swipedown.." + flag);} );
+//$('#touchscreen').on('swipeup',function(){alert("swipeup.." + flag);} );
+//$('#bottomMenu').on('swipedown',function(){alert("swipedown.." + flag);} );
+//$('#bottomMenu').on('swipeup',function(){alert("swipeup..");} );
+//$( "#touchscreen" ).on( "mouseup", function() {
+ // alert( "mouseup = " + flag );
+//});
+</script>
+
+</body>
+</html>
