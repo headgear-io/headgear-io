@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-<div id="touchscreen">NEW  </div>
+<div id="touchscreen">NEW  touch2 </div>
 
 <div id="bottomMenu">swipes this div up and down  </div>
   
@@ -99,12 +99,15 @@ var supportTouch = $.support.touch,
             }
         };
     });
+	
+	
 $("#touchscreen").each(function(){
-	flag = 0;
-	$('#touchscreen').bind('mousedown',function(){flag = 0; console.log('touchstarted');} );	
-	$('#touchscreen').bind('swipedown',function(){flag = 1;} );
-	$('#touchscreen').bind('swipeup',function(){flag = 2;} );	
-	$( "#touchscreen" ).bind( "click", function() {
+	var flag = 0;
+	$('#touchscreen').on('mousedown',function(){flag = 0; console.log('touchstarted');} );	
+	$('#touchscreen').on('touchstart',function(){flag = 0; console.log('touchstarted');} );
+	$('#touchscreen').on('swipedown',function(){flag = 1;} );
+	$('#touchscreen').on('swipeup',function(){flag = 2;} );	
+	$( "#touchscreen" ).on( "click", function() {
 		if(flag === 0){
 			alert("click");                   
         }
