@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-<div id="touchscreen">NEW  touch 5 </div>
+<div id="touchscreen">NEW  touch 6 </div>
 
 <div id="bottomMenu">swipes this div up and down  </div>
   
@@ -108,7 +108,7 @@ $("#touchscreen").each(function(){
 	$('#touchscreen').on('swipedown',function(){flag = 1;console.log('swipedown');} );
 	$('#touchscreen').on('swipeup',function(){flag = 2;console.log('swipeup');} );	
 	//$( "#touchscreen" ).on( "click", function() {
-	$( "#touchscreen" ).on( "click", function() {
+	$( "#touchscreen" ).on( "touchend", function() {
 		console.log(flag);    
 		if(flag === 0){
 			console.log("tap");                   
