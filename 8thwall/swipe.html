@@ -101,16 +101,18 @@ var supportTouch = $.support.touch,
     });
 $("#touchscreen").each(function(){
 	flag = 0;
-	$('#touchscreen').bind('mousedown',function(){flag = 0;} );	
-	$('#touchscreen').bind('mousemove',function(){flag = 1;} );
-	$('#touchscreen').bind('swipeup',function(){flag = 1;} );	
-	$( "#touchscreen" ).bind( "mouseup", function() {
+	$('#touchscreen').bind('mousedown',function(){flag = 0; console.log('touchstarted');} );	
+	$('#touchscreen').bind('swipedown',function(){flag = 1;} );
+	$('#touchscreen').bind('swipeup',function(){flag = 2;} );	
+	$( "#touchscreen" ).bind( "click", function() {
 		if(flag === 0){
-                    alert("click");                   
-                }
-                else if(flag === 1){
-                    alert("drag");
-                }
+			alert("click");                   
+        }
+        else if(flag === 1){
+			alert("swipeDown");
+        } else if(flag === 2){
+			alert("swipeUp");
+        }
 	});
 });
 	
