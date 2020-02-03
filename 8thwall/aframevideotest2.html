@@ -1,40 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <body>
+    <!-- As if this Glitch were a typical HTML CodePen... -->    
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    
+    <!-- Use components defined in separate files. -->
+    <script>
 
-  <meta charset="utf-8">
-  <title>360 Video</title>
-  <meta name="description" content="360 Video — A-Frame">
-<script src="//cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
-</head>
-<body>
-<div id="playbutton" style="background:rgba(255,255,255,0.2); 
-                            position:absolute; top:30%; left:00%; 
-                            padding:15px; z-index:999; color:grey;" 
-     onclick="startVideo()">
-  <h1 border="1">Welcome to this immersive experience. <br/><br/> Click to begin.</h1>
-</div>
-<a-scene>
-  <a-assets>
-    <video id="video" webkit-playsinline src="Venicebeach.mp4" loop preload crossorigin="anonymous"></video>
-  </a-assets>
-  <a-videosphere src="#video" rotation="0 180 0"></a-videosphere>
-  </a-scene>
-  <script>
-function startVideo(){
-    var videoEl = document.querySelector('#video');
-    videoEl.play();
-    var playbutton = document.querySelector('#playbutton');
-    playbutton.style.display = "none"
-}
+    </script>
+    <script>
+    AFRAME.registerComponent('play-on-window-click', {
+  init: function () {
+    this.onClick = this.onClick.bind(this);
+  },
+  play: function () {
+    window.addEventListener('click', this.onClick);
+  },
+  pause: function () {
+    window.removeEventListener('click', this.onClick);
+  },
+  onClick: function (evt) {
+    var video = this.el.components.material.material.map.image;
+    if (!video) { return; }
+    video.play();
+  }
+});
+    </script>
 
-if (!AFRAME.utils.device.isMobile()){
-    //var playbutton = document.querySelector('#playbutton');
-    //playbutton.style.display = "none"
-    //startVideo()
-} else {
-    //startVideo() sometimes work even on iOS
-}  
-  </script>
-</body>
+    <script>AFRAME.registerComponent('hide-once-playing', {
+  schema: {type: 'selector'},
+  init: function () {
+    this.onPlaying = this.onPlaying.bind(this);
+    this.onPause = this.onPause.bind(this);
+  },
+  play: function () {
+    if (this.data) {
+      this.data.addEventListener('playing', this.onPlaying);
+      this.data.addEventListener('pause', this.onPause);
+    }
+  },
+  pause: function () {
+    if (this.data) {
+      this.data.removeEventListener('playing', this.onPlaying);
+      this.data.removeEventListener('pause', this.onPause);
+    }
+  },
+  onPlaying: function (evt) {
+    this.el.setAttribute('visible', false);
+  },
+  onPause: function (evt) {
+    this.el.setAttribute('visible', true);
+  }
+});</script>
+
+    <!-- Specify our scene. -->
+    <a-scene>
+      <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
+      <a-videosphere rotation="0 180 0" src="#video" 
+                     play-on-window-click
+                     >
+      </a-videosphere>
+      
+      <!-- Define camera with zero user height, movement disabled and arrow key rotation added. -->
+      <a-camera user-height="0" wasd-controls-enabled="false" >
+        <!-- Text element for display messaging.  Hide once video is playing. -->
+        <a-entity id="msg" position="0 -0.3 -1.5" text="align:center; 
+                width:3;
+                wrapCount:100;
+                color:red;
+                value:Click window to make the video play, if needed."
+                hide-once-playing="#video">
+        </a-entity>
+      </a-camera>      
+      
+      <!-- Wait for the video to load. -->
+      <a-assets>
+        <!-- Single source video. -->
+        <video id="video" style="display:none" 
+               autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
+          <!-- MP4 video source. -->
+          <source type="video/mp4"
+               src="https://headgear.io/8thwall/assets/360_video.mp4" />
+        </video>
+      </a-assets>
+    </a-scene>
+    
+    <!-- Show a button to switch to the multi-source example that shows detail. -->
+    <button onclick="window.location.href='multi-source-detail.html'" style="position:absolute;top:10px;right:10px;">
+      Switch to multi-source detail example
+    </button>
+  </body>
 </html>
