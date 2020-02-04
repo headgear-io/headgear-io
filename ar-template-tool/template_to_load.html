@@ -1,6 +1,6 @@
 //Do not replace the templateContents line at the top and bottom!
 
-let templateVersion = `0.9.2`;
+let templateVersion = `0.9.3`;
 
 let templateContents = `
 <!DOCTYPE html>
@@ -90,7 +90,12 @@ let templateContents = `
     var doorTriggerDistance = 7.5  //camera starts around a value of 9. Where a value of 0 = at the door
     var containsDoorAnimation = false //whether door animation exists
 	var infoURL = "https://headgear.io" //URL that info page opens
+	var narrativeAudioExists = true // set via template default should be left True
+	var infoLinkExists = true // set via template default should be left true
+	var containsDoorSpawningSound = true; //17 whether to play a door spawning sound
+	var doorSpawningSoundURL = ""; //18: url for door spawning dound
 
+	
     //global logic vars ** DO NOT CHANGE THESE
     var isInPortalSpace = false
     var wasOutside = true
@@ -530,7 +535,9 @@ let templateContents = `
 
          <!-- asset for narrator -->
         <audio id="audio" src="./assets/narrative.mp3" preload="auto"></audio>
-        
+         <!-- asset for door spawning sound -->
+        <audio id="doorSpawningAudio" src="" preload="auto"></audio>
+		
       </a-assets>
       <!-- Different timeout mentioned here in case we wish to start the video streaming sooner -->
       <a-assets timeout="3000">
