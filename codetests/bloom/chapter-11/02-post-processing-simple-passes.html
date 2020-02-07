@@ -92,10 +92,7 @@
         effectCopy.renderToScreen = true;
 
         var bloomPass = new THREE.BloomPass(3, 25, 5.0, 256);
-        var effectFilm = new THREE.FilmPass(0.8, 0.325, 256, false);
-        effectFilm.renderToScreen = true;
 
-        var dotScreenPass = new THREE.DotScreenPass();
 
         // basic renderer that renders the scene, and uses the
         // effectCopy shader to output the image to the defined
