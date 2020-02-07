@@ -14,9 +14,6 @@
     <script type="text/javascript" src="../libs/postprocessing/BloomPass.js"></script>
     <script type="text/javascript" src="../libs/shaders/ConvolutionShader.js"></script>
 
-    <script type="text/javascript" src="../libs/postprocessing/DotScreenPass.js"></script>
-    <script type="text/javascript" src="../libs/shaders/DotScreenShader.js"></script>
-
 
     <script type="text/javascript" src="../libs/postprocessing/EffectComposer.js"></script>
 
@@ -110,68 +107,25 @@
         // we use a texture pass to pass the rendered output to
         // a texture, so we can reuse it
         var renderScene = new THREE.TexturePass(composer.renderTarget2);
-
-        // lower left corner
-        var composer1 = new THREE.EffectComposer(webGLRenderer);
-        composer1.addPass(renderScene);
-        composer1.addPass(dotScreenPass);
-        composer1.addPass(effectCopy);
-
-        // lower right corner
-        var composer2 = new THREE.EffectComposer(webGLRenderer);
-        composer2.addPass(renderScene);
-        composer2.addPass(effectCopy);
-
-        // upper left corner
+		
+		// upper left corner
         var composer3 = new THREE.EffectComposer(webGLRenderer);
         composer3.addPass(renderScene);
         composer3.addPass(bloomPass);
         composer3.addPass(effectCopy);
 
-        // upper right corner
-        var composer4 = new THREE.EffectComposer(webGLRenderer);
-        composer4.addPass(renderScene);
-        composer4.addPass(effectFilm);
-
 
         // setup the control gui
         var controls = new function () {
 
-            // film
-            this.scanlinesCount = 256;
-            this.grayscale = false;
-            this.scanlinesIntensity = 0.3;
-            this.noiseIntensity = 0.8;
-
+       
             // bloompass
             this.strength = 3;
             this.kernelSize = 25;
             this.sigma = 5.0;
             this.resolution = 256;
 
-            // dotscreen
-            this.centerX = 0.5;
-            this.centerY = 0.5;
-            this.angle = 1.57;
-            this.scale = 1;
-
-            this.updateEffectFilm = function () {
-                effectFilm.uniforms.grayscale.value = controls.grayscale;
-                effectFilm.uniforms.nIntensity.value = controls.noiseIntensity;
-                effectFilm.uniforms.sIntensity.value = controls.scanlinesIntensity;
-                effectFilm.uniforms.sCount.value = controls.scanlinesCount;
-            };
-
-            this.updateDotScreen = function () {
-                var dotScreenPass = new THREE.DotScreenPass(new THREE.Vector2(controls.centerX, controls.centerY), controls.angle, controls.scale);
-
-                composer1 = new THREE.EffectComposer(webGLRenderer);
-                composer1.addPass(renderScene);
-                composer1.addPass(dotScreenPass);
-                composer1.addPass(effectCopy);
-            };
-
-            this.updateEffectBloom = function () {
+             this.updateEffectBloom = function () {
                 bloomPass = new THREE.BloomPass(controls.strength, controls.kernelSize, controls.sigma, controls.resolution);
                 composer3 = new THREE.EffectComposer(webGLRenderer);
                 composer3.addPass(renderScene);
@@ -188,19 +142,6 @@
         bpFolder.add(controls, "kernelSize", 1, 100).onChange(controls.updateEffectBloom);
         bpFolder.add(controls, "sigma", 1, 10).onChange(controls.updateEffectBloom);
         bpFolder.add(controls, "resolution", 0, 1024).onChange(controls.updateEffectBloom);
-
-
-        var fpFolder = gui.addFolder("FilmPass");
-        fpFolder.add(controls, "scanlinesIntensity", 0, 1).onChange(controls.updateEffectFilm);
-        fpFolder.add(controls, "noiseIntensity", 0, 3).onChange(controls.updateEffectFilm);
-        fpFolder.add(controls, "grayscale").onChange(controls.updateEffectFilm);
-        fpFolder.add(controls, "scanlinesCount", 0, 2048).step(1).onChange(controls.updateEffectFilm);
-
-        var dsFolder = gui.addFolder("DotScreenPass");
-        dsFolder.add(controls, "centerX", 0, 1).onChange(controls.updateDotScreen);
-        dsFolder.add(controls, "centerY", 0, 1).onChange(controls.updateDotScreen);
-        dsFolder.add(controls, "angle", 0, 3.14).onChange(controls.updateDotScreen);
-        dsFolder.add(controls, "scale", 0, 10).onChange(controls.updateDotScreen);
 
 
         // call the render function
