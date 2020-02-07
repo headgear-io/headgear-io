@@ -195,17 +195,11 @@
             webGLRenderer.setViewport(0, 0, 2 * halfWidth, 2 * halfHeight);
             composer.render(delta);
 
-            webGLRenderer.setViewport(0, 0, halfWidth, halfHeight);
-            composer1.render(delta);
 
-            webGLRenderer.setViewport(halfWidth, 0, halfWidth, halfHeight);
-            composer2.render(delta);
 
             webGLRenderer.setViewport(0, halfHeight, halfWidth, halfHeight);
             composer3.render(delta);
 
-            webGLRenderer.setViewport(halfWidth, halfHeight, halfWidth, halfHeight);
-            composer4.render(delta);
         }
 
         function initStats() {
