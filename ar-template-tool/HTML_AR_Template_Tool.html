@@ -19,7 +19,7 @@
     <title>HTML Template</title>
 	
 	<script>
-		var toolVersionVar = "1.0.0";
+		var toolVersionVar = "1.0.1";
 	</script>
 	
 	<!––  Template File to load  ––>
@@ -271,18 +271,18 @@
 					</div>
 				</div>
 				<br>
-				<div id="trackingContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="Setup the 3rd party tracking you would like here.">
+				<div id="trackingContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="Choose which tracking provider to configure">
 					<h4>3rd Party Tracking:</h4>
 					<div class="btn-group">
 					  <button id="trackingProvider_value" class="btn btn-inverse dropdown-toggle" type="button" data-toggle="dropdown">Choose Tracking Provider</button>
 					  <ul class="dropdown-menu dropdown-menu-inverse" role="menu">
-						<li><a onclick="setupTracking('Tealium'); document.getElementById('trackingParameter_value').disabled = false;">Tealum</a></li>
+						<li data-toggle="tooltip" data-placement="left" data-html="true" title="Tealium uses the <b>Page Title</b> field as it's tracking identifier"><a onclick="setupTracking('Tealium'); document.getElementById('trackingParameter_value').disabled = false;">Tealium</a></li>
 						<li class="divider"></li>
-						<li><a onclick="setupTracking('None'); document.getElementById('trackingParameter_value').disabled = true;">None</a></li>
+						<li data-toggle="tooltip" data-placement="left" title="No 3rd party tracking."><a onclick="setupTracking('None'); document.getElementById('trackingParameter_value').disabled = true;">None</a></li>
 					  </ul>
 					</div>
-					<h6>Tracking Id:</h6>
-					  <input id="trackingParameter_value" disabled type="text" class="form-control" placeholder="Tracking id for this AR campaign" data-toggle="tooltip" data-placement="top" data-html="true" title="Tracking id for this AR campaign">
+					<h6 style="display:none;">Tracking Id:</h6>
+					  <input style="display:none;" id="trackingParameter_value" disabled type="text" class="form-control" placeholder="Tracking id for this AR campaign" data-toggle="tooltip" data-placement="top" data-html="true" title="Tracking id for this AR campaign">
 				</div>
 				<br>
 			
@@ -547,7 +547,7 @@ var Rotation360_var = 'rotation="0 90 0"' //14: intial rotation of 360 content
 var showInfoButton_var = "infoLinkExists = true"; //15: whether to show the info button
 var showNarrativeAudioButton_var = "narrativeAudioExists = true"; //16: whether to show the narrative audio button
 var containsDoorSpawningSound_var = "containsDoorSpawningSound = true"; //17 whether to play a door spawning sound
-var doorSpawningSound_var = '"doorSpawningAudio" src=""'; //18: url for door spawning dound
+var doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning dound
 
 //assign to array
 var stringsToReplaceArray = [
