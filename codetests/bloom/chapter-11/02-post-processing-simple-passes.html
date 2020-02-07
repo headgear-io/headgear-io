@@ -29,6 +29,7 @@
             /* set margin to 0 and overflow to hidden, to go fullscreen */
             margin: 0;
             overflow: hidden;
+			opacity: 0.1;
         }
     </style>
 </head>
@@ -192,8 +193,8 @@
             webGLRenderer.autoClear = false;
             webGLRenderer.clear();
 
-          //  webGLRenderer.setViewport(0, 0, 2 * halfWidth, 2 * halfHeight);
-           // composer.render(delta);
+            webGLRenderer.setViewport(0, 0, 2 * halfWidth, 2 * halfHeight);
+            composer.render(delta);
 
 
 
