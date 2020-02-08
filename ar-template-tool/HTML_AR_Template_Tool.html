@@ -120,11 +120,11 @@
 						<a href="https://www.8thwall.com/spring" target="_blank">8thWall Link</a>
 				</div>
 				<h4>Models</h4>
-				<div id="doorModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Enter the URL to where the door model glb file has been uploaded. <br><b>Mandatory</b>">
+				<div id="doorModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Enter the URL to where the door model glb file has been uploaded. Relative paths also supported <br><b>Mandatory</b>">
 					<h6>Door Model<b>*</b> :</h6>
 					<input id="doorModel_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('doorModel_value').value, 'doorModelContainer');" placeholder="URL to door model. *.glb file expected" data-toggle="tooltip" data-placement="top" title="Full path with https or Relative path with ./folder/filename.glb" >
 				</div>
-				<div id="balconyModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Should the experience contain a balcony? If so enter the URL to where the door model glb file has been uploaded. <br><i>(Optional)</i>">
+				<div id="balconyModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Should the experience contain a balcony? If so enter the URL to where the door model glb file has been uploaded. Relative paths also supported <br><i>(Optional)</i>">
 					<h6 >Balcony Model:</h6>
 						<!-- balcony model switch -->
 						<span class="mrl" onclick="document.getElementById('balconyModel_value').disabled = !document.getElementById('showBalcony_value').checked;">
@@ -157,10 +157,10 @@
 			
 		
 		<div id="videoInfo" >
-			<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the video file has been uploaded"> Video URL:</h6>
+			<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the video file has been uploaded. Relative paths also supported."> Video URL:</h6>
 			  <div id="videoFormGroup" class="form-group">
 				<div class="input-group">
-				  <input id="videoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('videoURL_value').value, 'videoFormGroup');" placeholder="Video URL starting with https:// & should be *.mp4" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 video is hosted. (starts with https:// & should be *.mp4)" >
+				  <input id="videoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('videoURL_value').value, 'videoFormGroup');" placeholder="Video URL starting with https:// & should be *.mp4" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 video is hosted. (starts with https:// & should be *.mp4) (Relative paths also supported)" >
 				  <span class="input-group-btn">
 					<button class="btn btn-default" type="button" onclick="previewVideo()" data-toggle="tooltip" data-placement="top" title="Press to make sure video file exists and is the one you were expecting.">Preview</button>
 				  </span>
@@ -176,10 +176,10 @@
 		</div>
 		<div id="photoInfo" style="display:none;">
 	
-			<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the image file has been uploaded">Photo URL:</h6>
+			<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the image file has been uploaded. Relative paths also supported.Relative paths also supported.">Photo URL:</h6>
 			  <div id="photoFormGroup" class="form-group">
 				<div class="input-group">
-				  <input id="photoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('photoURL_value').value, 'photoFormGroup');" placeholder="Image URL starting with https://" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 image is hosted. (starts with https://)">
+				  <input id="photoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('photoURL_value').value, 'photoFormGroup');" placeholder="Image URL starting with https://" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 image is hosted. (starts with https://) (Relative paths also supported)">
 				  <span class="input-group-btn">
 					<button class="btn btn-default" type="button" onclick="previewImage()" data-toggle="tooltip" data-placement="top" title="Press to make sure image exists and is the one you were expecting.">Preview</button>
 				  </span>
@@ -194,7 +194,7 @@
 		<br>
 		<div id="remainingSettings">
 			
-			<div id="narrativeContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Does the experience contain a separate narrative audio track? Supported Format: mp3 <br><i>(Optional)</i>">
+			<div id="narrativeContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Does the experience contain a separate narrative audio track? Supported Format: mp3  Relative paths also supported.<br><i>(Optional)</i>">
 				<h4>Narrative Audio Track:</h4>
 				<!-- switch -->
 						<span class="mrl" onclick="document.getElementById('narrative_value').disabled = !document.getElementById('showNarrativeAudioButton_value').checked; document.getElementById('audioPreview').disabled = !document.getElementById('showNarrativeAudioButton_value').checked;">
@@ -204,7 +204,7 @@
 						<br><br>
 				<div id="audioFormGroup" class="form-group">
 				  <div class="input-group">
-				  <input id="narrative_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('narrative_value').value, 'audioFormGroup');" placeholder="Audio URL starting with https:// & should be *.mp3" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your mp3 file is hosted. (starts with https://) & should be *.mp3">
+				  <input id="narrative_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('narrative_value').value, 'audioFormGroup');" placeholder="Audio URL starting with https:// & should be *.mp3" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your mp3 file is hosted. (starts with https://) & should be *.mp3 (Relative paths also supported)">
 				  <span class="input-group-btn">
 					<button id="audioPreview" class="btn btn-default" type="button" onclick="previewAudio('audioPlayer', document.getElementById('narrative_value').value, 'audioFormGroup')" data-toggle="tooltip" data-placement="top" title="Press to make sure audio track exists and is the one you were expecting.">Preview</button>
 				  </span>
@@ -219,7 +219,7 @@
 			</div>
 			<br>
 			
-			<div id="doorSpawningSoundContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Should the experience play a sound when spawning the door? Supported Format: mp3 <br><i>(Optional)</i>">
+			<div id="doorSpawningSoundContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Should the experience play a sound when spawning the door? Supported Format: mp3 Relative paths also supported.<br><i>(Optional)</i>">
 				<h4>Door Spawning Audio:</h4>
 				<!-- switch -->
 						<span class="mrl" onclick="document.getElementById('doorSpawningSound_value').disabled = !document.getElementById('containsDoorSpawningSound_value').checked; document.getElementById('doorSpawningSoundPreview').disabled = !document.getElementById('containsDoorSpawningSound_value').checked;">
@@ -229,7 +229,7 @@
 						<br><br>
 				<div id="doorSpawningSoundFormGroup" class="form-group">
 				  <div class="input-group">
-				  <input id="doorSpawningSound_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('doorSpawningSound_value').value, 'doorSpawningSoundFormGroup');" placeholder="Audio URL starting with https:// & should be *.mp3" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your mp3 file is hosted. (starts with https://) & should be *.mp3">
+				  <input id="doorSpawningSound_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('doorSpawningSound_value').value, 'doorSpawningSoundFormGroup');" placeholder="Audio URL starting with https:// & should be *.mp3" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your mp3 file is hosted. (starts with https://) & should be *.mp3 (Relative paths also supported)">
 				  <span class="input-group-btn">
 					<button id="doorSpawningSoundPreview" class="btn btn-default" type="button" onclick="previewAudio('doorSpawningSoundPlayer', document.getElementById('doorSpawningSound_value').value, 'doorSpawningSoundFormGroup')" data-toggle="tooltip" data-placement="top" title="Press to make sure audio track exists and is the one you were expecting.">Preview</button>
 				  </span>
@@ -469,9 +469,13 @@
 					} else if (request.status == '200') { //200 successfuly found
 						element.classList.remove("has-error");
 						element.classList.add("has-success");
-					} else {  //most likely an erro eg: 404
+					} else if ((url.substring(0,4) != "http") || (url.substring(0,4) != "HTTP")) {
 						element.classList.remove("has-success");
+						element.classList.remove("has-error");
+						addErrorInfoText(elementId, "Relative and absolute links cannot be checked. Make sure the folder structure matches what you plan server side.", 'grey');
+					} else {  //most likely an erro eg: 404
 						element.classList.add("has-error");
+						element.classList.remove("has-success");
 						addErrorInfoText(elementId, 'File not found: ' + request.status, 'red');
 					}
 				}
