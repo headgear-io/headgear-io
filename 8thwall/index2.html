@@ -33,7 +33,32 @@
  
    <!-- meta tag for iOS video playback -->
    <meta name="apple-mobile-web-app-capable" content="yes">
-      
+     
+	
+		<script type="text/javascript">
+		var trackingProvider = "None";
+		switch (trackingProvider) {
+			case "Tealium":
+				var utag_data = {
+					page_name : "",
+					page_section_path : "",
+					page_section_1 : "",
+					page_section_2 : "",
+					page_platform : "" ,
+					app_name : ""
+				};
+				(function(a,b,c,d){
+					a='https://tags.tiqcdn.com/utag/axelspringer/welt/dev/utag.js';
+					b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+					a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+				})();
+				break;
+		}
+		</script>
+	 
+	    <script src="https://demos.jquerymobile.com/1.3.2/js/jquery.js"></script>
+   <script src="https://demos.jquerymobile.com/1.3.2/js/jquery.mobile-1.3.2.min.js"></script>
+   
         <style>
 
 #tapScreenButton{
