@@ -19,29 +19,10 @@
     <title>HTML Template</title>
 	
 	<script>
-		var toolVersionVar = "1.0.1";
+		var toolVersionVar = "1.0.2";
 	</script>
 	
-	<!––  Template File to load  ––>
-	<script src="template_to_load.html"></script>
 	
-	<script>
-		//debug output to check file was read correctly
-		if (typeof templateContents !== 'undefined') {
-			  //console.log(templateContents);
-			  if (typeof templateVersion !== 'undefined') {
-				var templateVersionVar = templateVersion;
-			}
-		} else {
-			var templateVersionVar = "Template not loaded correctly";
-			alert('Template file is missing!\n\nPlease make sure the file "template_to_load.html" is placed in the same location as this tool!\n\n\nContact Headgear support if you continue to have issues: support@headgear.io');
-		}
-		
-
-	
-	</script>
-
-
 	<!-- project specific CSS -->
 	<style>
 		.divcss {padding: 2px 20px 50px;}
@@ -105,10 +86,17 @@
 
 
 	</div>
-	
-
-
-	<div class="row">
+	<div id="templateSelector" class="row">
+		<div class="center-col" style="" >
+		<div class="tile">
+            <img src="https://www.axelspringer.com/data/uploads/2019/04/wams-1.svg" alt="Infinity-Loop" class="tile-image" style="height:200px; margin: 0 0 0;">
+            <!--<h3 class="tile-title">Easy to Customize</h3>
+            <p>Vector-based shapes and minimum of layer styles.</p>-->
+            <a class="btn btn-primary btn-large btn-block" href="#" onclick="loadTemplate('WAmS');" style="font-size:30px;">Load Welt Am Sonntag Template</a>
+          </div>
+		</div>
+	</div>
+	<div id="templateContent" style="display:none;" class="row">
 			<div class="center-col" >
 				<div id="pageTitleContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Page title seen on the browser window and page bookmarks. <br><b>Mandatory</b>">
 					<h4>Page Title<b>*</b> : </h4>
@@ -317,7 +305,7 @@
 <script>
 //set version numbers
 	document.getElementById("toolVersion").textContent = toolVersionVar;
-	document.getElementById("templateVersion").textContent = templateVersionVar;
+	
 </script>
 
 
@@ -501,6 +489,41 @@
 </script>
 <script>
 //custom scripts Headgear
+
+function loadTemplate(templateName) {
+	if (templateName == "WAmS") {
+
+		var templateToLoadName = 'template_to_load.html'
+	}
+
+		// Template File to load 
+		var script = document.createElement('script');
+		script.onload = function () {
+			//debug output to check file was read correctly
+			if (typeof templateContents !== 'undefined') {
+				  //console.log(templateContents);
+				  showTemplateFields(templateName)
+				  if (typeof templateVersion !== 'undefined') {
+					var templateVersionVar = templateVersion;
+					document.getElementById("templateVersion").textContent = templateVersionVar;
+				}
+			} else {
+				var templateVersionVar = "Template not loaded correctly";
+				alert('Template file is missing!\n\nPlease make sure the file "template_to_load.html" is placed in the same location as this tool!\n\n\nContact Headgear support if you continue to have issues: support@headgear.io');
+			}
+		};
+		script.src = templateToLoadName;
+		document.head.appendChild(script);
+		
+}
+		
+function showTemplateFields(templateName) {
+	if (templateName == "WAmS") {
+		document.getElementById("templateContent").style.display = "block";	
+		
+	}
+}
+
 
 function clearForm() {
 
