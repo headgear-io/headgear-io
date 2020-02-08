@@ -110,21 +110,21 @@
 
 	<div class="row">
 			<div class="center-col" >
-				<div id="pageTitleContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="Page title seen on the browser window and page bookmarks">
-					<h4>Page Title:</h4>
-					  <input id="pageTitle_value" type="text" class="form-control" placeholder="Page title to be shown by browser window and page bookmarks" data-toggle="tooltip" data-placement="top" title="">
+				<div id="pageTitleContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Page title seen on the browser window and page bookmarks. <br><b>Mandatory</b>">
+					<h4>Page Title<b>*</b> : </h4>
+					  <input id="pageTitle_value" type="text" class="form-control" placeholder="Page title to be shown by browser window and page bookmarks." data-toggle="tooltip" data-placement="top" title="">
 				</div>
-				<div id="keyKeyContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="App Key from 8th Wall console. Usually 70 chars long">
-					<h4>App Key: <a href="#" onclick="overlayOn()" data-toggle="tooltip" data-placement="right" data-html="true" title="Located in Project -> Settings -> AppKey <br>Click for screenshot."> ?</a></h4> 
+				<div id="keyKeyContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="App Key from 8th Wall console. Usually 70 chars long. <br><b>Mandatory</b>">
+					<h4>App Key<b>*</b> : <a href="#" onclick="overlayOn()" data-toggle="tooltip" data-placement="right" data-html="true" title="Located in Project -> Settings -> AppKey <br>Click for screenshot."> ?</a></h4> 
 						<input id="appKey_value" type="text" class="form-control" placeholder="App Key from 8th Wall console. eg: gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn" data-toggle="tooltip" data-placement="top" title="Usually approx 70 chars long">
 						<a href="https://www.8thwall.com/spring" target="_blank">8thWall Link</a>
 				</div>
 				<h4>Models</h4>
-				<div id="doorModelContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="Enter the URL to where the door model glb file has been uploaded">
-					<h6>Door Model:</h6>
+				<div id="doorModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Enter the URL to where the door model glb file has been uploaded. <br><b>Mandatory</b>">
+					<h6>Door Model<b>*</b> :</h6>
 					<input id="doorModel_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('doorModel_value').value, 'doorModelContainer');" placeholder="URL to door model. *.glb file expected" data-toggle="tooltip" data-placement="top" title="Full path with https or Relative path with ./folder/filename.glb" >
 				</div>
-				<div id="balconyModelContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="Should the experience contain a balcony? If so enter the URL to where the door model glb file has been uploaded">
+				<div id="balconyModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Should the experience contain a balcony? If so enter the URL to where the door model glb file has been uploaded. <br><i>(Optional)</i>">
 					<h6 >Balcony Model:</h6>
 						<!-- balcony model switch -->
 						<span class="mrl" onclick="document.getElementById('balconyModel_value').disabled = !document.getElementById('showBalcony_value').checked;">
@@ -134,8 +134,8 @@
 					  <input id="balconyModel_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('balconyModel_value').value, 'balconyModelContainer');" placeholder="URL to balcony model. *.glb file expected" data-toggle="tooltip" data-placement="top" title="Full path with https or Relative path with ./folder/filename.glb">
 				</div>
 				<br>
-				<div id="360videoOrPhotoContainer" class="form-group" data-toggle="tooltip" data-placement="left" data-html="true" title="Should the portal contain a 360 Video <br><b>or</b><br> a 360 Image?">
-				 <h4>360 Video / Photo</h4>
+				<div id="360videoOrPhotoContainer" class="form-group" data-toggle="tooltip" data-placement="left" data-html="true" title="Should the portal contain a 360 Video <br><b>or</b><br> a 360 Image? <br><b>Mandatory</b>">
+				 <h4>360 Video / Photo <b>*</b></h4>
 				  <label class="radio" for="videoElsePhoto_value" style="width:200px" data-toggle="tooltip" data-placement="right" title="Portal should contain 360 Video." onclick="switchVideoPhotoDiv()">
 					<input type="radio" name="optionsRadios" data-toggle="radio" value="" id="videoElsePhoto_value" required="" checked="" class="custom-radio" ><span class="icons" ><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
 					 360 Video
@@ -194,7 +194,7 @@
 		<br>
 		<div id="remainingSettings">
 			
-			<div id="narrativeContainer" data-toggle="tooltip" data-placement="left" title="Does the experience contain a separate narrative audio track? Supported Format: mp3">
+			<div id="narrativeContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Does the experience contain a separate narrative audio track? Supported Format: mp3 <br><i>(Optional)</i>">
 				<h4>Narrative Audio Track:</h4>
 				<!-- switch -->
 						<span class="mrl" onclick="document.getElementById('narrative_value').disabled = !document.getElementById('showNarrativeAudioButton_value').checked; document.getElementById('audioPreview').disabled = !document.getElementById('showNarrativeAudioButton_value').checked;">
@@ -219,7 +219,7 @@
 			</div>
 			<br>
 			
-			<div id="doorSpawningSoundContainer" data-toggle="tooltip" data-placement="left" title="Should the experience play a sound when spawning the door? Supported Format: mp3">
+			<div id="doorSpawningSoundContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Should the experience play a sound when spawning the door? Supported Format: mp3 <br><i>(Optional)</i>">
 				<h4>Door Spawning Audio:</h4>
 				<!-- switch -->
 						<span class="mrl" onclick="document.getElementById('doorSpawningSound_value').disabled = !document.getElementById('containsDoorSpawningSound_value').checked; document.getElementById('doorSpawningSoundPreview').disabled = !document.getElementById('containsDoorSpawningSound_value').checked;">
@@ -244,7 +244,7 @@
 			</div>
 			
 			<br>
-				<div id="sceneLocationContainer" data-toggle="tooltip" data-placement="left" title="Should the experience contain a scene location text above the portal door? If so enter the text, should not be more than 32 Chars">
+				<div id="sceneLocationContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Should the experience contain a scene location text above the portal door? If so enter the text, should not be more than 32 Chars <br><i>(Optional)</i>">
 					<h4>Scene Location Text:</h4>
 					<!-- switch -->
 						<span class="mrl" onclick="document.getElementById('sceneLocationText_value').disabled = !document.getElementById('sceneLocation_value').checked;">
@@ -258,7 +258,7 @@
 					</div>
 				</div>
 				<br>
-				<div id="infoLinkContainer" data-toggle="tooltip" data-placement="left" title="Should the menu UI include an Info Button that open an external URL?">
+				<div id="infoLinkContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Should the menu UI include an Info Button that open an external URL? <br><i>(Optional)</i>">
 					<h4>Info Link URL:</h4>
 					<!-- switch -->
 						<span class="mrl" onclick="document.getElementById('infoLink_value').disabled = !document.getElementById('showInfoButton_value').checked;">
@@ -271,7 +271,7 @@
 					</div>
 				</div>
 				<br>
-				<div id="trackingContainer" class="form-group" data-toggle="tooltip" data-placement="left" title="Choose which tracking provider to configure">
+				<div id="trackingContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Choose which tracking provider to configure <br><i>(Optional)</i>">
 					<h4>3rd Party Tracking:</h4>
 					<div class="btn-group">
 					  <button id="trackingProvider_value" class="btn btn-inverse dropdown-toggle" type="button" data-toggle="dropdown">Choose Tracking Provider</button>
@@ -599,35 +599,38 @@ function exportHTMLfile() {
 	doorSpawningSound_var = '"doorSpawningAudio" src="' + document.getElementById("doorSpawningSound_value").value + '"';
 	
 	//if required values are there
-	if ((videoURL_var && appKey_var) || (photoURL_var && appKey_var)) {
-			templateContents_replaced = templateContents
-			//string replacing:
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[0], appKey_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[1], videoURL_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[2],doorModel_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[3], balconyModel_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[4], narrative_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[5], videoElsePhoto_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[6], photoURL_var);
-			//templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[7], pageTitle_var);
-			templateContents_replaced = templateContents_replaced.split(stringsToReplaceArray[7]).join(pageTitle_var); //different command as page title is to be replaced in multiple locations
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[8], showBalcony_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[9], sceneLocation_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[10], sceneLocationText_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[11], trackingParameter_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[12], trackingProvider_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[13], infoLink_var);
-			templateContents_replaced = templateContents_replaced.split(stringsToReplaceArray[14]).join(Rotation360_var); //different command as page title is to be replaced in multiple locations
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[15], showInfoButton_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[16], showNarrativeAudioButton_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[17], containsDoorSpawningSound_var);
-			templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[18], doorSpawningSound_var);
-			
-			//save and download
-			save('index', templateContents_replaced);
-			
-	} else {
-		alert("Check you have entered in the required fields correctly!\nAt least the appkey and one of video or photo URLs must be entered correctly.")
+	if (pageTitle_var && appKey_var && doorModel_var) {
+		if ((videoURL_var) || (photoURL_var)) {
+				templateContents_replaced = templateContents
+				//string replacing:
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[0], appKey_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[1], videoURL_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[2],doorModel_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[3], balconyModel_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[4], narrative_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[5], videoElsePhoto_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[6], photoURL_var);
+				//templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[7], pageTitle_var);
+				templateContents_replaced = templateContents_replaced.split(stringsToReplaceArray[7]).join(pageTitle_var); //different command as page title is to be replaced in multiple locations
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[8], showBalcony_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[9], sceneLocation_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[10], sceneLocationText_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[11], trackingParameter_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[12], trackingProvider_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[13], infoLink_var);
+				templateContents_replaced = templateContents_replaced.split(stringsToReplaceArray[14]).join(Rotation360_var); //different command as page title is to be replaced in multiple locations
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[15], showInfoButton_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[16], showNarrativeAudioButton_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[17], containsDoorSpawningSound_var);
+				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[18], doorSpawningSound_var);
+				
+				//save and download
+				save('index', templateContents_replaced);
+				
+		}
+	}
+	else {
+		alert("Check you have entered in the required fields correctly!\nAt least the appkey, page title, door model and one of video or photo URLs must be entered correctly.")
 	}
 }
 
