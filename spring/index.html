@@ -517,8 +517,9 @@ function clearForm() {
 	document.getElementById("360Rotation_value").textContent = "90";
 	document.getElementById("showInfoButton_value").checked = false;	
 	document.getElementById("showNarrativeAudioButton_value").checked = false;	
-	document.getElementById("containsDoorSpawningSound_value").checked = true;
+	document.getElementById("containsDoorSpawningSound_value").checked = false;
 	document.getElementById("doorSpawningSound_value").value = "";
+	document.getElementById('doorSpawningSound_value').disabled = true
 }
 	
 	//call set defaults as on a page reload they are not set
@@ -657,6 +658,10 @@ function save(filename, templateContents) {
 
 var debug = getUrlParam('debug','false');
 
+if (debug == 1) { 
+	templateName_var = "generic"; 
+	loadTemplate(templateName_var); 
+}
 function getUrlParam(parameter, defaultvalue){
     var urlparameter = defaultvalue;
     if(window.location.href.indexOf(parameter) > -1){
@@ -682,8 +687,10 @@ function loadTemplate(templateName) {
 	//assign correct template file
 	if (templateName == "WAmS") {
 		var templateToLoadName = 'WAmS_template.html'
+	} else if (templateName == "generic") {
+		var templateToLoadName = 'WAmS_template.html'
 	}
-
+	
 	var script = document.createElement('script');
 	script.onload = function () {
 		//debug output to check file was read correctly
