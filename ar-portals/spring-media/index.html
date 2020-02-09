@@ -618,7 +618,7 @@ function exportHTMLfile() {
 	doorModel_var = document.getElementById("doorModel_value").value;
 	balconyModel_var = document.getElementById("balconyModel_value").value;
 	narrative_var = document.getElementById("narrative_value").value;
-	videoElsePhoto_var = document.getElementById("videoElsePhoto_value").checked;
+	videoElsePhoto_var = 'videoElsePhoto = ' + document.getElementById("videoElsePhoto_value").checked;
 	photoURL_var = document.getElementById("photoURL_value").value;
 	pageTitle_var = document.getElementById("pageTitle_value").value;
 	showBalcony_var = "showBalcony = " + document.getElementById("showBalcony_value").checked;
