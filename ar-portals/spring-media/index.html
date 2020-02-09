@@ -521,35 +521,38 @@ function clearForm() {
 	document.getElementById("doorSpawningSound_value").value = "";
 	document.getElementById('doorSpawningSound_value').disabled = true
 }
-	
+
 	//call set defaults as on a page reload they are not set
 	clearForm();
 
-// Script for export	
+// Scripts for export	
 
-//Lookup values for template!! -> do not change!!!
-var appKey_var = "gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn"; //0: appkey
-var videoURL_var = "./assets/360_video.mp4"; //1: video URL
-var doorModel_var =	"./assets/door_model.glb"; //2: door model URL
-var balconyModel_var = "./assets/balcony_model.glb"; //3: balcony URL
-var narrative_var =	"./assets/narrative.mp3"; //4: narrative audio URL
-var videoElsePhoto_var = "videoElsePhoto = true"; //5: videoOrPhoto boolean
-var photoURL_var = "./assets/video_thumbnail.jpg"; //6: photo URL
-var pageTitle_var = "AR Portal"; //7: page Title - multiple occerances!
-var showBalcony_var = "showBalcony = true"; //8: balcony onOff boolean
-var sceneLocation_var = "sceneLocationText = false"; //9: boolean for showing text above door
-var sceneLocationText_var = "Scene Location"; //10: text to be shown above door
-var trackingParameter_var = "uid_1234567890"; //11: tracking id for this campaign
-var trackingProvider_var = 'trackingProvider = "None"' //12: tracking provider
-var infoLink_var = 'var infoURL = "https://headgear.io"' //13: Info Link
-var Rotation360_var = 'rotation="0 90 0"' //14: intial rotation of 360 content
-var showInfoButton_var = "infoLinkExists = true"; //15: whether to show the info button
-var showNarrativeAudioButton_var = "narrativeAudioExists = true"; //16: whether to show the narrative audio button
-var containsDoorSpawningSound_var = "containsDoorSpawningSound = true"; //17 whether to play a door spawning sound
-var doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning sound
 
-//assign to array
-var stringsToReplaceArray = [
+function setLookupValues() {
+
+	//Lookup values for template!! -> do not change!!!
+	var appKey_var = "gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn"; //0: appkey
+	var videoURL_var = "./assets/360_video.mp4"; //1: video URL
+	var doorModel_var =	"./assets/door_model.glb"; //2: door model URL
+	var balconyModel_var = "./assets/balcony_model.glb"; //3: balcony URL
+	var narrative_var =	"./assets/narrative.mp3"; //4: narrative audio URL
+	var videoElsePhoto_var = "videoElsePhoto = true"; //5: videoOrPhoto boolean
+	var photoURL_var = "./assets/video_thumbnail.jpg"; //6: photo URL
+	var pageTitle_var = "AR Portal"; //7: page Title - multiple occerances!
+	var showBalcony_var = "showBalcony = true"; //8: balcony onOff boolean
+	var sceneLocation_var = "sceneLocationText = false"; //9: boolean for showing text above door
+	var sceneLocationText_var = "Scene Location"; //10: text to be shown above door
+	var trackingParameter_var = "uid_1234567890"; //11: tracking id for this campaign
+	var trackingProvider_var = 'trackingProvider = "None"' //12: tracking provider
+	var infoLink_var = 'var infoURL = "https://headgear.io"' //13: Info Link
+	var Rotation360_var = 'rotation="0 90 0"' //14: intial rotation of 360 content
+	var showInfoButton_var = "infoLinkExists = true"; //15: whether to show the info button
+	var showNarrativeAudioButton_var = "narrativeAudioExists = true"; //16: whether to show the narrative audio button
+	var containsDoorSpawningSound_var = "containsDoorSpawningSound = true"; //17 whether to play a door spawning sound
+	var doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning sound
+	
+	//assign to array
+	var stringsToReplaceArray = [
 		appKey_var, //0: appkey
 		videoURL_var, //1: video URL
 		doorModel_var, //2: door model URL
@@ -571,11 +574,13 @@ var stringsToReplaceArray = [
 		doorSpawningSound_var, //18: url for door spawning sound
 	];
 
-
-
+}
 	
 function exportHTMLfile() {
 
+	//get lookupvalues
+	setLookupValues();
+				
 	//get new values from input form
 	appKey_var = document.getElementById("appKey_value").value;
 	videoURL_var = document.getElementById("videoURL_value").value;
@@ -604,6 +609,7 @@ function exportHTMLfile() {
 	//if required values are there
 	if (pageTitle_var && appKey_var && doorModel_var) {
 		if ((videoURL_var) || (photoURL_var)) {
+				
 				templateContents_replaced = templateContents
 				//string replacing:
 				templateContents_replaced = templateContents_replaced.replace(stringsToReplaceArray[0], appKey_var);
