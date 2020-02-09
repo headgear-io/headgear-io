@@ -20,6 +20,7 @@
 	
 	<script>
 		var toolVersionVar = "1.0.2";
+		var templateName_var = "";
 	</script>
 	
 	
@@ -92,7 +93,7 @@
             <img src="https://www.axelspringer.com/data/uploads/2019/04/wams-1.svg" alt="Infinity-Loop" class="tile-image" style="height:200px; margin: 0 0 0;">
             <!--<h3 class="tile-title">Easy to Customize</h3>
             <p>Vector-based shapes and minimum of layer styles.</p>-->
-            <a class="btn btn-primary btn-large btn-block" href="#" onclick="loadTemplate('WAmS');" style="font-size:30px;">Load Welt Am Sonntag Template</a>
+            <a class="btn btn-primary btn-large btn-block" href="#" onclick="templateName_var ='WAmS'; loadTemplate(templateName_var);" style="font-size:30px;">Load Welt Am Sonntag Template</a>
           </div>
 		</div>
 	</div>
@@ -107,6 +108,7 @@
 						<input id="appKey_value" type="text" class="form-control" placeholder="App Key from 8th Wall console. eg: gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn" data-toggle="tooltip" data-placement="top" title="Usually approx 70 chars long">
 						<a href="https://www.8thwall.com/spring" target="_blank">8thWall Link</a>
 				</div>
+			<div id="modelContainer">
 				<h4>Models</h4>
 				<div id="doorModelContainer" class="form-group" data-html="true" data-toggle="tooltip" data-placement="left" title="Enter the URL to where the door model glb file has been uploaded. Relative paths also supported <br><b>Mandatory</b>">
 					<h6>Door Model<b>*</b> :</h6>
@@ -121,8 +123,9 @@
 						<br><br>
 					  <input id="balconyModel_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('balconyModel_value').value, 'balconyModelContainer');" placeholder="URL to balcony model. *.glb file expected" data-toggle="tooltip" data-placement="top" title="Full path with https or Relative path with ./folder/filename.glb">
 				</div>
-				<br>
-				<div id="360videoOrPhotoContainer" class="form-group" data-toggle="tooltip" data-placement="left" data-html="true" title="Should the portal contain a 360 Video <br><b>or</b><br> a 360 Image? <br><b>Mandatory</b>">
+			</div>
+			<br>
+			<div id="360videoOrPhotoContainer" class="form-group" data-toggle="tooltip" data-placement="left" data-html="true" title="Should the portal contain a 360 Video <br><b>or</b><br> a 360 Image? <br><b>Mandatory</b>">
 				 <h4>360 Video / Photo <b>*</b></h4>
 				  <label class="radio" for="videoElsePhoto_value" style="width:200px" data-toggle="tooltip" data-placement="right" title="Portal should contain 360 Video." onclick="switchVideoPhotoDiv()">
 					<input type="radio" name="optionsRadios" data-toggle="radio" value="" id="videoElsePhoto_value" required="" checked="" class="custom-radio" ><span class="icons" ><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
@@ -141,45 +144,44 @@
 						<li><a onclick="setRotation('270');">270</a></li>
 					  </ul>
 					</div>
-				</div>
-			
-		
-		<div id="videoInfo" >
-			<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the video file has been uploaded. Relative paths also supported."> Video URL:</h6>
-			  <div id="videoFormGroup" class="form-group">
-				<div class="input-group">
-				  <input id="videoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('videoURL_value').value, 'videoFormGroup');" placeholder="Video URL starting with https:// & should be *.mp4" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 video is hosted. (starts with https:// & should be *.mp4) (Relative paths also supported)" >
-				  <span class="input-group-btn">
-					<button class="btn btn-default" type="button" onclick="previewVideo()" data-toggle="tooltip" data-placement="top" title="Press to make sure video file exists and is the one you were expecting.">Preview</button>
-				  </span>
-				</div><!-- /input-group -->
-			  </div><!-- /.form-group -->
-				<div class="thumbnail" style="height:340px;" data-toggle="tooltip" data-placement="left" title="Preview window so you can see if the URL is correct. Press the Preview button first.">
-					<video id="videoPreviewWindow" class="video-js" controls preload="auto" poster="" data-setup="{}" style="width:600px; height:280px;  margin: 0 auto;" src="">
-						<!-- <source src="https://vatelier.net/MyDemo/videosphere-showcase/city_halfres.mp4" type="video/mp4">  -->
-					</video>
-				</div>
-		
-			
-		</div>
-		<div id="photoInfo" style="display:none;">
-	
-			<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the image file has been uploaded. Relative paths also supported.Relative paths also supported.">Photo URL:</h6>
-			  <div id="photoFormGroup" class="form-group">
-				<div class="input-group">
-				  <input id="photoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('photoURL_value').value, 'photoFormGroup');" placeholder="Image URL starting with https://" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 image is hosted. (starts with https://) (Relative paths also supported)">
-				  <span class="input-group-btn">
-					<button class="btn btn-default" type="button" onclick="previewImage()" data-toggle="tooltip" data-placement="top" title="Press to make sure image exists and is the one you were expecting.">Preview</button>
-				  </span>
-				</div><!-- /input-group -->
-			  </div><!-- /.form-group -->
 				
-				  <a class="thumbnail" href="#" data-toggle="tooltip" data-placement="left" title="Preview window so you can see if the URL is correct. Press the Preview button first.">
-					<img id="photoPreviewWindow" alt="Preview Window: Recommended resolution no less than 3840 x 2160 (4k)" style="height: 330px; width: 500px; display: block;" src="#" data-holder-rendered="true">
-				  </a>
-			
-		</div>
-		<br>
+					<div id="videoInfo" >
+						<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the video file has been uploaded. Relative paths also supported."> Video URL:</h6>
+						  <div id="videoFormGroup" class="form-group">
+							<div class="input-group">
+							  <input id="videoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('videoURL_value').value, 'videoFormGroup');" placeholder="Video URL starting with https:// & should be *.mp4" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 video is hosted. (starts with https:// & should be *.mp4) (Relative paths also supported)" >
+							  <span class="input-group-btn">
+								<button class="btn btn-default" type="button" onclick="previewVideo()" data-toggle="tooltip" data-placement="top" title="Press to make sure video file exists and is the one you were expecting.">Preview</button>
+							  </span>
+							</div><!-- /input-group -->
+						  </div><!-- /.form-group -->
+							<div class="thumbnail" style="height:340px;" data-toggle="tooltip" data-placement="left" title="Preview window so you can see if the URL is correct. Press the Preview button first.">
+								<video id="videoPreviewWindow" class="video-js" controls preload="auto" poster="" data-setup="{}" style="width:600px; height:280px;  margin: 0 auto;" src="">
+									<!-- <source src="https://vatelier.net/MyDemo/videosphere-showcase/city_halfres.mp4" type="video/mp4">  -->
+								</video>
+							</div>
+					
+						
+					</div>
+					<div id="photoInfo" style="display:none;">
+				
+						<h6 data-toggle="tooltip" data-placement="left" title="Enter the URL to where the image file has been uploaded. Relative paths also supported.Relative paths also supported.">Photo URL:</h6>
+						  <div id="photoFormGroup" class="form-group">
+							<div class="input-group">
+							  <input id="photoURL_value" type="text" class="form-control" onfocusout="setStatus(document.getElementById('photoURL_value').value, 'photoFormGroup');" placeholder="Image URL starting with https://" data-toggle="tooltip" data-placement="top" data-html="true" title="Enter in the <b>full URL</b> of where your 360 image is hosted. (starts with https://) (Relative paths also supported)">
+							  <span class="input-group-btn">
+								<button class="btn btn-default" type="button" onclick="previewImage()" data-toggle="tooltip" data-placement="top" title="Press to make sure image exists and is the one you were expecting.">Preview</button>
+							  </span>
+							</div><!-- /input-group -->
+						  </div><!-- /.form-group -->
+							
+							  <a class="thumbnail" href="#" data-toggle="tooltip" data-placement="left" title="Preview window so you can see if the URL is correct. Press the Preview button first.">
+								<img id="photoPreviewWindow" alt="Preview Window: Recommended resolution no less than 3840 x 2160 (4k)" style="height: 330px; width: 500px; display: block;" src="#" data-holder-rendered="true">
+							  </a>
+						
+					</div>
+			</div>
+			<br>
 		<div id="remainingSettings">
 			
 			<div id="narrativeContainer" data-toggle="tooltip" data-html="true" data-placement="left" title="Does the experience contain a separate narrative audio track? Supported Format: mp3  Relative paths also supported.<br><i>(Optional)</i>">
@@ -488,42 +490,8 @@
 	
 </script>
 <script>
-//custom scripts Headgear
 
-function loadTemplate(templateName) {
-	if (templateName == "WAmS") {
-
-		var templateToLoadName = 'WAmS_template.html'
-	}
-
-		// Template File to load 
-		var script = document.createElement('script');
-		script.onload = function () {
-			//debug output to check file was read correctly
-			if (typeof templateContents !== 'undefined') {
-				  //console.log(templateContents);
-				  showTemplateFields(templateName)
-				  if (typeof templateVersion !== 'undefined') {
-					var templateVersionVar = templateVersion;
-					document.getElementById("templateVersion").textContent = templateVersionVar;
-				}
-			} else {
-				var templateVersionVar = "Template not loaded correctly";
-				alert('Template file is missing!\n\nPlease make sure the file "template_to_load.html" is placed in the same location as this tool!\n\n\nContact Headgear support if you continue to have issues: support@headgear.io');
-			}
-		};
-		script.src = templateToLoadName;
-		document.head.appendChild(script);
-		
-}
-		
-function showTemplateFields(templateName) {
-	if (templateName == "WAmS") {
-		document.getElementById("templateContent").style.display = "block";	
-		
-	}
-}
-
+//export and field values scripts
 
 function clearForm() {
 
@@ -533,19 +501,22 @@ function clearForm() {
 	document.getElementById("doorModel_value").value = "";
 	document.getElementById("balconyModel_value").value = "";
 	document.getElementById("narrative_value").value = "";
+	document.getElementById('narrative_value').disabled = true
 	document.getElementById("videoElsePhoto_value").checked = true;
 	document.getElementById("photoURL_value").value = "";
 	document.getElementById("pageTitle_value").value = "";
 	document.getElementById("showBalcony_value").checked = true;
-	document.getElementById("sceneLocation_value").checked  = true;
+	document.getElementById("sceneLocation_value").checked  = false;
 	document.getElementById("sceneLocationText_value").value = "";
+	document.getElementById('sceneLocationText_value').disabled = true
 	document.getElementById("trackingParameter_value").value = "";
 	document.getElementById('trackingParameter_value').disabled = true
 	document.getElementById("trackingProvider_value").textContent = "Choose Tracking Provider";
 	document.getElementById("infoLink_value").value = "";
+	document.getElementById('infoLink_value').disabled = true
 	document.getElementById("360Rotation_value").textContent = "90";
-	document.getElementById("showInfoButton_value").checked = true;	
-	document.getElementById("showNarrativeAudioButton_value").checked = true;	
+	document.getElementById("showInfoButton_value").checked = false;	
+	document.getElementById("showNarrativeAudioButton_value").checked = false;	
 	document.getElementById("containsDoorSpawningSound_value").checked = true;
 	document.getElementById("doorSpawningSound_value").value = "";
 }
@@ -574,7 +545,7 @@ var Rotation360_var = 'rotation="0 90 0"' //14: intial rotation of 360 content
 var showInfoButton_var = "infoLinkExists = true"; //15: whether to show the info button
 var showNarrativeAudioButton_var = "narrativeAudioExists = true"; //16: whether to show the narrative audio button
 var containsDoorSpawningSound_var = "containsDoorSpawningSound = true"; //17 whether to play a door spawning sound
-var doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning dound
+var doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning sound
 
 //assign to array
 var stringsToReplaceArray = [
@@ -624,6 +595,10 @@ function exportHTMLfile() {
 	showNarrativeAudioButton_var = 'narrativeAudioExists = ' + document.getElementById("showNarrativeAudioButton_value").checked;
 	containsDoorSpawningSound_var = 'containsDoorSpawningSound = ' + document.getElementById("containsDoorSpawningSound_value").checked;
 	doorSpawningSound_var = '"doorSpawningAudio" src="' + document.getElementById("doorSpawningSound_value").value + '"';
+	
+	//vars which are overwritten by default template vars:
+	templateDefaults(templateName_var);
+	
 	
 	//if required values are there
 	if (pageTitle_var && appKey_var && doorModel_var) {
@@ -699,7 +674,94 @@ function getUrlVars() {
 
 
 
-//Custom scripts headgear end
+//export scripts end
+// brand template scripts
+
+
+function loadTemplate(templateName) {
+	//assign correct template file
+	if (templateName == "WAmS") {
+		var templateToLoadName = 'WAmS_template.html'
+	}
+
+	var script = document.createElement('script');
+	script.onload = function () {
+		//debug output to check file was read correctly
+		if (typeof templateContents !== 'undefined') {
+			  //console.log(templateContents);
+			  
+			  //show / hide correct fields for this template
+			  showTemplateFields(templateName)
+			  if (typeof templateVersion !== 'undefined') {
+				var templateVersionVar = templateVersion;
+				document.getElementById("templateVersion").textContent = templateVersionVar;
+			}
+		} else {
+			var templateVersionVar = "Template not loaded correctly";
+			alert('Template file is missing!\n\nPlease make sure the file "template_to_load.html" is placed in the same location as this tool!\n\n\nContact Headgear support if you continue to have issues: support@headgear.io');
+		}
+	};
+	script.src = templateToLoadName;
+	document.head.appendChild(script);
+	
+}
+		
+function showTemplateFields(templateName) {
+	if (templateName == "generic") {
+		//configure visibility of invidivual divs:
+		document.getElementById("pageTitleContainer").style.display = "block";	
+		document.getElementById("keyKeyContainer").style.display = "block";	
+		document.getElementById("360videoOrPhotoContainer").style.display = "block";	
+		document.getElementById("modelContainer").style.display = "block";	
+		document.getElementById("doorSpawningSoundContainer").style.display = "block";	
+		document.getElementById("sceneLocationContainer").style.display = "block";	
+		document.getElementById("infoLinkContainer").style.display = "block";	
+		document.getElementById("trackingContainer").style.display = "block";	
+		//show parent content div
+		document.getElementById("templateContent").style.display = "block";		
+	}
+	else if (templateName == "WAmS") {
+		//configure visibility of invidivual divs:
+		document.getElementById("pageTitleContainer").style.display = "block";	
+		document.getElementById("keyKeyContainer").style.display = "block";	
+		document.getElementById("360videoOrPhotoContainer").style.display = "block";	
+		document.getElementById("modelContainer").style.display = "none";	
+		document.getElementById("doorSpawningSoundContainer").style.display = "none";	
+		document.getElementById("sceneLocationContainer").style.display = "block";	
+		document.getElementById("infoLinkContainer").style.display = "block";	
+		document.getElementById("trackingContainer").style.display = "none";	
+		//show parent content div
+		document.getElementById("templateContent").style.display = "block";		
+	}
+}
+
+function templateDefaults(templateName) {
+	
+	//uncommented vars are hardcoded and used to overwrite on export
+	if (templateName == "WAmS") {
+		//appKey_var = "gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn"; //0: appkey
+		//videoURL_var = "./assets/360_video.mp4"; //1: video URL
+		doorModel_var =	"./assets/door_model.glb"; //2: door model URL
+		balconyModel_var = "./assets/balcony_model.glb"; //3: balcony URL
+		//narrative_var =	"./assets/narrative.mp3"; //4: narrative audio URL
+		//videoElsePhoto_var = "videoElsePhoto = true"; //5: videoOrPhoto boolean
+		//photoURL_var = "./assets/video_thumbnail.jpg"; //6: photo URL
+		//pageTitle_var = "AR Portal"; //7: page Title - multiple occerances!
+		showBalcony_var = "showBalcony = true"; //8: balcony onOff boolean
+		//sceneLocation_var = "sceneLocationText = false"; //9: boolean for showing text above door
+		//sceneLocationText_var = "Scene Location"; //10: text to be shown above door
+		//trackingParameter_var = "uid_1234567890"; //11: tracking id for this campaign
+		trackingProvider_var = 'trackingProvider = "Tealium"' //12: tracking provider
+		//infoLink_var = 'var infoURL = "https://headgear.io"' //13: Info Link
+		//Rotation360_var = 'rotation="0 90 0"' //14: intial rotation of 360 content
+		//showInfoButton_var = "infoLinkExists = true"; //15: whether to show the info button
+		//showNarrativeAudioButton_var = "narrativeAudioExists = true"; //16: whether to show the narrative audio button
+		containsDoorSpawningSound_var = "containsDoorSpawningSound = true"; //17 whether to play a door spawning sound
+		doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning sound
+	}
+}
+
+//template scripts end
 
 </script>
 
