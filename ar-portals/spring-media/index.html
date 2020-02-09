@@ -536,6 +536,28 @@ function clearForm() {
 
 // Scripts for export	
 
+//assign array
+var stringsToReplaceArray = [
+		appKey_var, //0: appkey
+		videoURL_var, //1: video URL
+		doorModel_var, //2: door model URL
+		balconyModel_var, //3: balcony URL
+		narrative_var, //4: narrative audio URL
+		videoElsePhoto_var, //5: videoOrPhoto boolean
+		photoURL_var, //6: photo URL
+		pageTitle_var, //7: page Title - multiple occerances!
+		showBalcony_var, //8: balcony onOff boolean
+		sceneLocation_var, //9: boolean for showing text above door
+		sceneLocationText_var, //10: text to be shown above door
+		trackingParameter_var, //11: tracking id for this campaign
+		trackingProvider_var, //12: tracking provider for this campaign
+		infoLink_var, //13: URL for the info button
+		Rotation360_var, //14: intial rotation of 360 content
+		showInfoButton_var, //15: whether info button is included
+		showNarrativeAudioButton_var, //16: whether info button is included
+		containsDoorSpawningSound_var, //17 whether to play a door spawning sound
+		doorSpawningSound_var, //18: url for door spawning sound
+	];
 
 function setLookupValues() {
 
@@ -560,8 +582,8 @@ function setLookupValues() {
 	var containsDoorSpawningSound_var = "containsDoorSpawningSound = true"; //17 whether to play a door spawning sound
 	var doorSpawningSound_var = '"doorSpawningAudio" src="door_spawning_sound.mp3"'; //18: url for door spawning sound
 	
-	//assign to array
-	var stringsToReplaceArray = [
+	//update array
+	stringsToReplaceArray = [
 		appKey_var, //0: appkey
 		videoURL_var, //1: video URL
 		doorModel_var, //2: door model URL
