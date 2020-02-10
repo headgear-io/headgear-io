@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!-- 77471a451c84e96950ce884ada9f62cc8527e8ba 2b8bbf5097019718b734829ec3d8ddb7 -->
+      <meta charset="UTF-8">
+
+      <title>AR Portal</title>
+      <meta itemprop="name" content="AR Portal">
+      <meta name="twitter:title" content="AR Portal">
+      <meta name="og:title" content="AR Portal">
+      <meta name="og:site_name" content="AR Portal">
+      <meta name="image" content="//cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta itemprop="image" content="//cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta name="og:image" content="//cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+      <meta name="twitter:image:src" content="//cdn.8thwall.com/apps/cover/519zlgcbascq4pflqvdc4u12uh1z64gay7972yw7a77gv0c0n23f1dmh-preview">
+    
+      <meta name="og:type" content="website">
+      <meta name="twitter:card" content="summary">
+      <meta name="8thwall:workspace" content="spring">
+      <meta name="8thwall:project" content="ar-portal">
+
+      <script async src="//apps.8thwall.com/xrweb?appKey=gLMESoMSiCXZ8Ye4C7ooAO5bRn59zFpGIxN07SWCegxZNtScEoTCxh8S9SsXTB8xOevOSn&s=1"></script>
+      
+      <script src="//cdn.8thwall.com/web/aframe/8frame-0.9.2.min.js"></script>
+      <!-- Copyright (c) 2020 Headgear -->
+<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
+
+<script type="text/javascript">
+		var trackingProvider = "None";
+		switch (trackingProvider) {
+			case "Tealium":
+				var utag_data = {
+					page_name : "AR Portal",
+					page_section_path : "",
+					page_section_1 : "",
+					page_section_2 : "",
+					page_platform : "" ,
+					app_name : ""
+				};
+				(function(a,b,c,d){
+					a='https://tags.tiqcdn.com/utag/axelspringer/welt/dev/utag.js';
+					b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+					a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+				})();
+				break;
+		}
+		</script>
+
+<!-- Use "8thwall:" meta tags to hook into 8th Wall's build process and developer tools. -->
+<meta name="8thwall:renderer" content="aframe">
+<!-- <meta name="8thwall:package" content="@8thwall.xrextras"> -->
+
+<!-- Other external scripts and meta tags can also be added. -->
+<script src="https://headgear.io/8thwall/assets/xrextras.js"></script> 
+
+
+<!-- tag for iOS icon homepage pinning -->
+<link rel="apple-touch-icon" href="./assets/pagelogo.png">
+ <link rel="icon" type="image/png" href="./assets/pagelogo.ico">
+ 
+   <!-- meta tag for iOS video playback -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   
+   
+   
+   <!-- script for pushing debug logs onto screen! -->
+   <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script> 
+   
+   <!-- script for swiping menu -->
+   <script src="https://demos.jquerymobile.com/1.3.2/js/jquery.js"></script>
+ <script src="https://demos.jquerymobile.com/1.3.2/js/jquery.mobile-1.3.2.min.js"></script> 
+
+  <!-- currently not working: <script src="https://demos.jquerymobile.com/1.3.2/js/jquery.mobile-1.3.2.min.js"></script> -->
+     
+   <style>
+
+#infoText {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 200px;
+  text-align: center;
+  margin: auto;
+  padding-top: 150px;
+  width: 250px;
+  font-size: 24;
+  color: white;
+  text-shadow: -1px -1px 0#000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  z-index:11;
+}
+#outofboundsBackground{
+    
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height:100%;
+  z-index:10;
+}
+#tapScreenButton{
+    
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height:100%;
+  z-index:20;
+}
+#uiContainer{
+    position: fixed;
+    width:100%;
+    height: 31vmin;
+	bottom: -16vmin;
+	z-index: 30;
+	transition: all .3s ease-out;
+	float:left;
+	padding:0;
+	margin:0;
+	display: none;
+}
+#carrotContainer {
+	width: 100%;
+	height: 15vmin;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15vmin;
+	font-weight: bolder;
+	color: white;
+	opacity: 0.3;
+	-webkit-text-stroke: 2px black;
+	transition: all .3s ease-out;
+	transform: rotate(0deg);
+}
+#shareButtonContainer {
+  position: relative;
+  width: 33%;
+  float:left;
+  padding:0;
+  margin:0;
+}
+ #shareButton {
+ position: relative;
+  width: 15vmin;
+  height: 15vmin;
+  background-color: #003a5a;
+  border-radius: 7.5vmin;
+  transform: translateX(-50%);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: auto;
+  background-image: url('./assets/share_icon_white-evkawljf07.png');
+  
+}
+
+#audioButtonContainer {
+  position: relative;
+  width: 33%;
+  float:left;
+  padding:0;
+  margin:0;
+  }
+ #audioButton { 
+ position: relative;
+  width: 15vmin;
+  height: 15vmin;
+  background-color: #003a5a;
+  border-radius: 7.5vmin;
+  transform: translateX(-50%);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: auto;
+  background-image: url('./assets/speaking_icon_white-1wcsm890ik.png');
+  
+}
+
+#infoButtonContainer {
+  position: relative;
+  width: 33%;
+  float:left;
+  padding:0;
+  margin:0;
+  }
+ #infoButton {
+ position: relative;
+  width: 15vmin;
+  height: 15vmin;
+  background-color: #003a5a;
+  border-radius: 7.5vmin;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  pointer-events: auto;
+  background-image: url('./assets/info_icon_white-b2f8k1eb95.png');
+  transform: translateX(-50%);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-loader {
+	display:none !important;
+}
+   </style>
+      <script async src="//cdn.8thwall.com/web/hosting/dev8.js"></script>
+      
+    </head>
+    <body>
+      <script type="text/javascript" src="//cdn.8thwall.com/web/hosting/app8-k66vt5oc.js"></script>
+      <script type="text/javascript">app8("<!-- Copyright (c) 2020 Headgear -->\n\n<!-- body.html ; elements will be added to your html body after app.js is loaded. -->\n\n <!-- These HTML elements are used to show an UI laid over the scene -->\n      <div id=\"tapScreenButton\"></div>\n      <div id=\"uiContainer\">\n        \t<div id=\"carrotContainer\">^</div>\n        \t<div id=\"shareButtonContainer\">\n        \t\t<div id=\"shareButton\"></div>\n        \t</div>  \n        \t<div id=\"audioButtonContainer\">\n        \t\t<div id=\"audioButton\"></div>\n        \t</div>  \n        \t<div id=\"infoButtonContainer\">\n        \t\t<div id=\"infoButton\"></div>\n        \t</div>  \n      </div>\n      <div id=\"infoText\"></div>\n      <div id=\"outofboundsBackground\"></div>\n      \n<!-- aframe scene components -->\n\n <a-scene id=\"scene\"\n light=\"defaultLightsEnabled: false\"\n      xrweb\n      camera-status-check\n      touchscreen-handler\n      menu-interactions\n      aframe-log-component\n      photo-or-video\n      set-initial-info-text\n      xrextras-almost-there\n      xrextras-loading\n      xrextras-runtime-error\n      door-seen-by-camera> <!-- stats -->\n\n      <!-- We can define assets here to be loaded when A-Frame initializes -->\n      <a-assets>\n       \n       <!-- <a-asset-item id=\"doorModel\" src=\"./assets/door230cm.glb\"></a-asset-item>   -->\n        <a-asset-item id=\"doorModel\" src=\"/ar-portal/assets/door_model-yhjqgbte9h.glb\"></a-asset-item> \n        <a-asset-item id=\"balconyModel\" src=\"/ar-portal/assets/balcony_model-h66d8464i8.glb\"></a-asset-item>\n        <a-asset-item id=\"door_l\" src=\"xxxHTMLLINKxxx0.286603480544907140.38645051132660746xxx\"></a-asset-item>\n        <a-asset-item id=\"door_r\" src=\"xxxHTMLLINKxxx0.22697202006792550.25871349368526286xxx\"></a-asset-item>\n\n        <img id=\"arrowhead-image\" src=\"/ar-portal/assets/arrowhead-9bk707nf04.png\">\n        \n          <!-- asset for 360 photo and or video poster -->\n        <img id=\"photo\" src=\"/ar-portal/assets/test_video_poster-of8ioaf60c.jpg\">\n\n         <!-- Audio Assets -->\n         <!-- asset for narrator -->\n        <audio id=\"audio\" src=\"/ar-portal/assets/narrative-wiqowcijig.mp3\" preload=\"auto\"></audio>\n         <!-- asset for door spawning sound -->\n        <audio id=\"doorSpawningAudio\" src=\"/ar-portal/assets/door_spawning_sound-v51o43hrfi.mp3\" preload=\"auto\"></audio>\n         <!-- asset for door opening sound -->\n        <audio id=\"doorOpeningAudio\" src=\"/ar-portal/assets/door_opening_sound-b158kp3r5i.mp3\" preload=\"auto\"></audio>\n        \n      </a-assets>\n      <!-- Different timeout mentioned here in case we wish to start the video streaming sooner -->\n      <a-assets timeout=\"3000\">\n        \n        <video id=\"video1\" src=\"/ar-portal/assets/360_video-ewpawm8ir7.mp4\"\n          loop crossorigin=\"anonymous\" preload=\"auto\" playsinline webkit-playsinline></video>\n      \n      </a-assets>\n\n       <a-camera\n        id=\"camera\"\n        position=\"0 12 8\"> <!-- changing the depth/height (y) and distance (z) of the camera results in a rescale of the door -->\n           \n          <a-entity id=\"arrow-image-holder\" visible=\"false\" arrow-ani-setup>\n             <a-image id=\"arrow1\" position=\"0 0.025 -1\" scale=\"0.1 0.2 0.1\" src=\"#arrowhead-image\" transparent=\"true\" shader=\"flat\" opacity=\"0.0\" material=\"alphaTest: 0.5\"\n                          animation__moveup=\"property: position; from: 0 0.025 -1; to: 0 0.4 -1.5; dur: 2000; startEvents: moveup; easing: easeInOutQuad \"\n                          animation__fadein=\"property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad\"\n                           animation__fadeout=\"property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad \"\n                          \n                           arrow-ani>\n              </a-image>  \n              <!-- for multiple arrows:\n              <a-image id=\"arrow2\" position=\"0 0.025 -1\" scale=\"0.1 0.1 0.1\" src=\"#arrowhead-image\" transparent=\"true\" shader=\"flat\" opacity=\"0.0\"\n                          animation__moveup=\"property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad\"\n                          animation__fadein=\"property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad\"\n                           animation__fadeout=\"property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad\"\n                          \n                           arrow-ani>\n              </a-image>  \n              <a-image id=\"arrow3\" position=\"0 0.025 -1\" scale=\"0.1 0.1 0.1\" src=\"#arrowhead-image\" transparent=\"true\" shader=\"flat\" opacity=\"0.0\"\n                          animation__moveup=\"property: position; from: 0 0.025 -1; to: 0 0.4 -1; dur: 2000; startEvents: moveup; easing: easeInOutQuad \"\n                          animation__fadein=\"property: material.opacity; from: 0.0; to: 1.0; startEvents: animtioncomplete__moveup; dur: 1000; startEvents: fadein; easing: easeInOutQuad\"\n                           animation__fadeout=\"property: material.opacity; from: 1.0; to: 0.0; dur: 1000; startEvents: animationcomplete__fadein; startEvents: fadeout; easing: easeInOutQuad \"\n                          \n                           arrow-ani>\n              </a-image >  \n              -->\n          </a-entity> \n        <!-- markOT-qmqk8fajid.glb \n              <a-entity\n            id=\"infoText\"\n            text=\"align: center; value: Tor platzieren; color: white; wrapCount: 22; font: ./assets/markOToutline-lp1gchdrai.glb;\" \n            position=\"0 -0.1 -1\"\n            scale=\"0.5 0.5 0.5\"\n            set-initial-info-text>\n          </a-entity>\n              -->\n           <!-- Logging to screen -->\n           <a-log position=\"1 2.5 -4\" visibile=\"false\" debugon></a-log>\n            \n      </a-camera>\n\n <!-- main scene holder - used to push door further back on spawn. NOTE: changing Z results in having to move the camera Y up or down -->\n      <a-entity id=\"scene-holder\" position=\"0 -3 -15\" portal>\n        \n             <!-- light -->\n              <a-entity\n                light=\"type: directional;\n                       intensity: 0;\n                       target: #doorEntity;\"\n                position=\"1 4.3 2.5\">\n              </a-entity>\n              <a-light type=\"ambient\" intensity=\"0\"></a-light>\n        \n            <!-- box in front of door for ani in: wScale effected by width of door. yPosition & ySacle (set also in ani) effected by height of door \n            was: \n            scale=\"20 76 15\"\n            position=\"0 38 0\"\n            animation__showportal=\"property: scale; from: 20 76 15; to: 20 0 15; dur: 1900; startEvents: showportal; easing: linear \"\n            -->\n              <a-box id=\"boxInFrontOfDoor\"\n                scale=\"20 100 15\"\n                position=\"0 50 0\"\n                animation__showportal=\"property: scale; from: 20 100 15; to: 20 50 15; dur: 1900; startEvents: showportal; easing: linear \"\n                hider-material\n                show-door-ani-over-logic></a-box>\n        \n            <!-- Doorway door model (note: order is important as first listed is always drawn on top) \n            Door scale is actually set in 'scaleup-on-tap'. Reason: needs to start at 0, 0, 0 so not seen if user walks forward before spawning. Cannot be hidden otherwise texture is not loaded and causes hitch on show -->\n            <a-entity\n                id=\"doorEntity\"\n                position=\"0 0 0\"\n                scale=\"0 0 0\"\n                gltf-model=\"#doorModel\"\n                visible=\"true\"\n                save-orginal-model-material\n                show-door-ani-on-tap\n                scaleup-on-tap\n                >\n                    <a-entity\n                    id=\"doorEntityL\"\n                    position=\"0 0 0\"\n                    scale=\"1 1 1\"\n                    gltf-model=\"#door_l\"\n                    visible=\"true\"\n                    animation__open=\"property: position; to: -1.6 0 0; dur: 1000; startEvents: open; easing: easeInOutQuad \"\n                    animation__close=\"property: position; to: 0 0 0; dur: 1000; startEvents: close; easing: easeInOutQuad \"\n                     >\n                      </a-entity>\n                    <a-entity\n                    id=\"doorEntityR\"\n                    position=\"0 0 0\"\n                    scale=\"1 1 1\"\n                    gltf-model=\"#door_r\"\n                    visible=\"true\"\n                    animation__open=\"property: position; to: 1.6 0 0; dur: 1000; startEvents: open; easing: easeInOutQuad \"\n                    animation__close=\"property: position; to: 0 0 0; dur: 1000; startEvents: close; easing: easeInOutQuad \"\n                    >\n                      </a-entity>\n                    <!-- text sign --> \n                    <!-- standard font: \n                    font: https://cdn.aframe.io/fonts/mozillavr.fnt;\" \n                    -->\n                    <!-- custom font: \n                    shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/play/Play-Regular.json;\"\n                    from: https://github.com/etiennepinchon/aframe-fonts \n                    needs negate:true\n                    WamS font:  MarkOT-msdf-coe9cgoai6.glb \n                    needs negate:false -->\n                   <a-entity id=\"sceneLocationTextHolder\" scenelocation_textholder_controller>\n                        <a-entity\n                            id=\"sceneLocationTextEntity\"\n                            text=\"align:center; value:Scene; negate:true; color:#FFFFFF; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/play/Play-Regular.json;\"  \n                            position=\"0 8.75 0.91\"\n                            scale=\"10 10 10\"\n                            scenelocation_text_setter\n                            >\n                        </a-entity>\n                        <!-- text shadow attempt  -->\n                        <a-entity\n                            id=\"sceneLocationTextShadowEntity\"\n                            text=\"align: center; value: Location; color: black; shader: msdf; negate: true; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/play/Play-Regular.json;\" \n                            position=\"0 8.75 0.9\"\n                            scale=\"10.1 10.1 10.1\"\n                            scenelocation_text_setter\n                            >\n                        </a-entity>\n                    </a-entity>\n            </a-entity>\n            \n      \n            <!-- Hider walls -->\n            <a-entity id=\"hider-walls\">\n              <!-- above portal on front: wScale effected by width of door. yPosition & ySacle (set also in ani) effected by height of door  -->\n              <a-box id=\"abovePortalHiderWall\"\n                scale=\"10 100 1\"\n                position=\"0 74 0\"\n                hider-material></a-box>\n              <!-- front left: wScale effected by width of door-->\n              <a-box\n                scale=\"90 100 1\"\n                position=\"-50 50 0\"\n                hider-material></a-box>\n              <!-- front right: wScale effected by width of door-->\n              <a-box\n                scale=\"90 100 1\"\n                position=\"50 50 0\"\n                hider-material></a-box>\n              <!-- back -->\n              <a-box\n                scale=\"200 100 1\"\n                position=\"0 50 200\"\n                hider-material></a-box>\n              <!-- floor left -->\n              <a-box\n                scale=\"200 1 201\"\n                position=\"0 100 100\"\n                hider-material></a-box>\n              <!-- floor right -->\n              <a-box\n                scale=\"200 1 199\"\n                position=\"0 -0.5 100\"\n                hider-material></a-box>\n              <!-- side left -->\n              <a-box\n                scale=\"1 100 205\"\n                position=\"-100 50 100\"\n                hider-material></a-box>\n              <!-- side right -->\n              <a-box\n                scale=\"1 100 205\"\n                position=\"100 50 100\"\n                hider-material></a-box>\n            </a-entity>\n            \n            <!-- return side: xScale effected by width of door. yScale and yHeight effected by door height -->\n            <a-entity id=\"portal-return-opening\">\n              <a-plane\n                scale=\"11 25 1\"\n                rotation=\"180 0 0\"\n                position=\"0 10 0.5\"\n                hider-material></a-plane>\n            </a-entity>\n      \n            <a-entity id=\"portal-contents\"  >\n              \n              <!-- Balcony  -->\n                <a-entity id=\"balcony\"\n                position=\"0 0 0\"\n                gltf-model=\"#balconyModel\"\n                scale=\"0 0 0\"\n                visible=\"true\"\n                save-orginal-model-material\n                show-door-ani-on-tap\n                scaleup-on-tap></a-entity>\n                \n             <!-- video sphere 360 video - do not change default rotation required for template lookup -->\n           <a-videosphere id=\"videosphere\" rotation=\"0 90 0\" src=\"#video1\"  videoeventhandler hide-after-load show-on-tap>\n           </a-videosphere>    \n      \n            <!-- sky background for 360 photo - do not change default rotation required for template lookup -->\n            <a-sky id=\"photosphere\" rotation=\"0 90 0\" src=\"#photo\" photo-or-video hide-after-load show-on-tap></a-sky>\n            \n            <!-- ground outside if separate should go here --> \n              \n            </a-entity>\n        \n            <!-- ground inside portal --> \n       \n            <a-entity id=\"portal-world\">\n             \n            </a-entity>\n            \n   \n            \n            <!-- Audio tracks -->\n            \n            <!-- narrator audio track -->\n            <a-entity id=\"soundcue\" sound=\"src: #audio; autoplay: false;\"></a-entity>\n            <a-entity id=\"doorSpawnSoundCue\" sound=\"src: #doorSpawningAudio; autoplay: false; volume:4;\"></a-entity>\n            <a-entity id=\"doorOpenSoundCue\" sound=\"src: #doorOpeningAudio; autoplay: false; volume:3;\"></a-entity>\n            \n     </a-entity>\n    \n    <!-- visible ground reference for debugging\n     <a-entity\n        id=\"ground\"\n        class=\"cantap\"\n        geometry=\"primitive: box\"\n        material=\"color: #000000; transparent: true; opacity: 0.4\"\n        scale=\"1000 2 1000\"\n        position=\"0 -1 0\"\n        transparent=true\n        >\n      </a-entity>\n     -->\n    </a-scene>\n    \n   \n\n  ", "noncommercial", "77471a451c84e96950ce884ada9f62cc8527e8ba", false, "/ar-portal/")</script>
+     </body>
+  </html>
