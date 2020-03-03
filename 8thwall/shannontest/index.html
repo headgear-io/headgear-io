@@ -1562,7 +1562,8 @@ observer.observe(document.body, {childList: true});
             animation__showportal="property: scale; from: 20 76 15; to: 20 0 15; dur: 1900; startEvents: showportal; easing: linear "
             -->
               <a-box id="boxInFrontOfDoor"
-                scale="20 100 15"
+                visible="false"
+				scale="20 100 15"
                 position="0 50 0"
                 animation__showportal="property: scale; from: 20 100 15; to: 20 50 15; dur: 1900; startEvents: showportal; easing: linear "
                 hider-material
@@ -1573,7 +1574,7 @@ observer.observe(document.body, {childList: true});
             <a-entity
                 id="doorEntity"
                 position="0 0 0"
-                scale="0 0 0"
+                scale="2.6 2.6 2.6"
                 gltf-model="#doorModel"
                 visible="true"
                 save-orginal-model-material
