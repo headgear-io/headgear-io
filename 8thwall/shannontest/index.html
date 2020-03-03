@@ -1481,6 +1481,10 @@ observer.observe(document.body, {childList: true});
         <a-asset-item id="door_l_window" src="./assets/wams_window_L.glb"></a-asset-item>
         <a-asset-item id="door_r_window" src="./assets/wams_window_R.glb"></a-asset-item>
 
+		<video id="video1" src="./assets/Robben-1.mp4"
+          loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
+   
+
         <img id="arrowhead-image" src="./assets/arrowhead.png">
         
           <!-- asset for 360 photo and or video poster -->
@@ -1495,14 +1499,9 @@ observer.observe(document.body, {childList: true});
         <audio id="doorOpeningAudio" src="./assets/door_opening_sound.mp3" preload="auto"></audio>
         
       </a-assets>
-      <!-- Different timeout mentioned here in case we wish to start the video streaming sooner -->
-      <a-assets timeout="3000">
         
-        <video id="video1" src="./assets/Robben-1.mp4"
-          loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
       
-      </a-assets>
-
+   
        <a-camera
         id="camera"
         position="0 12 12"> <!-- changing the depth/height (y) and distance (z) of the camera results in a rescale of the door -->
