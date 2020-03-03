@@ -293,7 +293,7 @@ observer.observe(document.body, {childList: true});
     //experience setup ** THESE CAN BE CHANGED
     var hideDoorOnWalkthrough = false //true means door is hidden when user walks through - Needed for 2nd app demo!!
     var showBalcony = true   //true means balcony is shown
-    var videoElsePhoto = false //true means video not photo
+    var videoElsePhoto = true //true means video not photo
     var sceneLocationText = true //true means text will be shown above the door signifying the location
     var doorTriggerDistance = 6  //camera starts around a value of 9. Where a value of 0 = at the door
     var containsDoorAnimation = true //whether door animation exists
@@ -1481,14 +1481,14 @@ observer.observe(document.body, {childList: true});
         <a-asset-item id="door_l_window" src="./assets/wams_window_L.glb"></a-asset-item>
         <a-asset-item id="door_r_window" src="./assets/wams_window_R.glb"></a-asset-item>
 
-		<video id="video1" src=""
+		<video id="video1" src="./assets/Robben-1.mp4"
           loop crossorigin="anonymous" preload="auto" playsinline webkit-playsinline></video>
    
 
         <img id="arrowhead-image" src="./assets/arrowhead.png">
         
           <!-- asset for 360 photo and or video poster -->
-        <img id="photo" src="./assets/video_thumbnail.jpg">
+        <img id="photo" src="">
 
          <!-- Audio Assets -->
          <!-- asset for narrator -->
