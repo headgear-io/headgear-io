@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+   <!-- meta tag for iOS video playback -->
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   
+   
+<!-- tag for iOS icon homepage pinning -->
+<link rel="apple-touch-icon" href="https://headgear.io/assets/img/HLOGO.PNG">
+ <link rel="icon" type="image/png" href="https://headgear.io/assets/img/HLOGO.ico">
+   
+</head>
+<body>
+TEST VIDEO PLAYBACK ON iOS
+<br><br>
+Highway1-lowres
+<br>
+<button class="btn btn-default" type="button" onclick="previewVideo()">Play Video</button>
+<br><br><br>
+ <video width="320" height="240" controls>
+  <source src="https://headgear.io/8thwall/assets/Highway1-lowres.mp4">
+Your browser does not support the video tag.
+</video> 
+
+<script>
+	function previewVideo() {
+		
+		document.getElementById("video1").play();
+			
+	}
+	
+</script>
+</body>
+</html>
