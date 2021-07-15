@@ -1,6 +1,28 @@
 <html>
 <head>
+<!-- 
+
+  This is a website that has no AR content itself, but embeds an AR experience within an iframe.
+
+  
+
+  In the HEAD of your INNER AR page, add this script:
+
+  <script src="//cdn.8thwall.com/web/iframe/iframe-inner.js"></script>
+
+-->
+
+<!-- OUTER WEBSITE: Required in head of outer site -->
+
 <script src="https://cdn.8thwall.com/web/iframe/iframe.js"></script>
+
+<!-- Fonts for outer site example -->
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700,700i&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
 <style>
 /* iframe styling */
@@ -415,7 +437,6 @@ p {
 
 //
 
-import './outer-website.css'
 
 // The AR content to load in the iframe.
 
@@ -555,21 +576,6 @@ const createObserver = () => {
 
 }
 
-// Sets today's date in the article
-
-const dateCheck = () => {
-
-  const date = new Date()
-
-  document.getElementById(DATE_ID).innerHTML =
-
-    `${date.toLocaleDateString('en-US', {month: 'long'})
-
-    } ${date.toLocaleDateString('en-US', {day: 'numeric'})
-
-    }, ${date.toLocaleDateString('en-US', {year: 'numeric'})}`
-
-}
 
 // Handles fullscreen button behavior
 
@@ -653,7 +659,8 @@ const onLoad = () => {
 
   createObserver()  // handles intersection observer behavior
 
-  dateCheck()  // sets today's date in the article
+
+  
 
 }
 
