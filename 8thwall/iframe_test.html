@@ -1,5 +1,712 @@
 <html>
+<head>
+<script src="https://cdn.8thwall.com/web/iframe/iframe.js"></script>
 
-<iframe allow="camera;microphone;gyroscope;accelerometer;" src="https://8w.8thwall.app/inner-ar" width="100%" height="400" name="iFrame" title="AR inline example"></iframe>
+<style>
+/* iframe styling */
+
+#my-iframe {
+
+  width: 100%;
+
+  height: 400px;
+
+  margin: 0 auto;
+
+  border: 0;
+
+  background-image: url(https://media.giphy.com/media/fVhOUH4d2hqQRg0H0k/giphy.gif);
+
+  background-size: cover; 
+
+}
+
+#startBtn {
+
+  position: absolute;
+
+  z-index: 1; 
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  margin-top: 42%;
+
+  border: 0;
+
+  background-color: #464766;
+
+  border-radius: 15px;
+
+  padding: 3px 0px 0px 3px;
+
+  color: white;
+
+  width: 50%;
+
+}
+
+#startBtn img {
+
+  margin: 5px 20px;
+
+}
+
+#startBtn:focus {
+
+  outline: none !important; 
+
+  box-shadow: none !important;
+
+}
+
+#iframeControls {
+
+  display: none;
+
+  position: absolute;
+
+  height: 7em;
+
+  width: 98vw;
+
+  left: 50%;
+
+  z-index: 1;
+
+  transform: translateX(-50%);
+
+}
+
+#stopBtn {
+
+  margin-top: 1em;
+
+  margin-left: 1em;
+
+  float: left;
+
+  border: 0;
+
+  background: none;
+
+  padding: 0;
+
+}
+
+#stopBtn:focus {
+
+  outline: none !important; 
+
+  box-shadow: none !important;
+
+}
+
+#stopImg {
+
+  width: 30px;
+
+  height: 30px;
+
+  background-image: url(https://static.8thwall.app/assets/close-icon-bjw2gfbf49.svg);
+
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+
+  background-size: cover;
+
+}
+
+#expandBtn {
+
+  margin-top: 1em;
+
+  margin-right: 1em;
+
+  float: right;
+
+  border: 0;
+
+  background: none;
+
+  padding: 0;
+
+}
+
+#expandBtn:focus {
+
+  outline: none !important; 
+
+  box-shadow: none !important;
+
+}
+
+#expandImg {
+
+  width: 30px;
+
+  height: 30px;
+
+  background-image: url(https://static.8thwall.app/assets/noun_expand_534717-tukk5p064g.svg);
+
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+
+  background-size: cover;
+
+}
+
+#poweredByLogo {
+
+  width: 30%;
+
+  position: absolute;
+
+  bottom: 0;
+
+  right: 0;
+
+  z-index: 1;
+
+  padding: 1em;
+
+}
+
+.fullscreen-iframeControls {
+
+  position: fixed !important;
+
+  top: 0;
+
+}
+
+.fullscreen-iframe {
+
+  position: fixed !important;
+
+  height: 100% !important;
+
+  top: 0;
+
+  right: 0;
+
+}
+
+.fullscreen-btn {
+
+  position: fixed !important;
+
+  margin: 0;
+
+  top: 1em;
+
+  right: 0;
+
+}
+
+.fullscreen-btn #expandImg {
+
+  background-image: url(https://static.8thwall.app/assets/noun_shrink_534715-qj3i2fuxf6.svg) !important;
+
+}
+
+.hidden {
+
+  display: none !important;
+
+}
+
+/* Animations */
+
+.fade-in { animation: fade-in 0.25s linear forwards; }
+
+@keyframes fade-in {
+
+  0% {opacity: 0;}
+
+  100% {opacity: 1;}
+
+}
+
+.fade-out { animation: fade-out 0.25s linear forwards; }
+
+@keyframes fade-out {
+
+  0% {opacity: 1;}
+
+  100% {opacity: 0;}
+
+}
+
+/* Article styling */
+
+body {
+
+  font-family: 'Noto Serif', serif;
+
+}
+
+.grid-container {
+
+  display: inline-grid;
+
+  grid-template-columns: 75px auto 75px;
+
+  grid-template-rows: 50px;
+
+  margin: 0 auto;
+
+  width: 100%;
+
+}
+
+.grid-item {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+}
+
+.author {
+
+  margin: 0px;
+
+}
+
+#date {
+
+  margin-top: 0.25em;
+
+  margin-bottom: 0.25em;
+
+  font-weight: bold;
+
+  font-style: italic;
+
+}
+
+header h1 {
+
+  font-size: 20px;
+
+}
+
+header img {
+
+  max-width: 20px;
+
+}
+
+.content {
+
+  padding: 0px 1em;
+
+}
+
+.content h1 {
+
+  font-size: 38px;
+
+  font-style: italic;
+
+  margin-top: 0.5em;
+
+  margin-bottom: 0.5em;
+
+}
+
+p {
+
+  font-size: 22px;
+
+  line-height: 1.5em;
+
+}
+
+#inline-ar {
+
+  position: relative;
+
+  max-width: 100%;
+
+  max-height: 100%;
+
+}
+
+@media screen and (min-width: 981px) {
+
+  #inline-ar {
+
+    display: block;
+
+    margin: 0 auto;
+
+    max-width: 675px;
+
+    max-height: 675px;
+
+  }
+
+  
+
+  #my-iframe {
+
+    height: 42em;
+
+  }
+
+  
+
+  p {
+
+    font-size: 1em;
+
+    line-height: 1.5em;
+
+  }
+
+  
+
+  .content {
+
+    padding: 0px 10em;
+
+  }
+
+  
+
+  .content h1 {
+
+    font-size: 4em;
+
+  }
+
+  
+
+  #expandBtn {
+
+    display: none !important;
+
+  }
+
+  
+
+  #stopBtn {
+
+    display: none !important;
+
+  }
+
+}
+
+/* Prompt Box Styling */
+
+.prompt-button-8w-iframe {
+
+  border-radius: 10px !important;
+
+}
+</style>
+
+<script>
+// Copyright (c) 2021 8th Wall, Inc.
+
+//
+
+import './outer-website.css'
+
+// The AR content to load in the iframe.
+
+const INNER_FRAME_URL = 'https://8w.8thwall.app/inner-ar'
+
+// User control elements for the iframe AR experience.
+
+const IFRAME_ID = 'my-iframe'  // iframe containing AR content.
+
+const CONTROLS_ID = 'iframeControls'  // Top bar including Stop Button and Expand Button.
+
+const START_BTN_ID = 'startBtn'  // Button to start AR.
+
+const STOP_BTN_ID = 'stopBtn'  // Button to stop AR.
+
+const EXPAND_BTN_ID = 'expandBtn'  // Button to expand AR iframe to fill screen.
+
+const LOGO_ID = 'poweredByLogo'  // Powered by 8th Wall logo
+
+// Other UI elements
+
+const DATE_ID = 'date'  // Displays today's date in the article.
+
+// CSS classes for toggling appearance of elements when the iframe is full screen.
+
+const FULLSCREEN_IFRAME_CLASS = 'fullscreen-iframe'
+
+const FULLSCREEN_CONTROLS_CLASS = 'fullscreen-iframeControls'
+
+const FULLSCREEN_EXPAND_BTN_CLASS = 'fullscreen-btn'
+
+const FULLSCREEN_STOP_BTN_CLASS = 'hidden'
+
+// Handles stop AR button behavior; also called when scrolled away from active AR iframe.
+
+const stopAR = () => {
+
+  // deregisters the XRIFrame
+
+  window.XRIFrame.deregisterXRIFrame()
+
+  const controls = document.getElementById(CONTROLS_ID)
+
+  controls.style.opacity = 1
+
+  controls.classList.remove('fade-in')
+
+  controls.classList.add('fade-out')
+
+  const startBtn = document.getElementById(START_BTN_ID)
+
+  startBtn.style.opacity = 0
+
+  startBtn.style.display = 'block'
+
+  startBtn.classList.remove('fade-out')
+
+  startBtn.classList.add('fade-in')
+
+  const poweredByLogo = document.getElementById(LOGO_ID)
+
+  poweredByLogo.style.opacity = 0
+
+  poweredByLogo.style.display = 'block'
+
+  poweredByLogo.classList.remove('fade-out')
+
+  poweredByLogo.classList.add('fade-in')
+
+  // removes AR iframe's source to end AR session
+
+  document.getElementById(IFRAME_ID).setAttribute('src', '')
+
+  const styleCleanup = setTimeout(() => {
+
+    startBtn.style.opacity = 1
+
+    startBtn.classList.remove('fade-in')
+
+    poweredByLogo.style.opacity = 1
+
+    poweredByLogo.classList.remove('fade-in')
+
+    controls.style.display = 'none'
+
+    controls.style.opacity = 0
+
+    controls.classList.remove('fade-out')
+
+  }, 300)
+
+  setTimeout(() => {
+
+    clearTimeout(styleCleanup)
+
+  }, 900)
+
+}
+
+// Create an interaction observer that stops AR when the user scrolls away from active AR session.
+
+const createObserver = () => {
+
+  let cameraActive
+
+  const handleIntersect = (entries, observer) => {
+
+    entries.forEach((entry) => {
+
+      if (cameraActive && !entry.isIntersecting) {
+
+        stopAR()
+
+        cameraActive = false
+
+      }
+
+    })
+
+  }
+
+  window.addEventListener('message', (event) => {
+
+    if (event.data === 'acceptedCamera') {
+
+      cameraActive = true
+
+    }
+
+  })
+
+  // How much of the iframe is still visible when scrolling away before stopping AR.
+
+  const options = {threshold: 0.2}
+
+  new IntersectionObserver(handleIntersect, options).observe(document.getElementById(IFRAME_ID))
+
+}
+
+// Sets today's date in the article
+
+const dateCheck = () => {
+
+  const date = new Date()
+
+  document.getElementById(DATE_ID).innerHTML =
+
+    `${date.toLocaleDateString('en-US', {month: 'long'})
+
+    } ${date.toLocaleDateString('en-US', {day: 'numeric'})
+
+    }, ${date.toLocaleDateString('en-US', {year: 'numeric'})}`
+
+}
+
+// Handles fullscreen button behavior
+
+const toggleFullscreen = () => {
+
+  document.getElementById(IFRAME_ID).classList.toggle(FULLSCREEN_IFRAME_CLASS)
+
+  document.getElementById(CONTROLS_ID).classList.toggle(FULLSCREEN_CONTROLS_CLASS)
+
+  document.getElementById(EXPAND_BTN_ID).classList.toggle(FULLSCREEN_EXPAND_BTN_CLASS)
+
+  document.getElementById(STOP_BTN_ID).classList.toggle(FULLSCREEN_STOP_BTN_CLASS)
+
+}
+
+// Handles start AR button behavior.
+
+const startAR = () => {
+
+  // registers the XRIFrame by iframe ID
+
+  window.XRIFrame.registerXRIFrame(IFRAME_ID)
+
+  const iframe = document.getElementById(IFRAME_ID)
+
+  const controls = document.getElementById(CONTROLS_ID)
+
+  const startBtn = document.getElementById(START_BTN_ID)
+
+  startBtn.classList.add('fade-out')
+
+  const poweredByLogo = document.getElementById(LOGO_ID)
+
+  poweredByLogo.classList.add('fade-out')
+
+  // checks if camera has been accepted in iframe before displaying controls
+
+  window.addEventListener('message', (event) => {
+
+    if (event.data !== 'acceptedCamera') {
+
+      return
+
+    }
+
+    controls.style.opacity = 0
+
+    const styleCleanup = setTimeout(() => {
+
+      startBtn.style.display = 'none'
+
+      poweredByLogo.style.display = 'none'
+
+      controls.style.display = 'block'
+
+    }, 300)
+
+    const uiFadeIn = setTimeout(() => {
+
+      controls.classList.add('fade-in')
+
+    }, 800)
+
+    setTimeout(() => {
+
+      clearTimeout(styleCleanup)
+
+      clearTimeout(uiFadeIn)
+
+    }, 900)
+
+  })
+
+  iframe.setAttribute('src', INNER_FRAME_URL)  // This is where the AR iframe's source is set.
+
+}
+
+// Set up.
+
+const onLoad = () => {
+
+  createObserver()  // handles intersection observer behavior
+
+  dateCheck()  // sets today's date in the article
+
+}
+
+// Add event listeners and callbacks for the body DOM.
+
+window.addEventListener('load', onLoad, false)
+
+window.toggleFullscreen = toggleFullscreen
+
+window.startAR = startAR
+
+window.stopAR = stopAR
+</script>
+
+</head>
+<body>
+<!-- AR iframe -->
+
+<div id="inline-ar">
+
+  <button id="startBtn" onClick="startAR()">
+
+    <img src="https://static.8thwall.app/assets/start-ar-banner-25c1e463o1.svg">
+
+  </button>
+
+  <img id="poweredByLogo" src="https://static.8thwall.app/assets/poweredby8thwall-i5a40414qg.svg">
+
+  <div id="iframeControls">
+
+    <button id="expandBtn" onClick="toggleFullscreen()">
+
+      <div id="expandImg"></div>
+
+    </button>
+
+    <button id="stopBtn" onClick="stopAR()">
+
+      <div id="stopImg"></div>
+
+    </button>
+
+  </div>
+
+  <iframe
+
+    id="my-iframe"
+
+    allow="camera;microphone;gyroscope;accelerometer;">
+
+  </iframe>
+</div>
+
+</body>
 
 </html>
