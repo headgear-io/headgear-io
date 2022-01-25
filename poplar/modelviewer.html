@@ -25,7 +25,7 @@ body {
 <div id="modelviewerContainer">
 <model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer"></model-viewer>
 </div>
-<div id="backFromAR" onclick="activateAR();">
+<div id="backFromAR" onclick="var productViewer = document.getElementById('modelviewer'); productViewer.activateAR();">
 BACK
 </div>
 </body>
