@@ -8,9 +8,15 @@
 body {
   background-color: #000000;
 }
+#modelviewer {
+	width: 100%;
+	height: 100%;
+}
 </style>
 </head>
 <body>
-<model-viewer src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer"></model-viewer>
+<div id="modelviewerContainer">
+<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer" xr-environment></model-viewer>
+</div>
 </body>
 </html>
