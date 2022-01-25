@@ -11,7 +11,7 @@ body {
 #modelviewer {
 	width: 100%;
 	height: 100%;
-
+	display:none;
 }
 #startAR {
 	position: fixed;
@@ -24,7 +24,7 @@ body {
 </head>
 <body>
 <div id="modelviewerContainer">
-<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.5"></model-viewer>
+<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.5" ios-src="../../shared-assets/models/tube_mfx.usdz"></model-viewer>
 </div>
 <div id="startAR" onclick="startAR()">
 START AR
