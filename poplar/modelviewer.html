@@ -16,7 +16,7 @@ body {
 	position: fixed;
 	top: 20px;
 	left: 20px;
-
+ color: red;
 }
 </style>
 </head>
@@ -24,7 +24,7 @@ body {
 <div id="modelviewerContainer">
 <model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer"></model-viewer>
 </div>
-<div id="backFromAR">
+<div id="backFromAR" onclick="activateAR();">
 BACK
 </div>
 </body>
