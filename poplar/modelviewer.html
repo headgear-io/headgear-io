@@ -24,10 +24,19 @@ body {
 </head>
 <body>
 <div id="modelviewerContainer">
-<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.5"></model-viewer>
+<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.25"></model-viewer>
 </div>
-<div id="startAR" onclick="var productViewer = document.getElementById('modelviewer'); productViewer.style.display = 'block'; productViewer.activateAR();">
+<div id="startAR" onclick="startAR()">
 START AR
 </div>
+
+<script>
+	function startAR() {
+		var productViewer = document.getElementById('modelviewer'); 
+		productViewer.style.display = 'block'; 
+		productViewer.activateAR();
+	}
+</script>
+
 </body>
 </html>
