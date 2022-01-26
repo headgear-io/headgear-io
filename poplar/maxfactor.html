@@ -120,7 +120,11 @@ pointer-events: none;
 </div>
 <div class="docSlider">
     <section>
-        <div class="inner">Page1</div>
+        <div class="inner">Page1
+			<div id="page3btn" onclick="revealProduct()">
+				Reveal
+			</div>
+		</div>
     </section>
     <section>
         <div class="inner">Page2</div>
@@ -134,7 +138,7 @@ pointer-events: none;
 					</div>
 				</div>
 				<div id="modelviewerContainer">
-					<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.5" ios-src="models/tube_mfx.usdz">
+					<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" loading="eager" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.5" ios-src="models/tube_mfx.usdz">
 					  <button slot="ar-button" style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
 							View in AR
 						</button>
@@ -165,11 +169,19 @@ pointer-events: none;
 	
 <script src="docSlider.min.js"></script>
 <script>
+		var doOnce = true;
+		function revealProduct() {
+			if (doOnce) {
+				doOnce = false;
+				docSlider.init();
+			}
+		}
 	function closeLoadingScreen() {
 		var loadingScreen = document.getElementById('loadingScreen'); 
 		loadingScreen.style.display = 'none'; 
-		docSlider.init();
+		//docSlider.init();
 	}
+	
 </script>
 </body>
 </html>
