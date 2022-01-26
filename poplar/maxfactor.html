@@ -91,7 +91,7 @@ position:absolute;
 	z-index: 100;
 	
 }
-#page1btn {
+#revealbtn {
 	pointer-events: auto;
 	position:absolute;
 	bottom: 5vmin;
@@ -133,8 +133,9 @@ pointer-events: none;
 <div class="docSlider">
     <section>
         <div class="inner">Page1
-			<div id="page1btn" onclick="revealProduct()">
+			<div id="revealContainer"><div id="revealbtn" onclick="revealProduct()">
 				Reveal
+			</div>
 			</div>
 		</div>
     </section>
@@ -185,6 +186,8 @@ pointer-events: none;
 		function revealProduct() {
 			if (doOnce) {
 				doOnce = false;
+				var revealBtnVar = document.getElementById('revealContainer'); 
+				revealBtnVar.style.display = 'none'; 
 				docSlider.init();
 			}
 		}
