@@ -25,8 +25,75 @@
 		.docSlider-pager {
 			display: none !important;
 		}
-<!--         
-   justify-content: center;
+		/* down arrow */
+		.Top .scrollDownAniContainer, .Start .scrollDownAniContainer {
+		  position: absolute;
+		  width: 24px;
+		  height: 24px;
+		  margin: 0 auto;
+		  bottom: 5vmin;
+		  left: 50%;
+		}
+
+		.Top .chevron, .Start .chevron {
+		  position: absolute;
+		  width: 28px;
+		  height: 8px;
+		  opacity: 0;
+		  transform: scale3d(0.5, 0.5, 0.5);
+		  animation: move 3s ease-out infinite;
+		}
+
+		.Top .chevron:first-child, .Start .chevron:first-child {
+		  animation: move 3s ease-out 1s infinite;
+		}
+
+		.Top .chevron:nth-child(2), .Start .chevron:nth-child(2) {
+		  animation: move 3s ease-out 2s infinite;
+		}
+
+		.Top .chevron:before,
+		.Top .chevron:after, .Start .chevron:before,
+		.Start .chevron:after {
+		  content: ' ';
+		  position: absolute;
+		  top: 0;
+		  height: 100%;
+		  width: 51%;
+		  background: #fff;
+		}
+
+		.Top .chevron:before, .Start .chevron:before {
+		  left: 0;
+		  transform: skew(0deg, 30deg);
+		}
+
+		.Top .chevron:after, .Start .chevron:after {
+		  right: 0;
+		  width: 50%;
+		  transform: skew(0deg, -30deg);
+		}
+
+		@keyframes move {
+		  25% {
+			opacity: 1;
+		  }
+		  33% {
+			opacity: 1;
+			transform: translateY(30px);
+		  }
+		  67% {
+			opacity: 1;
+			transform: translateY(40px);
+		  }
+		  100% {
+			opacity: 0;
+			transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+		  }
+		}
+		
+		<!--         
+		justify-content: center;
             align-items: center;
 			-->
 		
@@ -36,7 +103,9 @@
 body {
   background-color: #000000;
 }
+#page1 {
 
+}
 #loadingScreen {
 	position: absolute;
 	top: 0px;
@@ -131,16 +200,32 @@ pointer-events: none;
 					</div>
 </div>
 <div class="docSlider">
-    <section>
+    <section class="Top">
         <div class="inner">Page1
-			<div id="revealContainer"><div id="revealbtn" onclick="revealProduct()">
-				Reveal
+			<div id="page1">
+			<div id="revealContainer">
+				<div id="revealbtn" onclick="revealProduct()">
+					Reveal
+				</div>
 			</div>
-			</div>
+			<div id="scrollDownAniContainer" class="scrollDownAniContainer" style="display:none;">
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                </div>
+		</div>
 		</div>
     </section>
-    <section>
-        <div class="inner">Page2</div>
+    <section class="Top">
+        <div class="inner">Page2
+			<div id="page2">
+					<div id="scrollDownAniContainer2" class="scrollDownAniContainer" style="display:none;" >
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+					</div>
+			</div>
+		</div>
     </section>
     <section>
         <div class="inner">
@@ -156,7 +241,7 @@ pointer-events: none;
 							View in AR
 						</button>
 						<button id="exitARBtn" slot="exit-webxr-ar-button" onclick="hideAR()">
-						  👋 Close AR
+						  ?? Close AR
 					  </button>
 					</model-viewer>
 				</div>
@@ -189,6 +274,11 @@ pointer-events: none;
 				var revealBtnVar = document.getElementById('revealContainer'); 
 				revealBtnVar.style.display = 'none'; 
 				docSlider.init();
+				//show animated scroll down icon
+				var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer'); 
+				for (let i = 0; i < scrollDownAniContainer.length; i++) {
+					scrollDownAniContainer[i].style.display = "block";
+				}
 			}
 		}
 	function closeLoadingScreen() {
