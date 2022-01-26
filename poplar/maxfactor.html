@@ -8,9 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="docSlider.css">
     <style>
-        section:nth-child(odd){
+        /*
+		section:nth-child(odd){
             background-color: #eee;
         }
+		*/
         .inner{
             height: 100%;
             display: flex;
@@ -41,6 +43,11 @@ body {
 	background-color: unset;
 	/* display:none; */
 }
+
+model-viewer {
+    --poster-color: transparent;
+}
+
 #modelviewerContainer {
     width: 100%;
     height: 80%;
