@@ -201,7 +201,6 @@ pointer-events: none;
   #vidParent {
     width: 100%;
 	text-align: center;
-	display:none;
   }
 </style>
 
@@ -225,21 +224,21 @@ pointer-events: none;
 					id="my-video"
 					class="video-js"
 					preload="auto"
-					autoplay
-					poster="MY_VIDEO_POSTER.jpg"
+					
+					poster="./vid/poster.jpg"
 					data-setup="{}"
 					style="pointer-events: auto;display: inline-block;"
+					playsinline
 				  >
 					<source src="./vid/test_vid_720x1280_1765kbps.mp4" type="video/mp4" />
 					<p class="vjs-no-js">
 					  To view this video please enable JavaScript, and consider upgrading to a
 					  web browser that
 					  <a href="https://videojs.com/html5-video-support/" target="_blank"
-						>supports HTML5 video</a
-					  >
+						>supports HTML5 video</a>
 					</p>
 					
-				 </video>
+				 </video><!-- test vid: https://vjs.zencdn.net/v/oceans.mp4 -->
 			</div>
 			<div id="page1">
 			 
@@ -327,9 +326,9 @@ pointer-events: none;
 				var revealBtnVar = document.getElementById('revealContainer'); 
 				revealBtnVar.style.display = 'none'; 
 				
+				//var vidParent = document.getElementById('vidParent')
+				//vidParent.style.display = 'block'; 
 				//play video
-				var vidParent = document.getElementById('vidParent')
-				vidParent.style.display = 'block'; 
 				var myPlayer = videojs('my-video');
 				myPlayer.play()
 		
