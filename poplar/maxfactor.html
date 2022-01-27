@@ -527,7 +527,7 @@ on('mousedown touchstart', function (event) {
   }
 
   var timer = setInterval(function () {
-  if (revealDrag) {
+  if (revealDrag && particleCount < 20) {
 	$d.
     one('mouseup mouseleave touchend touchcancel touchleave', function () {
       clearInterval(timer);
