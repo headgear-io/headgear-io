@@ -7,6 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="docSlider.css">
+	  <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
     <style>
         /*
 		section:nth-child(odd){
@@ -196,6 +197,12 @@ pointer-events: none;
     width: 100%;
     height: 100%;
 }
+
+  #vidParent {
+    width: 100%;
+	text-align: center;
+	display:none;
+  }
 </style>
 
 
@@ -203,15 +210,39 @@ pointer-events: none;
 
 </head>
 <body>
+<!--
 <div id="loadingScreen">
 	<div id="loadingscreenBtn" onclick="closeLoadingScreen()">
 		START
 	</div>
 </div>
+-->
 <div class="docSlider">
     <section class="Top">
-        <div class="inner">Page1
+        <div class="inner">
+		<div id="vidParent">
+				 <video
+					id="my-video"
+					class="video-js"
+					preload="auto"
+					autoplay
+					poster="MY_VIDEO_POSTER.jpg"
+					data-setup="{}"
+					style="pointer-events: auto;display: inline-block;"
+				  >
+					<source src="/vid/test_vid_720x1280_1765kbps.mp4" type="video/mp4" />
+					<p class="vjs-no-js">
+					  To view this video please enable JavaScript, and consider upgrading to a
+					  web browser that
+					  <a href="https://videojs.com/html5-video-support/" target="_blank"
+						>supports HTML5 video</a
+					  >
+					</p>
+					
+				 </video>
+			</div>
 			<div id="page1">
+			 
 			<div id="revealContainer">
 				<div id="revealbtn" onclick="revealProduct()">
 					Reveal
@@ -274,14 +305,34 @@ pointer-events: none;
 	}
 </script>
 	
+<script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+  	
 <script src="docSlider.min.js"></script>
 <script>
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	
+	var videoComponent = document.getElementById('my-video')
+	videoComponent.width = width*.98;
+	videoComponent.height = height*.8;
+	
+	function triggerPlay() {
+		var myPlayer = videojs('my-video');
+		myPlayer.play()
+	}
 		var doOnce = true;
 		function revealProduct() {
 			if (doOnce) {
 				doOnce = false;
 				var revealBtnVar = document.getElementById('revealContainer'); 
 				revealBtnVar.style.display = 'none'; 
+				
+				//play video
+				var vidParent = document.getElementById('vidParent')
+				vidParent.style.display = 'block'; 
+				var myPlayer = videojs('my-video');
+				myPlayer.play()
+		
 				docSlider.init();
 				//show animated scroll down icon
 				var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer'); 
