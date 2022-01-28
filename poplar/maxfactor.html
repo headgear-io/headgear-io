@@ -35,7 +35,7 @@
 			bottom: 13vmin;
 			transform: translate(-50%, 0);
 			left: 50%;
-			  
+			  display:none;
 		}
 
 		.Top .chevron, .Start .chevron {
@@ -138,23 +138,23 @@ model-viewer {
     position: absolute;
 }
 
-#page3 {
+#page3, #page4 {
     display: flex;
     width: 100%;
     height: 100%;
 }
 
-#page3btn {
+.downloadBtn {
 	pointer-events: auto;
 	cursor: pointer;
 	position:absolute;
-	bottom: 20px;
 	transform: translate(-50%, 0);
 	left: 50%;
+		top: 15vh;
 	color: red;
 	font-size: 5vmin;
 	height: 15vmin;
-	z-index: 100;
+	z-index: 2;
 	
 }
 #revealbtn {
@@ -168,8 +168,10 @@ model-viewer {
 	color: red;
 	font-size: 5vmin;
 	height: 15vmin;
-	z-index: 100;
-
+	z-index: 2;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
 }
 
 
@@ -195,7 +197,7 @@ model-viewer {
 	top: 25px; 
 	right: 16px;
 }
-#page3UI {
+#page4UI {
 pointer-events: none;
 	position: absolute;
 	    display: flex;
@@ -356,7 +358,7 @@ html, body {
 			<div id="page1">
 			 
 			<div id="revealContainer">
-				<div id="revealbtn" onclick="revealProduct()">
+				<div id="revealbtn">
 					Reveal the bottle
 				</div>
 			</div>
@@ -379,14 +381,9 @@ html, body {
 			</div>
 		</div>
     </section>
-    <section>
+    <section class="Top">
         <div class="inner">
 			<div id="page3">
-				<div id="page3UI">
-					<div id="page3btn" onclick="console.log('pressed')">
-						Download 1
-					</div>
-				</div>
 				<div id="modelviewerContainer">
 					<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" loading="eager" camera-controls alt="Max Factor 3D Model Viewer" exposure="0.5" ios-src="models/tube_mfx.usdz">
 					  <button slot="ar-button" style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
@@ -397,11 +394,26 @@ html, body {
 					  </button>
 					</model-viewer>
 				</div>
-				
+				<div id="scrollDownAniContainer3" class="scrollDownAniContainer"  >
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+					</div>
 			</div>
 		</div>
     </section>
-
+	<section class="Top">
+        <div class="inner">
+			<div id="page4">
+				<div id="page4UI">
+					<div class="downloadbtn" onclick="console.log('pressed')">
+						Download 1
+					</div>
+				</div>
+				
+		
+		</div>
+    </section>
 </div>
 <div class='particles'></div>
 <script>
@@ -422,46 +434,15 @@ html, body {
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 	
-	docSlider.init();
-	//show animated scroll down icon
-	var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer'); 
-	for (let i = 0; i < scrollDownAniContainer.length; i++) {
-		scrollDownAniContainer[i].style.display = "block";
-	}
-	
-
-	
-	function triggerPlay() {
-		var myPlayer = videojs('my-video');
-		myPlayer.play()
-	}
-		var doOnce = true;
-		function revealProduct() {
-			if (doOnce) {
-				doOnce = false;
-				var revealBtnVar = document.getElementById('revealContainer'); 
-				revealBtnVar.style.display = 'none'; 
-				
-				//var vidParent = document.getElementById('vidParent')
-				//vidParent.style.display = 'block'; 
-				//play video
-				var myPlayer = videojs('my-video');
-				myPlayer.play()
-		
-				docSlider.init();
-				//show animated scroll down icon
-				var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer'); 
-				for (let i = 0; i < scrollDownAniContainer.length; i++) {
-					scrollDownAniContainer[i].style.display = "block";
-				}
-			}
+	function startPageSlider() {
+		docSlider.init();
+		//show animated scroll down icon
+		var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer'); 
+		for (let i = 0; i < scrollDownAniContainer.length; i++) {
+			scrollDownAniContainer[i].style.display = "block";
 		}
-	function closeLoadingScreen() {
-		var loadingScreen = document.getElementById('loadingScreen'); 
-		loadingScreen.style.display = 'none'; 
-		//docSlider.init();
 	}
-	
+
 </script>
 <script>
 
@@ -469,10 +450,19 @@ var width = window.innerWidth;
 var height = window.innerHeight * 0.75; //to fix
 	var revealDrag = false;
 	var blankBottleContainer = document.getElementById('blankBottleContainer')
+	var doOnce = true;
+
 interact('.resize-drag')
   .resizable({
   
-   onstart: function (event) {docSlider.enable(false); revealDrag = true;},
+   onstart: function (event) {
+			docSlider.enable(false); 
+			revealDrag = true;
+			if (doOnce) {
+				doOnce = false;
+				startPageSlider();
+			}
+		},
   //onmove : function (event) {},
   onend  : function (event) {docSlider.enable(true); revealDrag = false;},
   
