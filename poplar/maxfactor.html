@@ -138,12 +138,20 @@ model-viewer {
     position: absolute;
 }
 
-#page3, #page4 {
+#page2, #page3, #page4 {
 	position:absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
     width: 100%;
     height: 100%;
+}
+#infoText {
+	position:absolute;
+	transform: translate(-50%, -50%);
+	    top: 50%;
+	left: 50%;
+	vertical-align: middle;
+    width: 80vw;
 }
 
 .downloadBtn {
@@ -372,13 +380,16 @@ html, body {
 		</div>
     </section>
     <section class="Top">
-        <div class="inner">Page2
+        <div class="inner">
 			<div id="page2">
-					<div id="scrollDownAniContainer2" class="scrollDownAniContainer" style="display:none;" >
-                    <div class="chevron"></div>
-                    <div class="chevron"></div>
-                    <div class="chevron"></div>
-					</div>
+						<div id="infoText">
+				<i>"Introducing Max Factor's Miracle Pure Skin-Improving Foundation - a hybrid blend of skincare and foundation, a one stop shop that enhances your natural skin. Infused with 89% skincare ingredients, including a collagen-boosting complex, Vitamin C and retaining moisture in your skin with hyaluronic acid, <b>Miracle Pure Skin-Improving Foundation</b> is the perfect resolution for those who love their skin, and are seeking ways to protect it."</i>
+				</div>		
+				<div id="scrollDownAniContainer2" class="scrollDownAniContainer" style="display:none;" >
+				<div class="chevron"></div>
+				<div class="chevron"></div>
+				<div class="chevron"></div>
+				</div>
 			</div>
 		</div>
     </section>
