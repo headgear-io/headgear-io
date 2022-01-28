@@ -235,8 +235,9 @@ pointer-events: none;
 <style>
 
 .resize-drag {
-	position:flex;
-
+	position:absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
 
   touch-action: none;
 
@@ -266,6 +267,7 @@ hr {
     position: absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
+
 }
 <!--
 #line {
@@ -480,7 +482,7 @@ interact('.resize-drag')
     listeners: {
       move (event) {
         var target = event.target
-        var x = (parseFloat(target.getAttribute('data-x')) || 0)
+        //var x = (parseFloat(target.getAttribute('data-x')) || 0)
         var y = (parseFloat(target.getAttribute('data-y')) || 0)
 
         // update the element's style
@@ -495,10 +497,12 @@ interact('.resize-drag')
         //x += event.deltaRect.left
         //y += event.deltaRect.top
 
-        target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+        target.style.transform = 'translate(-50%,' + y + 'px)'
+		//target.style.transform = 'translateY(' + y + 'px)'
 
-        target.setAttribute('data-x', x)
+        //target.setAttribute('data-x', x)
         target.setAttribute('data-y', y)
+		target.setAttribute('left', '-50px')
         //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
 		
 		moveHandler(event, document.getElementById('resize-handle'));
@@ -535,19 +539,40 @@ interact('.resize-drag')
       })
     ]
   })
-  function moveHandler (event, handlerElement) {
+  function moveHandler2 (event, handlerElement) {
     var target = handlerElement,
-        // keep the dragged position in the data-x/data-y attributes
-        x = 0, //(parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+          // keep the dragged position in the data-x/data-y attributes
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
     // translate the element
     target.style.webkitTransform =
-    //target.style.transform = 'translate(' + event.rect.right + 'px, ' + event.rect.bottom + 'px)';
-	target.style.transform = 'translate(0px, ' + y + 'px)';
+    target.style.transform =
+      'translate(' + event.rect.right + 'px, ' + event.rect.bottom + 'px)';
+
+
+
+	  target.style.transform =
+      'translate(' + event.rect.right + 'px, ' + event.rect.bottom + 'px)';
+
+	  
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+  function moveHandler (event, handlerElement) {
+    var target = handlerElement,
+        // keep the dragged position in the data-x/data-y attributes
+      //  x = 0, //(parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform = 'translate(-22px,' + event.rect.bottom + 'px)';
+	//target.style.transform = 'translate(50vw, ' + y + 'px)';
 
     // update the position attributes
-    target.setAttribute('data-x', x);
+    //target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
   }
   </script>
