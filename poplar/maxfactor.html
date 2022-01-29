@@ -226,7 +226,7 @@ pointer-events: none;
 		background-image: url('bottle_no_label.jpg');
 		background-repeat: no-repeat;
 		background-size: contain;
-		height: 80vh;
+		height: 75vh;
 		background-position-x: center;
 		/* This makes things *much* easier */
 		box-sizing: border-box;
@@ -365,7 +365,7 @@ html, body {
 			<div id="bottleParent">
 				<div id="bottleContainer">
 					<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
-								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:80vh; pointer:none;">
+								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:75vh; pointer:none;">
 					</div>
 					<div class="resize-drag">
 							
@@ -460,7 +460,7 @@ html, body {
 <script>
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-	
+//page animations	
 	function startPageSlider() {
 			const infoText1 = document.getElementById('infoTextHolder');
 			//infoText1.style.display = "none";
@@ -514,9 +514,9 @@ html, body {
 
 </script>
 <script>
-
+//reveal
 var width = window.innerWidth;
-var height = window.innerHeight * 0.75; //to fix
+var height = window.innerHeight * 0.70; //to fix
 	var revealDrag = false;
 	var blankBottleContainer = document.getElementById('blankBottleContainer')
 	var doOnce = true;
@@ -638,7 +638,8 @@ interact('.resize-drag')
    
 
       <script id='rendered-js' >
-var d = document,$d = $(d),
+//particles
+	  var d = document,$d = $(d),
 w = window,$w = $(w),
 wWidth = $w.width(),wHeight = $w.height(),
 credit = $('.credit > a'),
