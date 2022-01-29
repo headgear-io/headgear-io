@@ -633,6 +633,7 @@ wWidth = $w.width(),wHeight = $w.height(),
 credit = $('.credit > a'),
 particles = $('.particles'),
 particleCount = 0,
+maxParticles = 50,
 sizes = [
 5, 10, 12.5, 17, 20],
 
@@ -674,7 +675,7 @@ on('mousedown touchstart', function (event) {
   }
 
   var timer = setInterval(function () {
-  if (revealDrag && particleCount < 20) {
+  if (revealDrag && particleCount < maxParticles) {
 	$d.
     one('mouseup mouseleave touchend touchcancel touchleave', function () {
       clearInterval(timer);
