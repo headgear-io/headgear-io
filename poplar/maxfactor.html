@@ -280,6 +280,16 @@ hr {
 	left: 50%;
 
 }
+
+#logo1 {
+	pointer-events: none;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+	bottom: 17vh;
+	text-align: center;
+}
 <!--
 #line {
 position: absolute;  
@@ -354,19 +364,20 @@ html, body {
 				
 			<div id="bottleParent">
 				<div id="bottleContainer">
-<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
+					<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
 								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:80vh; pointer:none;">
-							</div>
+					</div>
 					<div class="resize-drag">
 							
 						<div id="resize-handle" data-bottom="true" ><hr></div>
 					</div>
-					
+				
 				</div> 
 			</div>
 			<div id="page1">
-			 
+			 	
 			<div id="revealContainer">
+				<img id="logo1" src="max_factor_logo.png">
 				<div id="revealbtn">
 					Reveal the bottle
 				</div>
