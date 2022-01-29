@@ -35,7 +35,7 @@
 			bottom: 13vmin;
 			transform: translate(-50%, 0);
 			left: 50%;
-			  display:none;
+			  opacity:0;
 		}
 
 		.Top .chevron, .Start .chevron {
@@ -398,7 +398,7 @@ html, body {
 					<i>"Introducing Max Factor's Miracle Pure Skin-Improving Foundation - a hybrid blend of skincare and foundation, a one stop shop that enhances your natural skin. Infused with 89% skincare ingredients, including a collagen-boosting complex, Vitamin C and retaining moisture in your skin with hyaluronic acid, <b>Miracle Pure Skin-Improving Foundation</b> is the perfect resolution for those who love their skin, and are seeking ways to protect it."</i>
 				</div>
 				</div>		
-				<div id="scrollDownAniContainer2" class="scrollDownAniContainer" style="display:none;" >
+				<div id="scrollDownAniContainer2" class="scrollDownAniContainer" >
 				<div class="chevron"></div>
 				<div class="chevron"></div>
 				<div class="chevron"></div>
@@ -490,6 +490,7 @@ html, body {
 		var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer'); 
 		for (let i = 0; i < scrollDownAniContainer.length; i++) {
 			scrollDownAniContainer[i].style.display = "block";
+			scrollDownAniContainer[i].style.opacity = "1";
 		}
 	}
 
