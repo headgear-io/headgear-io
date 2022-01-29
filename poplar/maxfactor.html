@@ -463,7 +463,7 @@ html, body {
 	
 	function startPageSlider() {
 			const infoText1 = document.getElementById('infoTextHolder');
-			infoText1.style.display = "none";
+			//infoText1.style.display = "none";
 			docSlider.init({
 			afterChange : function(index){
 				//console.log('current index is ' + index);
@@ -482,7 +482,7 @@ html, body {
 					infoText1.style.display = "block";
 				} else {
 					//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
-					//infoText1.style.display = "none";
+					infoText1.style.display = "none";
 				}
 			}
 		});
