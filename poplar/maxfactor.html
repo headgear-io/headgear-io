@@ -466,7 +466,7 @@ html, body {
 <script>
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-	startPageSlider();
+
 	//page animations
 
 	const bottleAni = document.querySelector('#bottleParent');
@@ -572,7 +572,7 @@ interact('.resize-drag')
         target.style.height = event.rect.height + 'px'
 
 		blankBottleContainer.style.height = event.rect.height + 'px';
-		//blankBottleContainer.style.display = "block";
+		blankBottleContainer.style.display = "inline-block";
 		//blankBottleContainer.style.transform = 'translate(' + x + 'px,' + y + 'px)'
 
         // translate when resizing from top or left edges
