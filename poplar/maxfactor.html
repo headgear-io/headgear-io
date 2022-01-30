@@ -293,7 +293,7 @@ hr {
 	position: absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
-	bottom: 17vh;
+	top: 0vh;
 	text-align: center;
   width: 90%;
 }
@@ -369,7 +369,9 @@ html, body {
 <div class="docSlider">
     <section class="Top">
         <div class="inner">
-			<div id="bottleParent" >
+			
+			<div id="bottleParent" style="margin-top: 10vh;">
+				<div>
 				<div id="bottleContainer">
 					<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
 								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:75vh; pointer:none;">
@@ -380,10 +382,13 @@ html, body {
 					</div>
 
 				</div>
+				</div>
 			</div>
+			
 			<div id="page1">
+				<img id="logo1" src="max_factor_logo.png" >
 				<div id="revealContainer" >
-					<img id="logo1" src="max_factor_logo.png" >
+					
 					<div id="revealbtn" >
 			  Reveal Your One Minute Miracle
 					</div>
@@ -545,6 +550,7 @@ html, body {
 //reveal
 var width = window.innerWidth;
 var height = window.innerHeight * 0.70; //to fix
+var offset = window.innerHeight * 0.1; //to fix
 	var revealDrag = false;
 	var blankBottleContainer = document.getElementById('blankBottleContainer')
 	var doOnce = true;
@@ -626,27 +632,7 @@ interact('.resize-drag')
       })
     ]
   })
-  function moveHandler2 (event, handlerElement) {
-    var target = handlerElement,
-          // keep the dragged position in the data-x/data-y attributes
-        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-    // translate the element
-    target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + event.rect.right + 'px, ' + event.rect.bottom + 'px)';
-
-
-
-	  target.style.transform =
-      'translate(' + event.rect.right + 'px, ' + event.rect.bottom + 'px)';
-
-
-    // update the posiion attributes
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-  }
   function moveHandler (event, handlerElement) {
     var target = handlerElement,
         // keep the dragged position in the data-x/data-y attributes
@@ -655,7 +641,7 @@ interact('.resize-drag')
 
     // translate the element
     target.style.webkitTransform =
-    target.style.transform = 'translate(-22px,' + event.rect.bottom + 'px)';
+    target.style.transform = 'translate(-22px,' + (event.rect.bottom - offset) + 'px)';
 	//target.style.transform = 'translate(50vw, ' + y + 'px)';
 
     // update the position attributes
