@@ -166,7 +166,6 @@ model-viewer {
 		bottom: 0vh;
 	color: #a69558;
 	font-size: 5vmin;
-	height: 15vmin;
 	z-index: 2;
 
 }
@@ -289,13 +288,26 @@ hr {
 
 }
 
-#logo1 {
+#logoTop {
 	pointer-events: none;
 	cursor: pointer;
 	position: absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
 	top: 0vh;
+	text-align: center;
+  height: 16vmin;
+  	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
+}
+#logoBottom {
+	pointer-events: none;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+	bottom: 6vh;
 	text-align: center;
   height: 16vmin;
   	-webkit-touch-callout: none; /* iOS Safari */
@@ -366,8 +378,45 @@ html, body {
 #thumbs {
   pointer-events: none;
   height: 61vmin;
-  margin-top: -15px;
-  margin-left: 6vmin;
+}
+.splide, .splide2 {
+	height: 33vh;
+}
+
+#splide1 {
+ top:7vh;
+}
+
+#splide2 {
+ position: relative;
+ top:6vh;
+}
+
+.splide__pagination {
+ display:none !important;
+}
+.splide__arrow svg {
+	fill: #a69558;
+}
+.splide__arrow {
+	-ms-flex-align: center;
+	align-items: center;
+	background: none;
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	display: -ms-flexbox;
+	display: flex;
+	height: 2em;
+	-ms-flex-pack: center;
+	justify-content: center;
+	opacity: 1;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 10em;
+	z-index: 1;
 }
 </style>
 
@@ -400,7 +449,7 @@ html, body {
 			</div>
 			
 			<div id="page1">
-				<img id="logo1" src="max_factor_logo.png" >
+				<img id="logoTop" src="max_factor_logo.png" >
 				<div id="revealContainer" >
 					
 					<div id="revealbtn" >
@@ -418,7 +467,7 @@ html, body {
     <section class="Top">
         <div class="inner">
 			<div id="page2">
-				<img id="logo1" src="max_factor_logo.png" >
+				<img id="logoTop" src="max_factor_logo.png" >
 				<div id="infoText">
 				<div id="infoTextHolder">
 					<i>"Introducing Max Factor's Miracle Pure Skin-Improving Foundation - a hybrid blend of skincare and foundation, a one stop shop that enhances your natural skin. Infused with 89% skincare ingredients, including a collagen-boosting complex, Vitamin C and retaining moisture in your skin with hyaluronic acid, <b>Miracle Pure Skin-Improving Foundation</b> is the perfect resolution for those who love their skin, and are seeking ways to protect it."</i>
@@ -435,40 +484,43 @@ html, body {
     
 	<section class="Top">
         <div class="inner">
-		<img id="logo1" src="max_factor_logo.png" >
+		<img id="logoTop" src="max_factor_logo.png" >
 			<div id="page4">
-				<div class="splide" style="height: 25vh;">
+				<div id="splide1" class="splide" >
 					  <div class="splide__track" >
 							<ul class="splide__list">
 								<li class="splide__slide"><div class="thumbHolder">
-								<img id="thumbs" src="PearlBeige Packshot.png"></div></li>
+								<img id="thumbs" src="PearlBeige Packshot.png"><br>name</div></li>
 								<li class="splide__slide"><div class="thumbHolder">
-								<img id="thumbs" src="PearlBeige Packshot.png"></div></li>
+								<img id="thumbs" src="PearlBeige Packshot.png"><br>name</div></li>
 								<li class="splide__slide"><div class="thumbHolder">
-								<img id="thumbs" src="PearlBeige Packshot.png"></div></li>
+								<img id="thumbs" src="PearlBeige Packshot.png"><br>name</div></li>
+							</ul>
+							 <div class="downloadbtn" onclick="console.log('pressed')">
+						Download 1
+					</div>
+					  </div>
+					 
+				</div>
+				<div id="splide2" class="splide2">
+					  <div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="PearlBeige Packshot.png"><br>name</div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="PearlBeige Packshot.png"><br>name</div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="PearlBeige Packshot.png"><br>name</div></li>
 							</ul>
 					  </div>
 					  <div class="downloadbtn" onclick="console.log('pressed')">
-						Download 1
+						Download 2
 					</div>
 				</div>
 				<div id="page4UI">
 					
 				</div>
-				<div class="splide2" style="height: 25vh;">
-					  <div class="splide__track">
-							<ul class="splide__list">
-								<li class="splide__slide"><img src="Pearl Beige Packshot.png"></li>
-								<li class="splide__slide"><img src="Pearl Beige Packshot.png"></li>
-								<li class="splide__slide"><img src="Pearl Beige Packshot.png"></li>
-							</ul>
-					  </div>
-				</div>
-<div id="page4UI">
-					<div class="downloadbtn" onclick="console.log('pressed')">
-						Download 2
-					</div>
-				</div>
+
 				<div id="scrollDownAniContainer3" class="scrollDownAniContainer"  >
                     <div class="chevron"></div>
                     <div class="chevron"></div>
@@ -489,7 +541,7 @@ html, body {
 					  </button>
 					</model-viewer>
 				</div>
-<img id="logo1" src="max_factor_logo.png" >
+<img id="logoBottom" src="max_factor_logo.png" >
 			</div>
 		</div>
     </section>
