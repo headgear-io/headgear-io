@@ -267,21 +267,19 @@ pointer-events: none;
   height: 40px;
 
   background-color: transparent;
-  border: dotted 1px white;
+  border: dashed 1px white;
   border-radius: 100%;
-  margin-top: -6vmin;
 
 }
 
 /* horizontal line */
-.hr {
-  border: 1px dotted white;
+hr {
+  border: 1px dashed white;
   width: 100vw;
     position: absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
-  padding-top: 2.5vmin;
-  margin-top: 4vmin;
+  padding-top: 4.5vmin;
 
 }
 
@@ -374,9 +372,7 @@ html, body {
 					</div>
 					<div class="resize-drag">
 
-						<div id="resize-handle" data-bottom="true" >
-              <div class="hr"></div>
-            </div>
+						<div id="resize-handle" data-bottom="true" ><hr></div>
 					</div>
 
 				</div>
@@ -389,7 +385,7 @@ html, body {
           Reveal Your One Minute Miracle
 				</div>
 			</div>
-			<div id="scrollDownAniContainer" class="scrollDownAniContainer" style="display:none;">
+			<div id="scrollDownAniContainer" class="scrollDownAniContainer">
                     <div class="chevron"></div>
                     <div class="chevron"></div>
                     <div class="chevron"></div>
@@ -489,7 +485,7 @@ html, body {
 					infoText1.style.display = "block";
 				} else {
 					//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
-					infoText1.style.display = "none";
+					//infoText1.style.display = "none";
 				}
 			}
 		});
