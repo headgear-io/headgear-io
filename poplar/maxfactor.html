@@ -219,7 +219,11 @@ pointer-events: none;
     width: 100%;
 	height: 80%;
 	text-align: center;
-
+  }
+  #page1BottomUI {
+      width: 100%;
+	height: 80%;
+	text-align: center;
   }
   #bottleContainer {
 
@@ -350,6 +354,7 @@ html, body {
   width: 25px;
   height: 25px;
 }
+
 </style>
 
 </head>
@@ -364,8 +369,7 @@ html, body {
 <div class="docSlider">
     <section class="Top">
         <div class="inner">
-
-			<div id="bottleParent">
+			<div id="bottleParent" >
 				<div id="bottleContainer">
 					<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
 								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:75vh; pointer:none;">
@@ -378,19 +382,18 @@ html, body {
 				</div>
 			</div>
 			<div id="page1">
-
-			<div id="revealContainer">
-				<img id="logo1" src="max_factor_logo.png">
-				<div id="revealbtn">
-          Reveal Your One Minute Miracle
+				<div id="revealContainer" >
+					<img id="logo1" src="max_factor_logo.png" >
+					<div id="revealbtn" >
+			  Reveal Your One Minute Miracle
+					</div>
+				</div>
+				<div id="scrollDownAniContainer" class="scrollDownAniContainer">
+						<div class="chevron"></div>
+						<div class="chevron"></div>
+						<div class="chevron"></div>
 				</div>
 			</div>
-			<div id="scrollDownAniContainer" class="scrollDownAniContainer">
-                    <div class="chevron"></div>
-                    <div class="chevron"></div>
-                    <div class="chevron"></div>
-                </div>
-		</div>
 		</div>
     </section>
     <section class="Top">
@@ -463,7 +466,23 @@ html, body {
 <script>
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-//page animations
+	
+	//page animations
+
+	const bottleAni = document.querySelector('#bottleParent');
+	bottleAni.classList.add('animate__animated', 'animate__fadeInDown');
+
+	bottleAni.addEventListener('animationend', () => {
+	  bottleAni.classList.remove('animate__animated', 'animate__fadeInDown');
+	});
+
+	const page1UIAni = document.querySelector('#page1');
+	page1UIAni.classList.add('animate__animated', 'animate__fadeIn');
+
+	page1UIAni.addEventListener('animationend', () => {
+	  page1UIAni.classList.remove('animate__animated', 'animate__fadeIn');
+	});
+
 	function startPageSlider() {
 			const infoText1 = document.getElementById('infoTextHolder');
 			//infoText1.style.display = "none";
