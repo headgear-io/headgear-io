@@ -649,8 +649,8 @@ interact('.resize-drag')
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
     // translate the element
-    //target.style.webkitTransform =
-    //target.style.transform = 'translate(-22px,' + event.rect.bottom + 'px)';
+    target.style.webkitTransform =
+    target.style.transform = 'translate(-22px,' + event.rect.bottom + 'px)';
 	//target.style.transform = 'translate(50vw, ' + y + 'px)';
 
     // update the position attributes
