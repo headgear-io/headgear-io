@@ -466,7 +466,33 @@ html, body {
 <script>
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-docSlider.init({});
+
+	//fixing
+
+	const infoText1 = document.getElementById('infoTextHolder');
+	docSlider.init({
+				afterChange : function(index){
+					//console.log('current index is ' + index);
+					if (index === 1) {
+						//animateCSS('#infoTextHolder', 'fadeInLeft');
+						//infoText1.style.display = "block";
+					} else {
+						//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
+						infoText1.style.display = "none";
+					}
+				},
+				beforeChange : function(index){
+					//console.log('next index is ' + index);
+					if (index === 0 || index === 2) {
+						animateCSS('#infoTextHolder', 'fadeInLeft');
+						infoText1.style.display = "block";
+					} else {
+						//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
+						//infoText1.style.display = "none";
+					}
+				}
+			});
+	docSlider.enable(false);
 	//page animations
 
 	const bottleAni = document.querySelector('#bottleParent');
@@ -484,30 +510,9 @@ docSlider.init({});
 	});
 
 	function startPageSlider() {
-			const infoText1 = document.getElementById('infoTextHolder');
-			//infoText1.style.display = "none";
-			docSlider.init({
-			afterChange : function(index){
-				//console.log('current index is ' + index);
-				if (index === 1) {
-					//animateCSS('#infoTextHolder', 'fadeInLeft');
-					//infoText1.style.display = "block";
-				} else {
-					//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
-					infoText1.style.display = "none";
-				}
-			},
-			beforeChange : function(index){
-				//console.log('next index is ' + index);
-				if (index === 0 || index === 2) {
-					animateCSS('#infoTextHolder', 'fadeInLeft');
-					infoText1.style.display = "block";
-				} else {
-					//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
-					//infoText1.style.display = "none";
-				}
-			}
-		});
+			//const infoText1 = document.getElementById('infoTextHolder');
+			
+			//docSlider.enable(true);
 		//show animated scroll down icon
 		var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer');
 		for (let i = 0; i < scrollDownAniContainer.length; i++) {
