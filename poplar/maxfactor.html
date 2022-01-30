@@ -360,6 +360,15 @@ html, body {
   height: 25px;
 }
 
+
+
+
+#thumbs {
+  pointer-events: none;
+  height: 61vmin;
+  margin-top: -15px;
+  margin-left: 6vmin;
+}
 </style>
 
 </head>
@@ -426,13 +435,17 @@ html, body {
     
 	<section class="Top">
         <div class="inner">
+		<img id="logo1" src="max_factor_logo.png" >
 			<div id="page4">
 				<div class="splide" style="height: 25vh;">
 					  <div class="splide__track" >
 							<ul class="splide__list">
-								<li class="splide__slide">Slide 01</li>
-								<li class="splide__slide">Slide 02</li>
-								<li class="splide__slide">Slide 03</li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="PearlBeige Packshot.png"></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="PearlBeige Packshot.png"></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="PearlBeige Packshot.png"></div></li>
 							</ul>
 					  </div>
 					  <div class="downloadbtn" onclick="console.log('pressed')">
@@ -445,9 +458,9 @@ html, body {
 				<div class="splide2" style="height: 25vh;">
 					  <div class="splide__track">
 							<ul class="splide__list">
-								<li class="splide__slide">Slide 01</li>
-								<li class="splide__slide">Slide 02</li>
-								<li class="splide__slide">Slide 03</li>
+								<li class="splide__slide"><img src="Pearl Beige Packshot.png"></li>
+								<li class="splide__slide"><img src="Pearl Beige Packshot.png"></li>
+								<li class="splide__slide"><img src="Pearl Beige Packshot.png"></li>
 							</ul>
 					  </div>
 				</div>
@@ -476,7 +489,7 @@ html, body {
 					  </button>
 					</model-viewer>
 				</div>
-
+<img id="logo1" src="max_factor_logo.png" >
 			</div>
 		</div>
     </section>
