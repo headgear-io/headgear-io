@@ -163,7 +163,7 @@ model-viewer {
 	position:absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
-		top: 15vh;
+		bottom: 0vh;
 	color: #a69558;
 	font-size: 5vmin;
 	height: 15vmin;
@@ -176,11 +176,11 @@ model-viewer {
 	position:absolute;
 	transform: translate(-50%, 0);
     left: 50%;
-	bottom: 10vmin;
+	bottom: 20vmin;
 	text-align: center;
 	color: #a69558;
   font-size: 9vmin;
-  height: 27vmin;
+  height: 16vmin;
 	z-index: 2;
 	-webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -297,7 +297,10 @@ hr {
 	left: 50%;
 	top: 0vh;
 	text-align: center;
-  width: 90%;
+  height: 16vh;
+  	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
 }
 <!--
 #line {
@@ -451,11 +454,12 @@ html, body {
 								<li class="splide__slide">Slide 03</li>
 							</ul>
 					  </div>
-				</div>
-				<div id="page4UI">
-					<div class="downloadbtn" onclick="console.log('pressed')">
+					  <div class="downloadbtn" onclick="console.log('pressed')">
 						Download 1
 					</div>
+				</div>
+				<div id="page4UI">
+					
 				</div>
 				<div class="splide2" style="height: 25vh;">
 					  <div class="splide__track">
