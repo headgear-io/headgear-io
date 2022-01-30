@@ -163,12 +163,25 @@ model-viewer {
 	position:absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
-		bottom: 0vh;
 	color: #a69558;
 	font-size: 5vmin;
 	z-index: 2;
 
 }
+
+#downloadPressKitBtn {
+		bottom: 10vh;
+}
+
+
+#downloadLifeBtn {
+		bottom: 0vh;
+}
+
+#downloadShadesBtn {
+		bottom: 0vh;
+}
+
 #revealbtn {
 	pointer-events: none;
 	cursor: pointer;
@@ -473,6 +486,9 @@ html, body {
 					<i>"Introducing Max Factor's Miracle Pure Skin-Improving Foundation - a hybrid blend of skincare and foundation, a one stop shop that enhances your natural skin. Infused with 89% skincare ingredients, including a collagen-boosting complex, Vitamin C and retaining moisture in your skin with hyaluronic acid, <b>Miracle Pure Skin-Improving Foundation</b> is the perfect resolution for those who love their skin, and are seeking ways to protect it."</i>
 				</div>
 				</div>
+				<div id="downloadPressKitBtn" class="downloadbtn" onclick="console.log('pressed')">
+					Download Press Kit
+				</div>
 				<div id="scrollDownAniContainer2" class="scrollDownAniContainer" >
 				<div class="chevron"></div>
 				<div class="chevron"></div>
@@ -485,7 +501,8 @@ html, body {
 	<section class="Top">
         <div class="inner">
 		<img id="logoTop" src="max_factor_logo.png" >
-			<div id="page4">
+			<div id="page3">
+				
 				<div id="splide1" class="splide" >
 					  <div class="splide__track" >
 							<ul class="splide__list">
@@ -502,7 +519,7 @@ html, body {
 								<li class="splide__slide"><div class="thumbHolder">
 								<img id="thumbs" src="./assets/PearlBeige Packshot.png"><br>name</div></li>
 							</ul>
-						<div class="downloadbtn" onclick="console.log('pressed')">
+						<div id="downloadLifeBtn" class="downloadbtn" onclick="console.log('pressed')">
 							Download 1
 						</div>
 					</div>
@@ -524,12 +541,12 @@ html, body {
 								<img id="thumbs" src="./assets/PearlBeige Packshot.png"><br>name</div></li>
 							</ul>
 					  </div>
-					 <div class="downloadbtn" onclick="console.log('pressed')">
+					 <div id="downloadShadesBtn" class="downloadbtn" onclick="console.log('pressed')">
 							Download 2
 					</div>
 				</div>
 				</div>
-				<div id="page4UI">
+				<div id="page3UI">
 					
 				</div>
 
@@ -542,7 +559,7 @@ html, body {
     </section>
 	<section class="Top">
         <div class="inner">
-			<div id="page3">
+			<div id="page4">
 				<div id="modelviewerContainer">
 					<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" loading="eager" camera-controls alt="Max Factor 3D Model Viewer" exposure="1" ios-src="models/tube_mfx.usdz">
 					  <button slot="ar-button" style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
