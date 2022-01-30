@@ -267,19 +267,21 @@ pointer-events: none;
   height: 40px;
 
   background-color: transparent;
-  border: dashed 1px white;
+  border: dotted 1px white;
   border-radius: 100%;
+  margin-top: -6vmin;
 
 }
 
 /* horizontal line */
-hr {
-  border: 1px dashed white;
+.hr {
+  border: 1px dotted white;
   width: 100vw;
     position: absolute;
 	transform: translate(-50%, 0);
 	left: 50%;
-  padding-top: 4.5vmin;
+  padding-top: 2.5vmin;
+  margin-top: 4vmin;
 
 }
 
@@ -372,7 +374,9 @@ html, body {
 					</div>
 					<div class="resize-drag">
 
-						<div id="resize-handle" data-bottom="true" ><hr></div>
+						<div id="resize-handle" data-bottom="true" >
+              <div class="hr"></div>
+            </div>
 					</div>
 
 				</div>
