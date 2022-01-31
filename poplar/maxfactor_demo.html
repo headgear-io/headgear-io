@@ -1,0 +1,959 @@
+<html>
+<head>
+<!-- Import the model viewer component -->
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="docSlider.css">
+    <link rel="stylesheet" href="https://use.typekit.net/zky7fcm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+	<script src="splide.min.js"></script>
+	 <link rel="stylesheet" href="splide.min.css">
+    <style>
+        /*
+		section:nth-child(odd){
+            background-color: #eee;
+        }
+		*/
+        .inner{
+            height: 100%;
+            display: flex;
+			text-align: center;
+            font-size: 1.4em;
+			color: white;
+        }
+
+		.docSlider-pager {
+			display: none !important;
+		}
+		/* down arrow */
+		.Top .scrollDownAniContainer, .Start .scrollDownAniContainer {
+			position: absolute;
+			width: 24px;
+			height: 24px;
+			margin: 0 auto;
+			bottom: 13vmin;
+			transform: translate(-50%, 0);
+			left: 50%;
+			  opacity:0.05;
+		}
+
+		.Top .chevron, .Start .chevron {
+		  position: absolute;
+		  width: 28px;
+		  height: 8px;
+		  opacity: 0;
+		  transform: scale3d(0.5, 0.5, 0.5);
+		  animation: move 3s ease-out infinite;
+		}
+
+		.Top .chevron:first-child, .Start .chevron:first-child {
+		  animation: move 3s ease-out 1s infinite;
+		}
+
+		.Top .chevron:nth-child(2), .Start .chevron:nth-child(2) {
+		  animation: move 3s ease-out 2s infinite;
+		}
+
+		.Top .chevron:before,
+		.Top .chevron:after, .Start .chevron:before,
+		.Start .chevron:after {
+		  content: ' ';
+		  position: absolute;
+		  top: 0;
+		  height: 100%;
+		  width: 51%;
+		  background: #a69558;
+		}
+
+		.Top .chevron:before, .Start .chevron:before {
+		  left: 0;
+		  transform: skew(0deg, 30deg);
+		}
+
+		.Top .chevron:after, .Start .chevron:after {
+		  right: 0;
+		  width: 50%;
+		  transform: skew(0deg, -30deg);
+		}
+
+		@keyframes move {
+		  25% {
+			opacity: 1;
+		  }
+		  33% {
+			opacity: 1;
+			transform: translateY(30px);
+		  }
+		  67% {
+			opacity: 1;
+			transform: translateY(40px);
+		  }
+		  100% {
+			opacity: 0;
+			transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+		  }
+		}
+
+		<!--
+		justify-content: center;
+            align-items: center;
+			-->
+
+    </style>
+<style>
+
+body {
+  background-color: #000000;
+    overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+#loadingScreen {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+ z-index: 101;
+ background-color: black;
+}
+
+#modelviewer {
+	width: 100%;
+	height: 100%;
+	background-color: unset;
+	/* display:none; */
+}
+
+model-viewer {
+    --poster-color: transparent;
+}
+
+#modelviewerContainer {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+}
+
+#page2, #page3, #page4 {
+	position:absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+    width: 100%;
+    height: 100%;
+}
+#infoText {
+	position:absolute;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	vertical-align: middle;
+    width: 80vw;
+}
+
+.downloadBtn {
+	pointer-events: auto;
+	cursor: pointer;
+	position:absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+	color: #a69558;
+	font-size: 5vmin;
+	z-index: 2;
+
+}
+
+#downloadPressKitBtn {
+		bottom: 10vh;
+}
+
+
+#downloadLifeBtn {
+		bottom: 0vh;
+}
+
+#downloadShadesBtn {
+		bottom: 0vh;
+}
+
+#revealbtn {
+	pointer-events: none;
+	cursor: pointer;
+	position:absolute;
+	transform: translate(-50%, 0);
+    left: 50%;
+	bottom: 18vmin;
+	text-align: center;
+	color: #a69558;
+  font-size: 9vmin;
+  width: 96%;
+	z-index: 2;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
+}
+#explorebtn {
+	pointer-events: none;
+	cursor: pointer;
+	position:absolute;
+	transform: translate(-50%, 0);
+    left: 50%;
+	bottom: 28vmin;
+	text-align: center;
+	color: #a69558;
+  font-size: 9vmin;
+  width: 96%;
+	z-index: 2;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
+}
+
+
+#loadingscreenBtn {
+	pointer-events: auto;
+	cursor: pointer;
+	position:absolute;
+	bottom: 5vmin;
+	text-align: center;
+	color: #a69558;
+	font-size: 10vmin;
+	height: 15vmin;
+	z-index: 100;
+    margin-left: -15vw;
+			transform: translate(-50%, 0);
+			left: 50%;
+}
+#exitARBtn {
+	background-color: white;
+	border-radius: 4px;
+	border: none;
+	position: absolute;
+	top: 25px;
+	right: 16px;
+}
+#page4UI {
+pointer-events: none;
+	position: absolute;
+    width: 100%;
+
+}
+
+  #bottleParent {
+    width: 100%;
+	height: 80%;
+	text-align: center;
+  }
+  #page1BottomUI {
+      width: 100%;
+	height: 80%;
+	text-align: center;
+  }
+  #bottleContainer {
+
+		top: 0;
+		background-image: url('bottle_no_label.jpg');
+		background-repeat: no-repeat;
+		background-size: contain;
+		height: 75vh;
+		background-position-x: center;
+		/* This makes things *much* easier */
+		box-sizing: border-box;
+  }
+  #blankBottleImage {
+  	pointer-events: auto;
+	cursor: pointer;
+	 -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently
+  }
+
+</style>
+
+<script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+
+<style>
+
+.resize-drag {
+	position:absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+
+  touch-action: none;
+
+  /* This makes things *much* easier */
+  box-sizing: border-box;
+
+}
+
+#resize-handle {
+  position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: transparent;
+  border: dashed 1px white;
+  border-radius: 100%;
+
+}
+
+/* horizontal line */
+hr {
+  border: 1px dashed white;
+  width: 100vw;
+    position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+  padding-top: 4.5vmin;
+
+}
+
+#logoTop {
+	pointer-events: none;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+	top: 0vh;
+	text-align: center;
+  height: 16vmin;
+  	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
+}
+#logoBottom {
+	pointer-events: none;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+	bottom: 6vh;
+	text-align: center;
+  height: 12vmin;
+  	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
+}
+<!--
+#line {
+position: absolute;
+  -webkit-transform: translate(200px, 200px);
+  transform: translate(200px, 200px);
+  left: -35px;
+  top: -35px;
+
+bottom: 0;
+}
+
+
+overflow: hidden;
+-->
+</style>
+<style>
+html, body {
+
+  width: 100%;
+  height: 100%;
+  font-family: 'din-condensed', serif;
+
+}
+
+.particle-count {
+  display: block;
+  text-align: center;
+  margin: 25px 0;
+}
+
+.particles > .particle {
+
+  background: transparent;
+  position: absolute;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.particles > .particle.smaller {
+  width: 5px;
+  height: 5px;
+}
+.particles > .particle.small {
+  width: 10px;
+  height: 10px;
+}
+.particles > .particle.normal {
+  width: 15px;
+  height: 15px;
+}
+.particles > .particle.big {
+  width: 20px;
+  height: 20px;
+}
+.particles > .particle.bigger {
+  width: 25px;
+  height: 25px;
+}
+
+
+
+
+#thumbs {
+  pointer-events: none;
+  height: 29vh;
+}
+.label {
+    top: -3vh;
+    position: relative;
+}
+.splide, .splide2 {
+	height: 33vh;
+}
+
+#splide1 {
+ top:7vh;
+}
+
+#splide2 {
+ position: relative;
+ top:0vh;
+}
+.splide__track {
+  overflow-y: visible;
+    overflow-x: hidden;
+}
+.splide__pagination {
+ display:none !important;
+}
+.splide__arrow svg {
+	fill: #a69558;
+}
+.splide__arrow {
+	-ms-flex-align: center;
+	align-items: center;
+	background: none;
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	display: -ms-flexbox;
+	display: flex;
+	height: 2em;
+	-ms-flex-pack: center;
+	justify-content: center;
+	opacity: 1;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 10em;
+	z-index: 1;
+}
+</style>
+
+</head>
+<body>
+<!--
+<div id="loadingScreen">
+	<div id="loadingscreenBtn" onclick="closeLoadingScreen()">
+		START
+	</div>
+</div>
+-->
+<div class="docSlider">
+    <section class="Top">
+        <div class="inner">
+
+			<div id="bottleParent" style="margin-top: 10vh;">
+				<div>
+				<div id="bottleContainer">
+					<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
+								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:75vh; pointer:none;">
+					</div>
+					<div class="resize-drag">
+
+						<div id="resize-handle" data-bottom="true" ><hr></div>
+					</div>
+
+				</div>
+				</div>
+			</div>
+
+			<div id="page1">
+				<img id="logoTop" src="max_factor_logo.png" >
+				<div id="revealContainer" >
+
+					<div id="revealbtn" >
+			  Reveal Your One Minute Miracle
+					</div>
+				</div>
+				<div id="scrollDownAniContainer" class="scrollDownAniContainer">
+						<div class="chevron"></div>
+						<div class="chevron"></div>
+						<div class="chevron"></div>
+				</div>
+			</div>
+		</div>
+    </section>
+    <section class="Top">
+        <div class="inner">
+			<div id="page2">
+				<img id="logoTop" src="max_factor_logo.png" >
+				<div id="infoText">
+				<div id="infoTextHolder">
+					<i>"Introducing Max Factor's Miracle Pure Skin-Improving Foundation - a hybrid blend of skincare and foundation, a one stop shop that enhances your natural skin. Infused with 89% skincare ingredients, including a collagen-boosting complex, <span style="color:a69558":> Vitamin C</span> and retaining moisture in your skin with <span style="color:a69558":>hyaluronic acid</span>, <b>Miracle Pure Skin-Improving Foundation</b> is the perfect resolution for those who love their skin, and are seeking ways to protect it."</i>
+				</div>
+				</div>
+				<div id="downloadPressKitBtn" class="downloadbtn" onclick="console.log('pressed')">
+					Download the full Press Release
+				</div>
+				<div id="scrollDownAniContainer2" class="scrollDownAniContainer" >
+				<div class="chevron"></div>
+				<div class="chevron"></div>
+				<div class="chevron"></div>
+				</div>
+			</div>
+		</div>
+    </section>
+
+	<section class="Top">
+        <div class="inner">
+		<img id="logoTop" src="max_factor_logo.png" >
+			<div id="page3">
+
+				<div id="splide1" class="splide" >
+					  <div class="splide__track" >
+							<ul class="splide__list">
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Carmel Packshot.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/DeepBronze Packshot.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Mocha Packshot.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmPraline Packshot.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmSand Packshot.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/PearlBeige Packshot.png"><br></div></li>
+							</ul>
+						<div id="downloadLifeBtn" class="downloadbtn" onclick="console.log('pressed')">
+							Download Lifestyle Images
+						</div>
+					</div>
+
+				<div id="splide2" class="splide2">
+					  <div class="splide__track">
+							<ul class="splide__list">
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Carmel Packshot.png"><div class="label">Carmel</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/DeepBronze Packshot.png"><div class="label">Deep Bronze</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Mocha Packshot.png"><div class="label">Mocha</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmPraline Packshot.png"><div class="label">Warm Praline</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmSand Packshot.png"><div class="label">Warm Sand</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/PearlBeige Packshot.png"><div class="label">Pearl Beige</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Beige Packshot.png"><div class="label">Beige</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/LightBeige Packshot.png"><div class="label">Light Beige</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/NaturalRose Packshot.png"><div class="label">Natural Rose</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Porcelain Packshot.png"><div class="label">Porcelain</div></div></li>
+								<li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmIvory Packshot.png"><div class="label">Warm Ivory</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Bronze Packshot.png"><div class="label">Bronze</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+                <img id="thumbs" src="./assets/DeepBronze Packshot.png"><div class="label">DeepBronze</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Cocoa Packshot.png"><div class="label">Cocoa</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/CrystalBeige Packshot.png"><div class="label">CrystalBeige</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Ganache Packshot.png"><div class="label">Ganache</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/Golden Packshot.png"><div class="label">Golden</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmGolden Packshot.png"><div class="label">WarmGolden</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/WarmAlmond Packshot.png"><div class="label">WarmAlmond</div></div></li>
+                <li class="splide__slide"><div class="thumbHolder">
+								<img id="thumbs" src="./assets/SoftToffee Packshot.png"><div class="label">SoftToffee</div></div></li>
+							</ul>
+					  </div>
+					 <div id="downloadShadesBtn" class="downloadbtn" onclick="console.log('pressed')">
+							Download All Packshots
+					</div>
+				</div>
+				</div>
+				<div id="page3UI">
+
+				</div>
+
+				<div id="scrollDownAniContainer3" class="scrollDownAniContainer"  >
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+                    <div class="chevron"></div>
+				</div>
+		</div>
+    </section>
+	<section class="Top">
+        <div class="inner">
+			<div id="page4">
+				<div id="modelviewerContainer">
+					<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" loading="eager" camera-controls alt="Max Factor 3D Model Viewer" exposure="1" ios-src="models/tube_mfx.usdz">
+					  <button slot="ar-button" style="background-color: #a69558; border-radius: 100%; border: 1px; position: absolute; top: 16px; right: 16px; font-size: 6vmin; color: white; height: 11vmin;">AR
+						</button>
+						<button id="exitARBtn" slot="exit-webxr-ar-button" onclick="hideAR()" style="background-color: #a69558; border-radius: 100%; border: 1px; position: absolute; top: 16px; right: 16px; font-size: 6vmin; color: white; height: 11vmin;"> X 
+					  </button>
+					</model-viewer>
+				</div>
+        <div id="explorebtn" >
+      Explore & View in AR
+        </div>
+<img id="logoBottom" src="max_factor_logo.png" >
+			</div>
+		</div>
+    </section>
+</div>
+<div class='particles'></div>
+<script>
+	var productViewer = document.getElementById('modelviewer');
+
+	function startAR() {
+		//productViewer.style.display = 'block';
+		productViewer.activateAR();
+	}
+
+	function hideAR() {
+		//productViewer.style.display = 'none';
+	}
+</script>
+
+<script src="docSlider.min.js"></script>
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script>
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+
+	//fixing
+
+
+  new Splide( '.splide' ).mount();
+ new Splide( '.splide2' ).mount();
+
+	const infoText1 = document.getElementById('infoTextHolder');
+	docSlider.init({
+				afterChange : function(index){
+					//console.log('current index is ' + index);
+					if (index === 1) {
+						//animateCSS('#infoTextHolder', 'fadeInLeft');
+						//infoText1.style.display = "block";
+					} else {
+						//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
+						infoText1.style.display = "none";
+					}
+				},
+				beforeChange : function(index){
+					//console.log('next index is ' + index);
+					if (index === 0 || index === 2) {
+						animateCSS('#infoTextHolder', 'fadeInLeft');
+						infoText1.style.display = "block";
+					} else {
+						//infoText1.classList.add('animate__animated', 'animate__fadeOutLeft');
+						//infoText1.style.display = "none";
+					}
+				}
+			});
+	docSlider.enable(false);
+	//page animations
+
+	const bottleAni = document.querySelector('#bottleParent');
+	bottleAni.classList.add('animate__animated', 'animate__fadeInDown');
+
+	bottleAni.addEventListener('animationend', () => {
+	  bottleAni.classList.remove('animate__animated', 'animate__fadeInDown');
+	});
+
+	const page1UIAni = document.querySelector('#page1');
+	page1UIAni.classList.add('animate__animated', 'animate__fadeIn');
+
+	page1UIAni.addEventListener('animationend', () => {
+	  page1UIAni.classList.remove('animate__animated', 'animate__fadeIn');
+	});
+
+	function startPageSlider() {
+			//const infoText1 = document.getElementById('infoTextHolder');
+
+			//docSlider.enable(true);
+		//show animated scroll down icon
+		var scrollDownAniContainer =  document.getElementsByClassName('scrollDownAniContainer');
+		for (let i = 0; i < scrollDownAniContainer.length; i++) {
+			//scrollDownAniContainer[i].style.display = "block";
+			scrollDownAniContainer[i].style.opacity = "1";
+		}
+	}
+
+	//animate style CC function to add and remove automatically
+	const animateCSS = (element, animation, prefix = 'animate__') =>
+		// We create a Promise and return it
+		new Promise((resolve, reject) => {
+		const animationName = `${prefix}${animation}`;
+		const node = document.querySelector(element);
+
+		node.classList.add(`${prefix}animated`, animationName);
+
+		// When the animation ends, we clean the classes and resolve the Promise
+		function handleAnimationEnd(event) {
+		  event.stopPropagation();
+		  node.classList.remove(`${prefix}animated`, animationName);
+		  resolve('Animation ended');
+		}
+
+		node.addEventListener('animationend', handleAnimationEnd, {once: true});
+	});
+
+</script>
+<script>
+//reveal
+var width = window.innerWidth;
+var height = window.innerHeight * 0.70; //to fix
+var offset = window.innerHeight * 0.1; //to fix
+	var revealDrag = false;
+	var blankBottleContainer = document.getElementById('blankBottleContainer')
+	var doOnce = true;
+
+interact('.resize-drag')
+  .resizable({
+
+   onstart: function (event) {
+			docSlider.enable(false);
+			revealDrag = true;
+			if (doOnce) {
+				doOnce = false;
+				startPageSlider();
+			}
+		},
+  //onmove : function (event) {},
+  onend  : function (event) {docSlider.enable(true); revealDrag = false;},
+
+    // resize from all edges and corners
+    edges: { left: false, right: false, bottom: true, top: false },
+
+    listeners: {
+      move (event) {
+        var target = event.target
+        //var x = (parseFloat(target.getAttribute('data-x')) || 0)
+        var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+        // update the element's style
+        target.style.width = event.rect.width + 'px'
+        target.style.height = event.rect.height + 'px'
+
+		blankBottleContainer.style.height = event.rect.height + 'px';
+		blankBottleContainer.style.display = "inline-block";
+		//blankBottleContainer.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+
+        // translate when resizing from top or left edges
+        //x += event.deltaRect.left
+        //y += event.deltaRect.top
+
+        target.style.transform = 'translate(-50%,' + y + 'px)'
+		//target.style.transform = 'translateY(' + y + 'px)'
+
+        //target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
+		target.setAttribute('left', '-50px')
+        //target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+
+		moveHandler(event, document.getElementById('resize-handle'));
+      },
+
+
+    },
+
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent'
+      }),
+
+      // minimum size
+
+      interact.modifiers.restrictSize({
+        min: { width: width, height: 2 },
+		max: { width: width, height: height }
+      })
+    ],
+
+    inertia: true
+  })
+  .draggable({
+    listeners: {
+		move: window.dragMoveListener,
+	},
+    inertia: true,
+    modifiers: [
+      interact.modifiers.restrictRect({
+        restriction: 'parent',
+        endOnly: true
+      })
+    ]
+  })
+
+  function moveHandler (event, handlerElement) {
+    var target = handlerElement,
+        // keep the dragged position in the data-x/data-y attributes
+      //  x = 0, //(parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform = 'translate(-22px,' + (event.rect.bottom - offset) + 'px)';
+	//target.style.transform = 'translate(50vw, ' + y + 'px)';
+
+    // update the position attributes
+    //target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+  </script>
+
+
+      <script id='rendered-js' >
+//particles
+	  var d = document,$d = $(d),
+w = window,$w = $(w),
+wWidth = $w.width(),wHeight = $w.height(),
+credit = $('.credit > a'),
+particles = $('.particles'),
+particleCount = 0,
+maxParticles = 50,
+sizes = [
+5, 10, 12.5, 17, 20],
+
+colors = [
+'#e9b89c', '#998e61', '#fffbd2'],
+
+
+mouseX = $w.width() / 2,mouseY = $w.height() / 2;
+
+
+
+$w.
+on('resize', function () {
+  wWidth = $w.width();
+  wHeight = $w.height();
+});
+
+$d.
+on('mousemove touchmove', function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+  if (!!event.originalEvent.touches) {
+    mouseX = event.originalEvent.touches[0].clientX;
+    mouseY = event.originalEvent.touches[0].clientY;
+  }
+}).
+on('mousedown touchstart', function (event) {
+
+  if (event.target === credit.get(0)) {
+    return;
+  }
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+  if (!!event.originalEvent.touches) {
+    mouseX = event.originalEvent.touches[0].clientX;
+    mouseY = event.originalEvent.touches[0].clientY;
+  }
+
+  var timer = setInterval(function () {
+  if (revealDrag && particleCount < maxParticles) {
+	$d.
+    one('mouseup mouseleave touchend touchcancel touchleave', function () {
+      clearInterval(timer);
+    });
+    createParticle(event);
+	}
+  }, 1000 / 60);
+
+});
+
+
+function createParticle(event) {
+  var particle = $('<div class="particle"/>'),
+  size = sizes[Math.floor(Math.random() * sizes.length)],
+  color = colors[Math.floor(Math.random() * colors.length)],
+  negative = size / 2,
+  speedHorz = Math.random() * 10,
+  speedUp = Math.random() * 25,
+  spinVal = 360 * Math.random(),
+  spinSpeed = 36 * Math.random() * (Math.random() <= .5 ? -1 : 1),
+  otime,
+  time = otime = (1 + .5 * Math.random()) * 1000,
+  top = mouseY - negative,
+  left = mouseX - negative,
+  direction = Math.random() <= .5 ? -1 : 1,
+  shape=Math.random()*100,
+  life = 10;
+
+  particle.
+  css({
+      'border-radius': shape +'%',
+	  height: size + 'px',
+    width: size + 'px',
+    top: top + 'px',
+    left: left + 'px',
+    background: color,
+    transform: 'rotate(' + spinVal + 'deg)',
+    webkitTransform: 'rotate(' + spinVal + 'deg)' }).
+
+  appendTo(particles);
+  particleCount++;
+
+
+  var particleTimer = setInterval(function () {
+    time = time - life;
+    left = left - speedHorz * direction;
+    top = top - speedUp;
+    speedUp = Math.min(size, speedUp - 1);
+    spinVal = spinVal + spinSpeed;
+
+
+    particle.
+    css({
+      height: size + 'px',
+      width: size + 'px',
+      top: top + 'px',
+      left: left + 'px',
+      opacity: time / otime / 2 + .25,
+      transform: 'rotate(' + spinVal + 'deg)',
+      webkitTransform: 'rotate(' + spinVal + 'deg)' });
+
+
+    if (time <= 0 || left <= -size || left >= wWidth + size || top >= wHeight + size) {
+      particle.remove();
+      particleCount--;
+
+      clearInterval(particleTimer);
+    }
+  }, 1000 / 60);
+}
+
+    </script>
+
+</body>
+</html>
