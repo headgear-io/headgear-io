@@ -762,8 +762,8 @@ interact('.resize-drag')
         target.style.height = event.rect.height + 'px'
 
 		blankBottleContainer.style.height = event.rect.height + 'px';
-		blankBottleContainer.style.display = "inline-block";
-		//blankBottleContainer.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+		blankBottleContainer.style.display = "block";
+		blankBottleContainer.style.transform = 'translate(-50%,' + y + 'px)'
 
         // translate when resizing from top or left edges
         //x += event.deltaRect.left
