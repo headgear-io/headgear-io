@@ -215,12 +215,10 @@ pointer-events: none;
 }
 
   #bottleParent {
-  width: 100%;
-  height: 80%;
-  text-align: center;
-  position: relative;
-  top: 10vh;
-}
+    width: 100%;
+	height: 80%;
+	text-align: center;
+
   }
   #bottleContainer {
 
@@ -228,27 +226,6 @@ pointer-events: none;
 		background-repeat: no-repeat;
 		background-size: contain;
 		height: 80vh;
-		background-position-x: center;
-		/* This makes things *much* easier */
-		box-sizing: border-box;
-  }
-  #blankBottleImage {
-  	pointer-events: auto;
-	cursor: pointer;
-	 -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-            user-select: none; /* Non-prefixed version, currently
-  }
-
-  
-  
-    #bottleContainer {
-
-		top: 0;
-		background-image: url('bottle_no_label.jpg');
-		background-repeat: no-repeat;
-		background-size: contain;
-		height: 75vh;
 		background-position-x: center;
 		/* This makes things *much* easier */
 		box-sizing: border-box;
@@ -389,7 +366,7 @@ html, body {
     <section class="Top">
         <div class="inner">
 				
-			<div id="bottleParent">
+			<div id="bottleParent" style="top: 10vh; position:relative;">
 				<div id="bottleContainer">
 <div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
 								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:80vh; pointer:none;">
