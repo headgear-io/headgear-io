@@ -221,8 +221,7 @@ pointer-events: none;
 
   }
   #bottleContainer {
-		
-		top: 0;
+
 		background-image: url('bottle_no_label.jpg');
 		background-repeat: no-repeat;
 		background-size: contain;
@@ -279,6 +278,21 @@ hr {
 	transform: translate(-50%, 0);
 	left: 50%;
 
+}
+
+#logoTop {
+	pointer-events: none;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-50%, 0);
+	left: 50%;
+	top: 0vh;
+	text-align: center;
+  height: 16vmin;
+  z-index: 2;
+  	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+            user-select: none; /* Non-prefixed version, currently */
 }
 <!--
 #line {
@@ -352,7 +366,7 @@ html, body {
     <section class="Top">
         <div class="inner">
 				
-			<div id="bottleParent">
+			<div id="bottleParent" style="margin-top: 10vh;">
 				<div id="bottleContainer">
 <div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
 								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:80vh; pointer:none;">
@@ -365,7 +379,7 @@ html, body {
 				</div> 
 			</div>
 			<div id="page1">
-			 
+			 <img id="logoTop" src="max_factor_logo.png" >
 			<div id="revealContainer">
 				<div id="revealbtn">
 					Reveal the bottle
@@ -582,6 +596,21 @@ interact('.resize-drag')
     // translate the element
     target.style.webkitTransform =
     target.style.transform = 'translate(-22px,' + event.rect.bottom + 'px)';
+	//target.style.transform = 'translate(50vw, ' + y + 'px)';
+
+    // update the position attributes
+    //target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+    function moveHandler_new (event, handlerElement) {
+    var target = handlerElement,
+        // keep the dragged position in the data-x/data-y attributes
+      //  x = 0, //(parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform = 'translate(-22px,' + (event.rect.bottom - offset) + 'px)';
 	//target.style.transform = 'translate(50vw, ' + y + 'px)';
 
     // update the position attributes
