@@ -679,15 +679,15 @@ html, body {
 	docSlider.enable(false);
 	//page animations
 
-	//const bottleAni = document.querySelector('#bottleParent');
-	//bottleAni.classList.add('animate__animated', 'animate__fadeInDown');
+	const bottleAni = document.querySelector('#bottleParent');
+	bottleAni.classList.add('animate__animated', 'animate__fadeInDown');
 
 	bottleAni.addEventListener('animationend', () => {
 	  bottleAni.classList.remove('animate__animated', 'animate__fadeInDown');
 	});
 
-	//const page1UIAni = document.querySelector('#page1');
-	//page1UIAni.classList.add('animate__animated', 'animate__fadeIn');
+	const page1UIAni = document.querySelector('#page1');
+	page1UIAni.classList.add('animate__animated', 'animate__fadeIn');
 
 	page1UIAni.addEventListener('animationend', () => {
 	  page1UIAni.classList.remove('animate__animated', 'animate__fadeIn');
