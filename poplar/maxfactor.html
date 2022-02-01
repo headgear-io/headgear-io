@@ -819,7 +819,9 @@ interact('.resize-drag')
 
     // translate the element
     target.style.webkitTransform =
-    target.style.transform = 'translate(-22px,' + (event.rect.bottom - offset) + 'px)';
+    target.style.transform = 'translate(-22px,' + (event.rect.bottom) + 'px)';
+	
+	//target.style.transform = 'translate(-22px,' + (event.rect.bottom - offset) + 'px)';
 	//target.style.transform = 'translate(50vw, ' + y + 'px)';
 
     // update the position attributes
