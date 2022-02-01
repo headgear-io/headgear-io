@@ -518,6 +518,9 @@ interact('.resize-drag')
 
 		blankBottleContainer.style.height = event.rect.height + 'px';
 		blankBottleContainer.style.display = "block";
+		blankBottleContainer.style.overlow = "hidden";
+		
+		console.log(event.rect.height);
 		//blankBottleContainer.style.transform = 'translate(' + x + 'px,' + y + 'px)'
 
         // translate when resizing from top or left edges
