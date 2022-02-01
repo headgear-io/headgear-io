@@ -257,7 +257,6 @@ pointer-events: none;
   }
   #bottleContainer {
 
-		top: 0;
 		background-image: url('bottle_no_label.jpg');
 		background-repeat: no-repeat;
 		background-size: contain;
@@ -470,11 +469,11 @@ html, body {
     <section class="Top">
         <div class="inner">
 
-			<div id="bottleParent" style="margin-top: 10vh;">
+			<div id="bottleParent">
 				<div>
 				<div id="bottleContainer">
 					<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
-								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:75vh; pointer:none;">
+								<img id="blankBottleImage" src="bottle_with_label.jpg" style="height:75vh; pointer:none; overflow:hidden;">
 					</div>
 					<div class="resize-drag">
 
@@ -486,7 +485,7 @@ html, body {
 			</div>
 
 			<div id="page1">
-				<img id="logoTop" src="max_factor_logo.png" >
+				<img id="logoTop" src="max_factor_logo.png" style="display:none;" >
 				<div id="revealContainer" >
 
 					<div id="revealbtn" >
@@ -762,8 +761,8 @@ interact('.resize-drag')
         target.style.height = event.rect.height + 'px'
 
 		blankBottleContainer.style.height = event.rect.height + 'px';
-		blankBottleContainer.style.display = "inline-block";
-		//blankBottleContainer.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+		blankBottleContainer.style.display = "block";
+		blankBottleContainer.style.transform = 'translate(-50%,' + y + 'px)'
 
         // translate when resizing from top or left edges
         //x += event.deltaRect.left
