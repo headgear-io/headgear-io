@@ -365,10 +365,12 @@ html, body {
 <div class="docSlider">
     <section class="Top">
         <div class="inner">
-				
+			<div style="margin-top: 10vh;">	
 			<div id="bottleParent" >
 				<div id="bottleContainer">
-<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
+								<div id="blankBottleContainer2"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:visible;  ">
+								<img src="bottle_no_label.jpg" style="height:80vh; pointer:none;"></div>
+								<div id="blankBottleContainer"  style="position: absolute; transform: translate(-50%, 0); left: 50%; overflow:hidden; display:none; ">
 								<div id="blankBottleImage" style="height:80vh; pointer:none; overflow: hidden; overflow-y:hidden;"> <img src="bottle_with_label.jpg" style="height:80vh; pointer:none;"></div>
 							</div>
 					<div class="resize-drag">
@@ -390,6 +392,7 @@ html, body {
                     <div class="chevron"></div>
                     <div class="chevron"></div>
                 </div>
+		</div>
 		</div>
 		</div>
     </section>
@@ -520,7 +523,6 @@ interact('.resize-drag')
 		blankBottleContainer.style.display = "block";
 		blankBottleContainer.style.overlow = "hidden";
 		
-		console.log(blankBottleContainer.style.overflow);
 		//blankBottleContainer.style.transform = 'translate(' + x + 'px,' + y + 'px)'
 
         // translate when resizing from top or left edges
