@@ -643,7 +643,9 @@ html, body {
  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script>
 	function downloadFunction(downloadURL) {
-		var a = $("<a>").attr("href", downloadURL).attr("download", "img.png").attr("target", "_blank").appendTo("body");
+		var fileName = downloadURL.split("/");
+
+		var a = $("<a>").attr("href", downloadURL).attr("download", fileName[2]).attr("target", "_blank").appendTo("body");
 		a[0].click();
 		a.remove();
 	}
