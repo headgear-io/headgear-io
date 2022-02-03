@@ -409,24 +409,25 @@ html, body {
 
 #thumbs {
   pointer-events: none;
-  height: 29vh;
+  height: 20.5vh;
 }
 .label {
     top: -3vh;
     position: relative;
 }
-.splide, .splide2 {
-	height: 33vh;
+.splide, .splide2, .splide3 {
+	height: 26vh;
 }
 
 #splide1 {
- top:7vh;
+ top:10vh;
 }
 
-#splide2 {
+#splide2, #splide3 {
  position: relative;
  top:0vh;
 }
+
 .splide__track {
   overflow-y: visible;
     overflow-x: hidden;
@@ -547,58 +548,78 @@ html, body {
 							Download Lifestyle Images
 						</div>
 					</div>
-
-				<div id="splide2" class="splide2">
-					  <div class="splide__track">
+			<div id="splide2" class="splide2" >
+					  <div class="splide__track" >
 							<ul class="splide__list">
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Carmel Packshot.png');">
-								<img id="thumbs" src="./assets/Carmel Packshot.png"><div class="label">85 Caramel</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/DeepBronze Packshot.png');">
-								<img id="thumbs" src="./assets/DeepBronze Packshot.png"><div class="label">82 Deep Bronze</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Mocha Packshot.png');">
-								<img id="thumbs" src="./assets/Mocha Packshot.png"><div class="label">93 Mocha</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmPraline Packshot.png');">
-								<img id="thumbs" src="./assets/WarmPraline Packshot.png"><div class="label">89 Warm Praline</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmSand Packshot.png');">
-								<img id="thumbs" src="./assets/WarmSand Packshot.png"><div class="label">70 Warm Sand</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/PearlBeige Packshot.png');">
-								<img id="thumbs" src="./assets/PearlBeige Packshot.png"><div class="label">35 Pearl Beige</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Beige Packshot.png');">
-								<img id="thumbs" src="./assets/Beige Packshot.png"><div class="label">55 Beige</div></div></li>
-                <li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/LightBeige Packshot.png');">
-                <img id="thumbs" src="./assets/LightIvory Packshot.png"><div class="label">40 Light Ivory</div></div></li>
-                <li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/LightIvory Packshot.png');">
-								<img id="thumbs" src="./assets/LightBeige Packshot.png"><div class="label">32 Light Beige</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/NaturalRose Packshot.png');">
-								<img id="thumbs" src="./assets/NaturalRose Packshot.png"><div class="label">50 Natural Rose</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Porcelain Packshot.png');">
-								<img id="thumbs" src="./assets/Porcelain Packshot.png"><div class="label">30 Porcelain</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmIvory Packshot.png');">
-								<img id="thumbs" src="./assets/WarmIvory Packshot.png"><div class="label">44 Warm Ivory</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Bronze Packshot.png');">
-												<img id="thumbs" src="./assets/Bronze Packshot.png"><div class="label">80 Bronze</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/DeepBronze Packshot.png');">
-								<img id="thumbs" src="./assets/DeepBronze Packshot.png"><div class="label">82 Deep Bronze</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Cocoa Packshot.png');">
-												<img id="thumbs" src="./assets/Cocoa Packshot.png"><div class="label">100 Cocoa</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/CrystalBeige Packshot.png');">
-												<img id="thumbs" src="./assets/CrystalBeige Packshot.png"><div class="label">33 Crystal Beige</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Ganache Packshot.png');">
-												<img id="thumbs" src="./assets/Ganache Packshot.png"><div class="label">105 Ganache</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Golden Packshot.png');">
-												<img id="thumbs" src="./assets/Golden Packshot.png"><div class="label">75 Golden</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmGolden Packshot.png');">
-												<img id="thumbs" src="./assets/WarmGolden Packshot.png"><div class="label">76 Warm Golden</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmAlmond Packshot.png');">
-												<img id="thumbs" src="./assets/WarmAlmond Packshot.png"><div class="label">45 Warm Almond</div></div></li>
-								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/SoftToffee Packshot.png');">
-												<img id="thumbs" src="./assets/SoftToffee Packshot.png"><div class="label">84 Soft Toffee</div></div></li>
-											</ul>
-					  </div>
-					 <div id="downloadShadesBtn" class="downloadbtn" onclick="downloadFunction('./assets/packshots.zip');">
-							Download All Packshots
+								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/3616302638789_MaxFactor_MiraclePureFoundation_100_SI_10_x512.png');">
+								<img id="thumbs" src="./assets/3616302638789_MaxFactor_MiraclePureFoundation_100_SI_10_x512.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_5_v1_x512.png');">
+								<img id="thumbs" src="./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_5_v1_x512.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder"onclick="downloadFunction('./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_4_x512.png');">
+								<img id="thumbs" src="./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_4_x512.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_3_1_x512.png');">
+								<img id="thumbs" src="./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_3_1_x512.png"><br></div></li>
+								<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_5_x512.png');">
+								<img id="thumbs" src="./assets/3616302638611_MaxFactor_MiraclePureFoundation_82_SI_5_x512.png"><br></div></li>
+							</ul>
+						<div id="downloadLifeBtn" class="downloadbtn" onclick="downloadFunction('./assets/lifestyle.zip');">
+							Download PJC Images
+						</div>
+					
 					</div>
-				</div>
+					
+					<div id="splide3" class="splide3">
+						  <div class="splide__track">
+								<ul class="splide__list">
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Carmel Packshot.png');">
+									<img id="thumbs" src="./assets/Carmel Packshot.png"><div class="label">85 Caramel</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/DeepBronze Packshot.png');">
+									<img id="thumbs" src="./assets/DeepBronze Packshot.png"><div class="label">82 Deep Bronze</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Mocha Packshot.png');">
+									<img id="thumbs" src="./assets/Mocha Packshot.png"><div class="label">93 Mocha</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmPraline Packshot.png');">
+									<img id="thumbs" src="./assets/WarmPraline Packshot.png"><div class="label">89 Warm Praline</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmSand Packshot.png');">
+									<img id="thumbs" src="./assets/WarmSand Packshot.png"><div class="label">70 Warm Sand</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/PearlBeige Packshot.png');">
+									<img id="thumbs" src="./assets/PearlBeige Packshot.png"><div class="label">35 Pearl Beige</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Beige Packshot.png');">
+									<img id="thumbs" src="./assets/Beige Packshot.png"><div class="label">55 Beige</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/LightBeige Packshot.png');">
+									<img id="thumbs" src="./assets/LightIvory Packshot.png"><div class="label">40 Light Ivory</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/LightIvory Packshot.png');">
+									<img id="thumbs" src="./assets/LightBeige Packshot.png"><div class="label">32 Light Beige</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/NaturalRose Packshot.png');">
+									<img id="thumbs" src="./assets/NaturalRose Packshot.png"><div class="label">50 Natural Rose</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Porcelain Packshot.png');">
+									<img id="thumbs" src="./assets/Porcelain Packshot.png"><div class="label">30 Porcelain</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmIvory Packshot.png');">
+									<img id="thumbs" src="./assets/WarmIvory Packshot.png"><div class="label">44 Warm Ivory</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Bronze Packshot.png');">
+													<img id="thumbs" src="./assets/Bronze Packshot.png"><div class="label">80 Bronze</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/DeepBronze Packshot.png');">
+									<img id="thumbs" src="./assets/DeepBronze Packshot.png"><div class="label">82 Deep Bronze</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Cocoa Packshot.png');">
+													<img id="thumbs" src="./assets/Cocoa Packshot.png"><div class="label">100 Cocoa</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/CrystalBeige Packshot.png');">
+													<img id="thumbs" src="./assets/CrystalBeige Packshot.png"><div class="label">33 Crystal Beige</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Ganache Packshot.png');">
+													<img id="thumbs" src="./assets/Ganache Packshot.png"><div class="label">105 Ganache</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/Golden Packshot.png');">
+													<img id="thumbs" src="./assets/Golden Packshot.png"><div class="label">75 Golden</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmGolden Packshot.png');">
+													<img id="thumbs" src="./assets/WarmGolden Packshot.png"><div class="label">76 Warm Golden</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/WarmAlmond Packshot.png');">
+													<img id="thumbs" src="./assets/WarmAlmond Packshot.png"><div class="label">45 Warm Almond</div></div></li>
+									<li class="splide__slide"><div class="thumbHolder" onclick="downloadFunction('./assets/SoftToffee Packshot.png');">
+													<img id="thumbs" src="./assets/SoftToffee Packshot.png"><div class="label">84 Soft Toffee</div></div></li>
+												</ul>
+						  </div>
+						 <div id="downloadShadesBtn" class="downloadbtn" onclick="downloadFunction('./assets/packshots.zip');">
+								Download All Packshots
+						</div>
+					</div>
+					</div>
 				</div>
 				<div id="page3UI">
 
@@ -664,7 +685,8 @@ html, body {
 
   new Splide( '.splide' ).mount();
  new Splide( '.splide2' ).mount();
-
+ new Splide( '.splide3' ).mount();
+ 
 	const infoText1 = document.getElementById('infoTextHolder');
 	docSlider.init({
 				afterChange : function(index){
