@@ -202,7 +202,7 @@ model-viewer {
             user-select: none; /* Non-prefixed version, currently */
 }
 #explorebtn {
-  -webkit-text-stroke: 0.5px black; 
+  -webkit-text-stroke: 0.5px black;
   pointer-events: none;
 	cursor: pointer;
 	position:absolute;
@@ -560,9 +560,9 @@ html, body {
 						<div id="downloadLifeBtn" class="downloadbtn" onclick="downloadFunction('./assets/pcj.zip');">
 							Download Priyanka Chopra Jones Images
 						</div>
-					
+
 					</div>
-					
+
 					<div id="splide3" class="splide3">
 						  <div class="splide__track">
 								<ul class="splide__list">
@@ -632,7 +632,7 @@ html, body {
 			<div id="page4" style="background-image: url('bathroom sink.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
 				<div id="modelviewerContainer">
 					<model-viewer id="modelviewer" src="models/tube_mfx.glb" ar ar-scale="fixed" loading="eager" camera-controls alt="Max Factor 3D Model Viewer" exposure="1" ios-src="models/tube_mfx.usdz">
-					  <button slot="ar-button" style="background-color: #a69558; border-radius: 100%; border: 1px; position: absolute; top: 16px; right: 16px; font-size: 6vmin; color: white; height: 11vmin; box-sizing: border-box; padding: 0px;">AR
+					  <button slot="ar-button" style="background-color: #a69558; border-radius: 100%; border: 1px; position: absolute; top: 16px; right: 16px; font-size: 6vmin; color: white; height: 11vmin; box-sizing: border-box; padding: 6px 7px 6px 6px;">AR
 						</button>
 						<button id="exitARBtn" slot="exit-webxr-ar-button" onclick="hideAR()" style="background-color: #a69558; border-radius: 100%; border: 1px; position: absolute; top: 16px; right: 16px; font-size: 6vmin; color: white; height: 11vmin; box-sizing: border-box; padding: 0px;"> X
 					  </button>
@@ -681,7 +681,7 @@ html, body {
   new Splide( '.splide' ).mount();
  new Splide( '.splide2' ).mount();
  new Splide( '.splide3' ).mount();
- 
+
 	const infoText1 = document.getElementById('infoTextHolder');
 	docSlider.init({
 				afterChange : function(index){
